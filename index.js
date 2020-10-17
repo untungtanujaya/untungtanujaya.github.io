@@ -30,10 +30,21 @@ const initQnA = async (question, responses, model) => {
 window.onload = () => {
     let question = document.getElementById('question');
     let answer = document.getElementById('answer');
+    // hide loader
+    document.getElementById('loader').style.display = 'none';
     question.addEventListener('keyup', async (event) => {
         if (event.key === 'Enter') {
+            // hide answer, show loader
+            answer.style.display = 'none';
+            document.getElementById('loader').style.display = 'inline-block';
             const model = await use.loadQnA();
-            initQnA(question, sentences, model).then(value => {answer.innerHTML = value}).catch(err => {console.log(err)});
+            initQnA(question, sentences, model).then(
+                value => {
+                    // hide loader, show answer
+                    answer.style.display = 'inline-block';
+                    document.getElementById('loader').style.display = 'none';
+                    answer.innerHTML = value;
+                }).catch(err => {console.log(err)});
         }
     });
 };

@@ -7,3 +7,10 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+.loader {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}

@@ -10,21 +10,50 @@
         <link type="text/css" rel="stylesheet" href="index.css">
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Answering Your Questions</title>
+        <title>Untung Tanujaya</title>
     </head>
     <body>
         <header class="container" id='header'>
-            <h1 class='center-align'> Hello, I am Untung Tanujaya's AI Assistant</h1>
+            <ul class="collapsible hide-on-med-and-down">
+                <li>
+                    <div class="collapsible-header"><h1 class='center-align'> Hello, I am Untung Tanujaya's AI Assistant</h1></div>
+                    <div class="collapsible-body"><span>I can help you know Untung better. I am not perfect though, so if I can't answer your question, please ask him through his LinkedIn profile</span></div>
+                </li>
+            </ul>
+            <div class="hide-on-large-only">
+                <nav>
+                    <div class="nav-wrapper show-on-medium-and-down light-blue darken-3">
+                        <a href="#!" class="brand-logo">Untung Tanujaya</a>
+                        <a href="#" data-target="mobile-look" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    </div>
+                </nav>
+                <ul class="sidenav" id="mobile-look">
+                    <li><a href="https://linkedin.com/in/untungtanujaya">LinkedIn</a></li>
+                </ul>
+                <h4 class='center-align'> Hello, I am Untung Tanujaya's AI Assistant</h4>
+                <h6 class='center-align'>I can help you know Untung better. I am not perfect though, so if I can't answer your question, please ask him through his LinkedIn profile</h6>
+            </div>
         </header>
         <main class="container" id='content'>
             <div class='input-field center-align' id='askBar'>
                 <input type='text' id="question" placeholder="Ask me something about Untung...">
             </div>
+            <div class="preloader-wrapper active loader" id="loader">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
             <div class='center-align' id='answerBar'>
                 <span id='answer'></span>
             </div>
         </main>
-        <footer class="page-footer light-blue darken-3">
+        <footer class="page-footer hide-on-med-and-down light-blue darken-3">
             <div class="container center-align">
                 <h5 class="white-text">Links</h5>
                 <ul>
@@ -39,6 +68,17 @@
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"> </script>
         <script src="index.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script>
+            // for front-end effect
+            document.addEventListener('DOMContentLoaded', function() {
+                // collapsible for desktop
+                var elems = document.querySelectorAll('.collapsible');
+                var instances = M.Collapsible.init(elems, {accordion: false});
+                // sidebar for mobile & tablet
+                var elems = document.querySelectorAll('.sidenav');
+                var instances = M.Sidenav.init(elems, {accordion: false});
+            });
+        </script>
     </body>
 </html>
 
