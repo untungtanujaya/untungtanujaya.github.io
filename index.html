@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <!-- Import css made by self -->
+        <link type="text/css" rel="stylesheet" href="index.css">
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Answering Your Questions</title>
+    </head>
+    <body>
+        <header class="container" id='header'>
+            <h1 class='center-align'> Hello, I am Untung Tanujaya's AI Assistant</h1>
+        </header>
+        <main class="container" id='content'>
+            <div class='input-field center-align' id='askBar'>
+                <input type='text' id="question" placeholder="Ask me something about Untung...">
+            </div>
+            <div class='center-align' id='answerBar'>
+                <span id='answer'></span>
+            </div>
+        </main>
+        <footer class="page-footer light-blue darken-3">
+            <div class="container center-align">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="https://linkedin.com/in/untungtanujaya">Linkedin</a></li>
+                </ul>
+            </div>
+        </footer>
+        <!-- Scripts -->
+        <!-- Load TensorFlow.js. This is required to use the USE model. -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+        <!-- Load the USE model. -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"> </script>
+        <script src="index.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+    </body>
+</html>
+
