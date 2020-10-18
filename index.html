@@ -14,8 +14,19 @@
     </head>
     <body>
         <header id='header'>
-            <div class="container">
-                <ul class="collapsible hide-on-med-and-down">
+            <nav>
+                <div class="nav-wrapper light-blue darken-3">
+                    <a href="#" data-target="mobile-look" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul class="left hide-on-med-and-down">
+                        <li><a href="https://linkedin.com/in/untungtanujaya">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <ul class="sidenav" id="mobile-look">
+                <li><a href="https://linkedin.com/in/untungtanujaya">LinkedIn</a></li>
+            </ul>
+            <div class="container hide-on-med-and-down">
+                <ul class="collapsible">
                     <li>
                         <div class="collapsible-header"><h1 class='center-align'> Hello, I am Untung Tanujaya's AI Assistant</h1></div>
                         <div class="collapsible-body"><span>I can help you know Untung better. I am not perfect though, so if I can't answer your question, please ask him through his LinkedIn profile</span></div>
@@ -23,18 +34,12 @@
                 </ul>
             </div>
             <div class="hide-on-large-only">
-                <nav>
-                    <div class="nav-wrapper show-on-medium-and-down light-blue darken-3">
-                        <a href="#" data-target="mobile-look" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                    </div>
-                </nav>
-                <ul class="sidenav" id="mobile-look">
-                    <li><a href="https://linkedin.com/in/untungtanujaya">LinkedIn</a></li>
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header"><h3 class='center-align'> Hello, I am Untung Tanujaya's AI Assistant</h3></div>
+                        <div class="collapsible-body"><span>I can help you know Untung better. I am not perfect though, so if I can't answer your question, please ask him through his LinkedIn profile</span></div>
+                    </li>
                 </ul>
-                <div class="container">
-                    <h4 class='center-align'> Hello, I am Untung Tanujaya's AI Assistant</h4>
-                    <h6 class='center-align'>I can help you know Untung better. I am not perfect though, so if I can't answer your question, please ask him through his LinkedIn profile</h6>
-                </div>
             </div>
         </header>
         <main class="container" id='content'>
@@ -56,14 +61,6 @@
                 <span id='answer'></span>
             </div>
         </main>
-        <footer class="page-footer hide-on-med-and-down light-blue darken-3">
-            <div class="container center-align">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="https://linkedin.com/in/untungtanujaya">Linkedin</a></li>
-                </ul>
-            </div>
-        </footer>
         <!-- Scripts -->
         <!-- Load TensorFlow.js. This is required to use the USE model. -->
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>

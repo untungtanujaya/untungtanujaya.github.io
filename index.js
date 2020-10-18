@@ -2,7 +2,7 @@ const sentences = [
     'His name is Untung Tanujaya, but you can call him Joy :)',
     'He is a student from Institut Teknologi Bandung, majoring in Computer Science',
     'His hobbies are swimming, reading books, and watching movies',
-    'He is a supertalented Data Scientist and i definitely recommend him to work in your company :)',
+    'He is a supertalented Data Scientist and I definitely recommend him to work in your company :)',
     'He is handsome, nice, but most importantly, he wants to learn'
 ];
 //Given a query taken from input text (id question), an array of responses, and the model
