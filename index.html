@@ -14,51 +14,46 @@
     </head>
     <body>
         <header id='header'>
-            <nav>
-                <div class="nav-wrapper light-blue darken-3">
-                    <a href="#" data-target="mobile-look" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                    <ul class="left hide-on-med-and-down">
-                        <li><a href="https://linkedin.com/in/untungtanujaya">LinkedIn</a></li>
-                    </ul>
-                </div>
-            </nav>
+            <div class="navbar-fixed">
+                <nav>
+                    <div class="nav-wrapper light-blue darken-3">
+                        <a href="#" data-target="mobile-look" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                        <ul class="left hide-on-med-and-down">
+                            <li><a href="https://linkedin.com/in/untungtanujaya">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
             <ul class="sidenav" id="mobile-look">
                 <li><a href="https://linkedin.com/in/untungtanujaya">LinkedIn</a></li>
             </ul>
-            <div class="container hide-on-med-and-down">
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header"><h1 class='center-align'> Hello, I am Untung Tanujaya's AI Assistant</h1></div>
-                        <div class="collapsible-body"><span>I can help you know Untung better. I am not perfect though, so if I can't answer your question, please ask him through his LinkedIn profile</span></div>
-                    </li>
-                </ul>
-            </div>
-            <div class="hide-on-large-only">
-                <ul class="collapsible">
-                    <li>
-                        <div class="collapsible-header"><h3 class='center-align'> Hello, I am Untung Tanujaya's AI Assistant</h3></div>
-                        <div class="collapsible-body"><span>I can help you know Untung better. I am not perfect though, so if I can't answer your question, please ask him through his LinkedIn profile</span></div>
-                    </li>
-                </ul>
-            </div>
         </header>
-        <main class="container" id='content'>
-            <div class='input-field center-align' id='askBar'>
-                <input type='text' id="question" placeholder="Ask me something about Untung...">
+        <main id='content'>
+            <div class="parallax-container">
+                <div class="parallax"><img class="responsive-img" src="images/graduationPhoto.png"></div>
             </div>
-            <div class="preloader-wrapper active loader" id="loader">
-                <div class="spinner-layer spinner-blue-only">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div><div class="gap-patch">
-                        <div class="circle"></div>
-                    </div><div class="circle-clipper right">
-                        <div class="circle"></div>
+            <div class="section white">
+                <div class="row container">
+                    <h2 class="header light-blue-text text-darken-3">Hello, I am Untung Tanujaya's AI Assistant</h2>
+                    <p class="grey-text text-darken-3 lighten-3">I can help you know Untung better. I am not perfect though, so if I can't answer your question, please ask him through his LinkedIn profile
+                    <div class='input-field center-align' id='askBar'>
+                        <input type='text' id="question" placeholder="Ask me something about Untung...">
+                    </div>
+                    <div class="preloader-wrapper active loader" id="loader">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div><div class="gap-patch">
+                                <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='center-align' id='answerBar'>
+                        <span id='answer'></span>
                     </div>
                 </div>
-            </div>
-            <div class='center-align' id='answerBar'>
-                <span id='answer'></span>
             </div>
         </main>
         <!-- Scripts -->
@@ -77,6 +72,9 @@
                 // sidebar for mobile & tablet
                 var elems = document.querySelectorAll('.sidenav');
                 var instances = M.Sidenav.init(elems, {accordion: false});
+                // parallax
+                var elems = document.querySelectorAll('.parallax');
+                var instances = M.Parallax.init(elems, {});
             });
         </script>
     </body>
