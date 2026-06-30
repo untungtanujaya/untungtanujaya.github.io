@@ -25,14 +25,7 @@
     <meta property="twitter:description" content="Building snappy, type-safe frontends backed by highly concurrent, blazing-fast Go microservices. Explore my featured projects and technical insights." />
     <meta property="twitter:image" content="https://untungtanujaya.com/src/assets/profile.webp" />
 
-    <!-- Google Fonts Optimized Asynchronous Loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Fira+Code:wght@400;500;600&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Fira+Code:wght@400;500;600&display=swap" media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Fira+Code:wght@400;500;600&display=swap" />
-    </noscript>
+
 
     <!-- Critical CSS: renders nav + body background immediately before bundle arrives -->
     <style>
@@ -42,16 +35,32 @@
         --border-color: rgba(255,255,255,0.07);
         --text-primary: #e8eaf0;
         --text-muted: rgba(232,234,240,0.45);
+        --pastel-blue: #90CAF9;
+        --pastel-teal: #80CBC4;
       }
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *, *::before, *::after { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
       body {
         background-color: #0b0f19;
         color: var(--text-primary);
-        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
       }
       #root { min-height: 100vh; display: flex; flex-direction: column; }
+      main {
+        margin: 0 auto;
+        max-width: 1340px;
+        padding: 110px 1.5rem 3rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      @media (max-width: 768px) {
+        main {
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
       .glass-nav {
         position: fixed; top: 0; left: 0; right: 0; z-index: 100;
         background: rgba(11,15,25,0.85);
@@ -60,8 +69,8 @@
         height: 64px;
       }
     </style>
-    <script type="module" crossorigin src="/assets/index-5R4N60qh.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Dpl89bEZ.css">
+    <script type="module" crossorigin src="/assets/index-DMbBAqU3.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DVrevABS.css">
   </head>
   <body style="background-color: #0b0f19;">
     <div id="root"></div>
