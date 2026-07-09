@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import projects from '../../data/projects.json';
+import { getProjSlug } from '../../utils/slugify';
+
+export async function getStaticPaths() {
+  return projects.map((proj) => ({
+    params: { slug: getProjSlug(proj) },
+    props: { proj },
+  }));
+}
+
+const { proj } = Astro.props;
+---
+
+<Layout title={`${proj.title} | Projects`} activeTab="projects">
+  <div class="bento-grid">
+    <div class="bento-card span-12">
+      <div>
+        <a href="/projects" class="back-link">&larr; Back to Projects</a>
+        <div style="margin-top: 1rem;">
+          <span class="badge badge-gold">{proj.subtitle}</span>
+          <h1 style="margin-top: 0.5rem; margin-bottom: 1rem;">{proj.title}</h1>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
+        <div>
+          <h3 style="font-size: 1rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">
+            Project Description
+          </h3>
+          <p style="font-size: 1.05rem; line-height: 1.6; color: var(--text-primary);">
+            {proj.description}
+          </p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 1rem; text-transform: uppercase; font-family: var(--font-mono); color: var(--text-muted); margin-bottom: 0.5rem;">
+            Technologies Applied
+          </h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            {proj.tech_stack.split(',').map((tech) => (
+              <span style="font-size: 0.8rem; background: rgba(209, 184, 122, 0.05); border: 1px solid rgba(209, 184, 122, 0.1); color: var(--accent-gold); padding: 0.35rem 0.75rem; border-radius: var(--radius-sm); font-family: var(--font-mono);">
+                {tech.trim()}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

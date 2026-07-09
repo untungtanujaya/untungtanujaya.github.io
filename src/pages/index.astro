@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Untung Tanujaya | Backend Developer" activeTab="home">
+  <div class="bento-grid">
+    <!-- Left Column - Intro and CTAs (Large) -->
+    <section class="bento-card span-8" style="justify-content: center; min-height: 280px;">
+      <div class="hero-content">
+        <div style="flex: 1;">
+          <span class="badge badge-fern">Backend & Distributed Systems</span>
+          <h1 style="font-size: 2.75rem; margin-top: 0.75rem; margin-bottom: 1rem; line-height: 1.1;">
+            Hi, I'm <span style="background: linear-gradient(90deg, var(--text-primary), var(--accent-teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Untung</span>.
+          </h1>
+          <p style="font-size: 1.15rem; max-width: 600px;">
+            I design and build high-performance, type-safe API backends and highly concurrent compliance data pipelines in Go and Python, optimizing data systems for maximum throughput and reliability.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem;">
+            <a href="/resume" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; font-weight: 600; font-size: 0.9rem; border-radius: var(--radius-md); background-color: var(--accent-teal); color: var(--bg-primary); transition: all 0.2s ease;">
+              View Full Resume
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="/projects" style="display: inline-flex; align-items: center; padding: 0.75rem 1.5rem; font-weight: 600; font-size: 0.9rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); color: var(--text-primary); transition: all 0.2s ease;">
+              Browse Projects
+            </a>
+          </div>
+        </div>
+        <div style="flex-shrink: 0;">
+          <img 
+            src="/untung-tanujaya.webp" 
+            alt="Untung Tanujaya Profile Photo" 
+            width="120" 
+            height="120" 
+            style="border-radius: 50%; border: 3px solid var(--border-color); object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" 
+            loading="eager" 
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Column - Currently Card (Small) -->
+    <div class="bento-card span-4" style="background-image: radial-gradient(at 100% 0%, rgba(128, 203, 196, 0.05) 0px, transparent 70%);">
+      <div>
+        <h3 style="margin-bottom: 0.5rem;">Based in</h3>
+        <p style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--text-primary); margin-bottom: 1.5rem;">
+          Jakarta Barat, Indonesia
+        </p>
+        
+        <h3 style="margin-bottom: 0.5rem;">Currently</h3>
+        <p style="font-size: 0.95rem; line-height: 1.4; color: var(--text-primary); margin-bottom: 0.5rem;">
+          <strong>Incoming M.S. Student in Software Engineering</strong> at <span style="color: var(--accent-teal);">Harbin Institute of Technology</span>
+        </p>
+        <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-secondary);">
+          Focusing on the intersection of Scalable Software Systems, Deep Learning, and Computational Biology.
+        </p>
+      </div>
+      
+      <div style="display: flex; gap: 1rem; font-family: var(--font-mono); font-size: 0.85rem; margin-top: auto;">
+        <a href="mailto:utanujaya@gmail.com">Email</a>
+        <span>•</span>
+        <a href="https://linkedin.com/in/tanujaya" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span>•</span>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </div>
+</Layout>

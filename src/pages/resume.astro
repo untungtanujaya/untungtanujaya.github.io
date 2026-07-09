@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+import experiences from '../data/experiences.json';
+import educations from '../data/educations.json';
+import skills from '../data/skills.json';
+---
+
+<Layout title="Resume | Untung Tanujaya" activeTab="resume" description="Detailed professional experience, education, and technical skills of Untung Tanujaya.">
+  <div class="bento-grid">
+    <!-- Header Summary Card -->
+    <header class="bento-card span-12">
+      <div style="display: flex; flex-direction: column; md-flex-direction: row; justify-content: space-between; align-items: start; gap: 1rem;">
+        <div>
+          <span class="badge badge-fern">Resume</span>
+          <h1 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Untung Tanujaya</h1>
+          <p style="font-size: 1.15rem; color: var(--accent-fern); font-weight: 600;">Software Engineer</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-secondary);">
+          <span>📍 Jakarta Barat, Indonesia</span>
+          <span>📧 <a href="mailto:utanujaya@gmail.com">utanujaya@gmail.com</a></span>
+          <span>📱 (+62) 85172088168</span>
+          <span>🔗 <a href="https://linkedin.com/in/tanujaya" target="_blank" rel="noopener noreferrer">linkedin.com/in/tanujaya</a></span>
+        </div>
+      </div>
+      <p style="border-top: 1px solid var(--border-color); padding-top: 1rem; font-size: 1rem; line-height: 1.6;">
+        Software Engineer specializing in backend architecture, API integration, and high-performance distributed systems. Core expertise lies in designing and building scalable, concurrent-safe services using Golang, gRPC, GraphQL, and Redis. Proven track record of optimizing complex technical operations, drastically reducing system latency, and maintaining high availability for mission-critical applications.
+      </p>
+    </header>
+
+    <!-- Experience Timeline Card -->
+    <section class="bento-card span-8">
+      <h2 style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+        Work Experience
+      </h2>
+      <div class="timeline">
+        {experiences.map((exp) => (
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-header">
+              <h3 class="timeline-title">{exp.title}</h3>
+              <span class="timeline-meta">{exp.company} | {exp.start_date} – {exp.end_date}</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 0.75rem;">
+              📍 {exp.location}
+            </p>
+            <p style="font-weight: 500; font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--text-primary);">
+              {exp.summary}
+            </p>
+            <ul style="margin-left: 1.25rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+              {exp.description.map((bullet) => (
+                <li style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;">
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Sidebar (Education & Skills) -->
+    <div class="span-4" style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <!-- Education Card -->
+      <section class="bento-card" style="gap: 1rem;">
+        <h2 style="font-size: 1.4rem;">Education</h2>
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          {educations.map((edu) => (
+            <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; last-child: {border: none; padding-bottom: 0}">
+              <h4 style="font-size: 0.95rem; margin-bottom: 0.15rem; color: var(--text-primary);">{edu.degree}</h4>
+              <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-fern); margin-bottom: 0.4rem;">
+                {edu.institution}
+              </p>
+              <p style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 0.5rem;">
+                {edu.completion_date} | {edu.location}
+              </p>
+              <p style="font-size: 0.85rem; line-height: 1.4; color: var(--text-secondary);">
+                {edu.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Skills Card -->
+      <section class="bento-card" style="gap: 1rem;">
+        <h2 style="font-size: 1.4rem;">Technical Skills</h2>
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          {skills.map((group) => (
+            <div>
+              <h4 style="font-size: 0.9rem; font-family: var(--font-mono); color: var(--accent-teal); text-transform: uppercase; margin-bottom: 0.5rem;">
+                {group.category}
+              </h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+                {group.items.map((skill) => (
+                  <span style="font-size: 0.8rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm);">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>

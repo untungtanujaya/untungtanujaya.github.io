@@ -1,0 +1,99 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import projects from '../../data/projects.json';
+import { getProjSlug } from '../../utils/slugify';
+---
+
+<Layout title="Projects | Untung Tanujaya" activeTab="projects" description="Featured software projects, automation RPA systems, compliance gateways, and web apps built by Untung Tanujaya.">
+  <div class="bento-grid">
+    <!-- Header Summary Card -->
+    <header class="bento-card span-12">
+      <div>
+        <span class="badge badge-gold">Portfolio</span>
+        <h1 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Featured Projects</h1>
+        <p style="font-size: 1.1rem;">
+          A showcase of web applications, observability systems, and developer automation tools built with high standards.
+        </p>
+      </div>
+
+      <!-- Live Search Bar -->
+      <div class="search-container" style="margin-top: 0.5rem;">
+        <input 
+          type="text" 
+          id="project-search" 
+          class="search-input" 
+          placeholder="Search projects by title, stack, or description..." 
+          aria-label="Search projects"
+        />
+      </div>
+    </header>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="bento-card span-12" style="display: none; text-align: center; padding: 3rem;">
+      <h3>No projects found</h3>
+      <p style="color: var(--text-muted);">Try adjusting your search criteria.</p>
+    </div>
+
+    <!-- Projects List -->
+    {projects.map((proj) => {
+      const slug = getProjSlug(proj);
+      return (
+        <a href={`/projects/${slug}`} class="bento-card span-6 project-card" style="display: flex; flex-direction: column; justify-content: space-between; text-decoration: none;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem;">
+              <h3 class="proj-title" style="font-size: 1.25rem; color: var(--text-primary); transition: color 0.2s ease;">{proj.title}</h3>
+            </div>
+            <p style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--accent-gold); margin-top: 0.25rem; margin-bottom: 0.75rem;">
+              {proj.subtitle}
+            </p>
+            <p class="proj-desc" style="font-size: 0.95rem; line-height: 1.5; color: var(--text-secondary);">
+              {proj.description}
+            </p>
+          </div>
+          <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem;">
+            {proj.tech_stack.split(',').map((tech) => (
+              <span class="tech-badge" style="font-size: 0.75rem; background: rgba(209, 184, 122, 0.05); border: 1px solid rgba(209, 184, 122, 0.1); color: var(--accent-gold); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm); font-family: var(--font-mono);">
+                {tech.trim()}
+              </span>
+            ))}
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <!-- Micro client-side search script -->
+  <script is:inline>
+    const searchInput = document.getElementById('project-search');
+    const cards = document.querySelectorAll('.project-card');
+    const emptyState = document.getElementById('empty-state');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const title = card.querySelector('.proj-title')?.textContent.toLowerCase() || '';
+          const desc = card.querySelector('.proj-desc')?.textContent.toLowerCase() || '';
+          const badges = Array.from(card.querySelectorAll('.tech-badge')).map(b => b.textContent.toLowerCase()).join(' ');
+
+          const isMatch = title.includes(query) || desc.includes(query) || badges.includes(query);
+          
+          if (isMatch) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (visibleCount === 0) {
+          emptyState.style.display = 'flex';
+        } else {
+          emptyState.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</Layout>

@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles');
+const sortedArticles = articles.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<Layout title="Articles | Untung Tanujaya" activeTab="articles" description="Technical articles and writeups about systems, Go concurrency, performance optimization, and software development.">
+  <div class="bento-grid">
+    <!-- Header Card -->
+    <header class="bento-card span-12">
+      <div>
+        <span class="badge badge-fern">Writing</span>
+        <h1 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Technical Articles</h1>
+        <p style="font-size: 1.1rem;">
+          Deep dives into Go concurrency patterns, distributed rate limiters, database idempotent processing, and dev workflow automation.
+        </p>
+      </div>
+
+      <!-- Live Search Bar -->
+      <div class="search-container" style="margin-top: 0.5rem;">
+        <input 
+          type="text" 
+          id="article-search" 
+          class="search-input" 
+          placeholder="Search articles by title, tags, or contents..." 
+          aria-label="Search articles"
+        />
+      </div>
+    </header>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="bento-card span-12" style="display: none; text-align: center; padding: 3rem;">
+      <h3>No articles found</h3>
+      <p style="color: var(--text-muted);">Try adjusting your search query.</p>
+    </div>
+
+    <!-- Articles List -->
+    <div class="span-12" style="display: flex; flex-direction: column; gap: 1.25rem; width: 100%;">
+      {sortedArticles.map((art) => {
+        const slug = art.data.slug || art.id;
+        return (
+          <a href={`/articles/${slug}`} class="bento-card article-card" style="display: flex; flex-direction: column; gap: 0.5rem; text-decoration: none; width: 100%;">
+            <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem; flex-wrap: wrap;">
+              <div>
+                <span class="badge badge-fern" style="margin-bottom: 0.5rem;">{art.data.subtitle}</span>
+                <h3 class="art-title" style="font-size: 1.35rem; color: var(--text-primary); transition: color 0.2s ease;">
+                  {art.data.title}
+                </h3>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); white-space: nowrap;">
+                <span>{art.data.read_time} min read</span>
+              </div>
+            </div>
+            
+            <p class="art-desc" style="font-size: 0.95rem; line-height: 1.5; color: var(--text-secondary); margin-top: 0.5rem;">
+              {art.data.summary}
+            </p>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Micro client-side search script -->
+  <script is:inline>
+    const searchInput = document.getElementById('article-search');
+    const cards = document.querySelectorAll('.article-card');
+    const emptyState = document.getElementById('empty-state');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const title = card.querySelector('.art-title')?.textContent.toLowerCase() || '';
+          const desc = card.querySelector('.art-desc')?.textContent.toLowerCase() || '';
+          const badge = card.querySelector('.badge')?.textContent.toLowerCase() || '';
+
+          const isMatch = title.includes(query) || desc.includes(query) || badge.includes(query);
+          
+          if (isMatch) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (visibleCount === 0) {
+          emptyState.style.display = 'flex';
+        } else {
+          emptyState.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</Layout>

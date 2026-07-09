@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AppsDashboard from '../../components/AppsDashboard';
+---
+
+<Layout title="Clinical Apps Suite | Untung Tanujaya" activeTab="apps" description="Clinical specialty calculators and assessments tools.">
+  <div class="bento-grid">
+    <div class="bento-card span-12">
+      <!-- Embed React Apps Dashboard -->
+      <AppsDashboard client:load navigate={(path) => {
+        // Since it's client-side, we redirect using location
+        if (typeof window !== 'undefined') {
+          window.location.href = path;
+        }
+      }} lang="en" />
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,16 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import MedicalTools from '../../../components/MedicalTools';
+---
+
+<Layout title="Psychiatry Scales | Clinical Apps" activeTab="apps">
+  <div class="bento-grid">
+    <div class="bento-card span-12">
+      <MedicalTools client:load specialty="psychiatry" lang="en" navigate={(path) => {
+        if (typeof window !== 'undefined') {
+          window.location.href = path;
+        }
+      }} />
+    </div>
+  </div>
+</Layout>
