@@ -350,10 +350,10 @@ function TiRadsCard({ lang }: { lang: 'en' | 'id' }) {
         
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="flex flex-col gap-3 mt-4 text-xs">
+        <div className="flex flex-col gap-4 mt-4 text-xs">
           <div>
             <label htmlFor="tirads-comp" className="text-[var(--text-secondary)] block mb-1">{t.comp}</label>
-            <select id="tirads-comp" value={comp} onChange={(e) => setComp(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:border-[var(--pastel-teal)] focus:outline-none">
+            <select id="tirads-comp" value={comp} onChange={(e) => setComp(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:border-[var(--pastel-teal)] focus:outline-none">
               <option value="0">{isEn ? 'Cystic or spongiform (0 pts)' : 'Kistik atau spongiform (0 poin)'}</option>
               <option value="1">{isEn ? 'Mixed solid/cystic (1 pt)' : 'Campuran padat/kistik (1 poin)'}</option>
               <option value="2">{isEn ? 'Solid or almost solid (2 pts)' : 'Padat atau hampir padat (2 poin)'}</option>
@@ -362,7 +362,7 @@ function TiRadsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="tirads-echo" className="text-[var(--text-secondary)] block mb-1">{t.echo}</label>
-            <select id="tirads-echo" value={echo} onChange={(e) => setEcho(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:border-[var(--pastel-teal)] focus:outline-none">
+            <select id="tirads-echo" value={echo} onChange={(e) => setEcho(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:border-[var(--pastel-teal)] focus:outline-none">
               <option value="0">{isEn ? 'Anechoic (0 pts)' : 'Anekoik (0 poin)'}</option>
               <option value="1">{isEn ? 'Hyperechoic/isoechoic (1 pt)' : 'Hiperekogenik/isorekogenik (1 poin)'}</option>
               <option value="2">{isEn ? 'Hypoechoic (2 pts)' : 'Hipoekogenik (2 poin)'}</option>
@@ -372,7 +372,7 @@ function TiRadsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="tirads-shape" className="text-[var(--text-secondary)] block mb-1">{t.shape}</label>
-            <select id="tirads-shape" value={shape} onChange={(e) => setShape(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:border-[var(--pastel-teal)] focus:outline-none">
+            <select id="tirads-shape" value={shape} onChange={(e) => setShape(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:border-[var(--pastel-teal)] focus:outline-none">
               <option value="0">{isEn ? 'Wider-than-tall (0 pts)' : 'Lebih lebar daripada tinggi (0 poin)'}</option>
               <option value="3">{isEn ? 'Taller-than-wide (3 pts)' : 'Lebih tinggi daripada lebar (3 poin)'}</option>
             </select>
@@ -380,7 +380,7 @@ function TiRadsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="tirads-margin" className="text-[var(--text-secondary)] block mb-1">{t.margin}</label>
-            <select id="tirads-margin" value={margin} onChange={(e) => setMargin(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:border-[var(--pastel-teal)] focus:outline-none">
+            <select id="tirads-margin" value={margin} onChange={(e) => setMargin(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:border-[var(--pastel-teal)] focus:outline-none">
               <option value="0">{isEn ? 'Smooth / Ill-defined (0 pts)' : 'Halus / Batas tidak tegas (0 poin)'}</option>
               <option value="2">{isEn ? 'Lobulated or irregular (2 pts)' : 'Berlobus atau tidak teratur (2 poin)'}</option>
               <option value="3">{isEn ? 'Extra-thyroidal extension (3 pts)' : 'Ekstensi ekstra-tiroid (3 poin)'}</option>
@@ -389,7 +389,7 @@ function TiRadsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="tirads-foci" className="text-[var(--text-secondary)] block mb-1">{t.foci}</label>
-            <select id="tirads-foci" value={foci} onChange={(e) => setFoci(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:border-[var(--pastel-teal)] focus:outline-none">
+            <select id="tirads-foci" value={foci} onChange={(e) => setFoci(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:border-[var(--pastel-teal)] focus:outline-none">
               <option value="0">{isEn ? 'None or large colloid (0 pts)' : 'Tidak ada / koloid besar (0 poin)'}</option>
               <option value="1">{isEn ? 'Macrocalcifications (1 pt)' : 'Makrokalsifikasi (1 poin)'}</option>
               <option value="2">{isEn ? 'Peripheral calcifications (2 pts)' : 'Kalsifikasi perifer (2 poin)'}</option>
@@ -484,7 +484,7 @@ function LungRadsCard({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="flex flex-col gap-3 mt-4 text-xs">
+        <div className="flex flex-col gap-4 mt-4 text-xs">
           <div>
             <span className="text-[var(--text-secondary)] block mb-1">{t.comp}</span>
             <div className="grid grid-cols-3 gap-1 bg-[var(--card-bg-inset)] p-0.5 border border-[var(--border-color)] rounded" role="radiogroup" aria-label="Nodule Composition Type">
@@ -495,7 +495,7 @@ function LungRadsCard({ lang }: { lang: 'en' | 'id' }) {
                   role="radio"
                   aria-checked={noduleType === tVal}
                   onClick={() => setNoduleType(tVal)}
-                  className={`py-1 rounded text-[11px] font-semibold uppercase tracking-wider transition-all ${
+                  className={`py-2 px-1 rounded text-[11px] font-semibold uppercase tracking-wider transition-all ${
                     noduleType === tVal 
                       ? 'bg-[var(--pastel-teal)] text-[var(--bg-color)]' 
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
@@ -514,11 +514,11 @@ function LungRadsCard({ lang }: { lang: 'en' | 'id' }) {
               type="number"
               value={size}
               onChange={(e) => setSize(Math.max(0, Number(e.target.value)))}
-              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:border-[var(--pastel-teal)] focus:outline-none font-mono"
+              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:border-[var(--pastel-teal)] focus:outline-none font-mono"
             />
           </div>
 
-          <div className="flex justify-between items-center py-1 bg-[var(--card-bg-inset)] px-2.5 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="lungrads-growth" className="text-[var(--text-secondary)] cursor-pointer">{t.growth}</label>
             <input 
               id="lungrads-growth"
@@ -582,7 +582,7 @@ function SpnMalignancyCard({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="grid grid-cols-2 gap-3 mt-4 text-xs">
+        <div className="grid grid-cols-2 gap-4 mt-4 text-xs">
           <div>
             <label htmlFor="spn-age" className="text-[var(--text-secondary)] block mb-1">{t.age}</label>
             <input 
@@ -590,7 +590,7 @@ function SpnMalignancyCard({ lang }: { lang: 'en' | 'id' }) {
               type="number"
               value={age}
               onChange={(e) => setAge(Number(e.target.value))}
-              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:border-[var(--pastel-teal)] focus:outline-none font-mono"
+              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:border-[var(--pastel-teal)] focus:outline-none font-mono"
             />
           </div>
 
@@ -601,13 +601,13 @@ function SpnMalignancyCard({ lang }: { lang: 'en' | 'id' }) {
               type="number"
               value={diam}
               onChange={(e) => setDiam(Number(e.target.value))}
-              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:border-[var(--pastel-teal)] focus:outline-none font-mono"
+              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:border-[var(--pastel-teal)] focus:outline-none font-mono"
             />
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 mt-3 text-xs">
-          <div className="flex justify-between items-center py-1 bg-[var(--card-bg-inset)] px-2 rounded border border-[var(--border-color)]">
+        <div className="flex flex-col gap-4 mt-4 text-xs">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="spn-smoke" className="text-[var(--text-secondary)] cursor-pointer">{t.smoke}</label>
             <input 
               id="spn-smoke"
@@ -618,7 +618,7 @@ function SpnMalignancyCard({ lang }: { lang: 'en' | 'id' }) {
             />
           </div>
 
-          <div className="flex justify-between items-center py-1 bg-[var(--card-bg-inset)] px-2 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="spn-cancer" className="text-[var(--text-secondary)] cursor-pointer">{t.cancer}</label>
             <input 
               id="spn-cancer"
@@ -629,7 +629,7 @@ function SpnMalignancyCard({ lang }: { lang: 'en' | 'id' }) {
             />
           </div>
 
-          <div className="flex justify-between items-center py-1 bg-[var(--card-bg-inset)] px-2 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="spn-spic" className="text-[var(--text-secondary)] cursor-pointer">{t.spic}</label>
             <input 
               id="spn-spic"
@@ -640,7 +640,7 @@ function SpnMalignancyCard({ lang }: { lang: 'en' | 'id' }) {
             />
           </div>
 
-          <div className="flex justify-between items-center py-1 bg-[var(--card-bg-inset)] px-2 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="spn-upper" className="text-[var(--text-secondary)] cursor-pointer">{t.upper}</label>
             <input 
               id="spn-upper"
@@ -722,42 +722,42 @@ function CinRiskCard({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="grid grid-cols-2 gap-2 mt-4 text-[11px]">
-          <div className="flex justify-between items-center py-0.5 bg-[var(--card-bg-inset)] px-2 rounded border border-[var(--border-color)]">
+        <div className="grid grid-cols-2 gap-3.5 mt-4 text-xs">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="cin-hypo" className="cursor-pointer">{t.hypo}</label>
             <input id="cin-hypo" type="checkbox" checked={hypo > 0} onChange={(e) => setHypo(e.target.checked ? 5 : 0)} className="w-3.5 h-3.5 cursor-pointer" />
           </div>
           
-          <div className="flex justify-between items-center py-0.5 bg-[var(--card-bg-inset)] px-2 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="cin-iabp" className="cursor-pointer">{t.iabp}</label>
             <input id="cin-iabp" type="checkbox" checked={iabp > 0} onChange={(e) => setIabp(e.target.checked ? 5 : 0)} className="w-3.5 h-3.5 cursor-pointer" />
           </div>
 
-          <div className="flex justify-between items-center py-0.5 bg-[var(--card-bg-inset)] px-2 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="cin-chf" className="cursor-pointer">{t.chf}</label>
             <input id="cin-chf" type="checkbox" checked={chf > 0} onChange={(e) => setChf(e.target.checked ? 5 : 0)} className="w-3.5 h-3.5 cursor-pointer" />
           </div>
 
-          <div className="flex justify-between items-center py-0.5 bg-[var(--card-bg-inset)] px-2 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="cin-age" className="cursor-pointer">{t.age}</label>
             <input id="cin-age" type="checkbox" checked={age > 0} onChange={(e) => setAge(e.target.checked ? 4 : 0)} className="w-3.5 h-3.5 cursor-pointer" />
           </div>
 
-          <div className="flex justify-between items-center py-0.5 bg-[var(--card-bg-inset)] px-2 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="cin-anemia" className="cursor-pointer">{t.anemia}</label>
             <input id="cin-anemia" type="checkbox" checked={anemia > 0} onChange={(e) => setAnemia(e.target.checked ? 3 : 0)} className="w-3.5 h-3.5 cursor-pointer" />
           </div>
 
-          <div className="flex justify-between items-center py-0.5 bg-[var(--card-bg-inset)] px-2 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="cin-diab" className="cursor-pointer">{t.diab}</label>
             <input id="cin-diab" type="checkbox" checked={diab > 0} onChange={(e) => setDiab(e.target.checked ? 3 : 0)} className="w-3.5 h-3.5 cursor-pointer" />
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 mt-3 text-xs">
+        <div className="flex flex-col gap-4 mt-4 text-xs">
           <div>
             <label htmlFor="cin-egfr" className="text-[var(--text-secondary)] block mb-0.5">{t.egfr}</label>
-            <select id="cin-egfr" value={egfrPts} onChange={(e) => setEgfrPts(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1 focus:outline-none">
+            <select id="cin-egfr" value={egfrPts} onChange={(e) => setEgfrPts(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">&ge; 60 ({isEn ? '0 pts' : '0 poin'})</option>
               <option value="2">40 - 59 ({isEn ? '2 pts' : '2 poin'})</option>
               <option value="4">20 - 39 ({isEn ? '4 pts' : '4 poin'})</option>
@@ -772,7 +772,7 @@ function CinRiskCard({ lang }: { lang: 'en' | 'id' }) {
               type="number"
               value={contrast}
               onChange={(e) => setContrast(Number(e.target.value))}
-              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1 focus:outline-none font-mono"
+              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none font-mono"
             />
           </div>
         </div>
@@ -785,7 +785,7 @@ function CinRiskCard({ lang }: { lang: 'en' | 'id' }) {
             {risk}
           </span>
         </div>
-        <div className="flex justify-between text-[11px] font-mono text-[var(--text-muted)] bg-[var(--card-bg-inset)] p-1.5 rounded border border-[var(--border-color)]">
+        <div className="flex justify-between text-[11px] font-mono text-[var(--text-muted)] bg-[var(--card-bg-inset)] py-2 px-3 rounded border border-[var(--border-color)]">
           <span>{t.dialysis}</span>
           <span className="font-bold text-[var(--text-primary)]">{dial}</span>
         </div>
@@ -854,7 +854,7 @@ function PiRadsCard({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="flex flex-col gap-3 mt-4 text-xs">
+        <div className="flex flex-col gap-4 mt-4 text-xs">
           <div>
             <span className="text-[var(--text-secondary)] block mb-1">{t.zone}</span>
             <div className="grid grid-cols-2 gap-1 bg-[var(--card-bg-inset)] p-0.5 border border-[var(--border-color)] rounded" role="radiogroup" aria-label="Anatomical Zone Type">
@@ -863,7 +863,7 @@ function PiRadsCard({ lang }: { lang: 'en' | 'id' }) {
                 role="radio"
                 aria-checked={zone === 'pz'}
                 onClick={() => setZone('pz')}
-                className={`py-1 rounded text-[11px] font-semibold transition-all ${
+                className={`py-2.5 px-1 rounded text-xs font-semibold transition-all ${
                   zone === 'pz' ? 'bg-[var(--pastel-teal)] text-[var(--bg-color)]' : 'text-[var(--text-secondary)]'
                 }`}
               >
@@ -874,7 +874,7 @@ function PiRadsCard({ lang }: { lang: 'en' | 'id' }) {
                 role="radio"
                 aria-checked={zone === 'tz'}
                 onClick={() => setZone('tz')}
-                className={`py-1 rounded text-[11px] font-semibold transition-all ${
+                className={`py-2.5 px-1 rounded text-xs font-semibold transition-all ${
                   zone === 'tz' ? 'bg-[var(--pastel-teal)] text-[var(--bg-color)]' : 'text-[var(--text-secondary)]'
                 }`}
               >
@@ -887,7 +887,7 @@ function PiRadsCard({ lang }: { lang: 'en' | 'id' }) {
             <>
               <div>
                 <label htmlFor="pirads-dwi" className="text-[var(--text-secondary)] block mb-1">{t.dwi}</label>
-                <select id="pirads-dwi" value={dwi} onChange={(e) => setDwi(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none">
+                <select id="pirads-dwi" value={dwi} onChange={(e) => setDwi(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
                   <option value="1">{isEn ? '1 - Normal / No abnormalities' : '1 - Normal / Tanpa kelainan'}</option>
                   <option value="2">{isEn ? '2 - Indistinct focal hypointensity' : '2 - Hipointensitas fokal tidak tegas'}</option>
                   <option value="3">{isEn ? '3 - Focal mild/moderate hyperintensity' : '3 - Hiperintensitas fokal ringan/sedang'}</option>
@@ -898,7 +898,7 @@ function PiRadsCard({ lang }: { lang: 'en' | 'id' }) {
 
               <div>
                 <label htmlFor="pirads-dce" className="text-[var(--text-secondary)] block mb-1">{t.dce}</label>
-                <select id="pirads-dce" value={dce} onChange={(e) => setDce(e.target.value as any)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none">
+                <select id="pirads-dce" value={dce} onChange={(e) => setDce(e.target.value as any)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
                   <option value="neg">{isEn ? 'Negative (No early enhancement)' : 'Negatif (Tanpa penyangatan dini)'}</option>
                   <option value="pos">{isEn ? 'Positive (Focal + early enhancement)' : 'Positif (Focal + penyangatan dini)'}</option>
                 </select>
@@ -908,7 +908,7 @@ function PiRadsCard({ lang }: { lang: 'en' | 'id' }) {
             <>
               <div>
                 <label htmlFor="pirads-t2" className="text-[var(--text-secondary)] block mb-1">{t.t2}</label>
-                <select id="pirads-t2" value={t2} onChange={(e) => setT2(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none">
+                <select id="pirads-t2" value={t2} onChange={(e) => setT2(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
                   <option value="1">{isEn ? '1 - Normal / Homogeneous signal' : '1 - Normal / Sinyal homogen'}</option>
                   <option value="2">{isEn ? '2 - Circumscribed hypointense nodules' : '2 - Nodul hipointens berbatas tegas'}</option>
                   <option value="3">{isEn ? '3 - Heterogeneous, ill-defined intensity' : '3 - Intensitas heterogen, batas tidak tegas'}</option>
@@ -919,7 +919,7 @@ function PiRadsCard({ lang }: { lang: 'en' | 'id' }) {
 
               <div>
                 <label htmlFor="pirads-secdwi" className="text-[var(--text-secondary)] block mb-1">{t.secdwi}</label>
-                <select id="pirads-secdwi" value={dwi} onChange={(e) => setDwi(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none">
+                <select id="pirads-secdwi" value={dwi} onChange={(e) => setDwi(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
                   <option value="1">{isEn ? 'DWI 1 or 2' : 'DWI 1 atau 2'}</option>
                   <option value="3">{isEn ? 'DWI 3' : 'DWI 3'}</option>
                   <option value="4">{isEn ? 'DWI 4 or 5' : 'DWI 4 atau 5'}</option>
@@ -983,7 +983,7 @@ function PediatricEGfrCard({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="flex flex-col gap-3 mt-4 text-xs">
+        <div className="flex flex-col gap-4 mt-4 text-xs">
           <div>
             <label htmlFor="egfr-height" className="text-[var(--text-secondary)] block mb-1">{t.height}</label>
             <input 
@@ -991,7 +991,7 @@ function PediatricEGfrCard({ lang }: { lang: 'en' | 'id' }) {
               type="number"
               value={height}
               onChange={(e) => setHeight(Number(e.target.value))}
-              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none font-mono"
+              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none font-mono"
             />
           </div>
 
@@ -1003,7 +1003,7 @@ function PediatricEGfrCard({ lang }: { lang: 'en' | 'id' }) {
               step="0.01"
               value={creat}
               onChange={(e) => setCreat(Number(e.target.value))}
-              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none font-mono"
+              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none font-mono"
             />
           </div>
         </div>
@@ -1064,10 +1064,10 @@ function CtDoseCard({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="flex flex-col gap-3 mt-4 text-xs">
+        <div className="flex flex-col gap-4 mt-4 text-xs">
           <div>
             <label htmlFor="ctdose-region" className="text-[var(--text-secondary)] block mb-1">{t.region}</label>
-            <select id="ctdose-region" value={region} onChange={(e) => setRegion(e.target.value as any)} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none">
+            <select id="ctdose-region" value={region} onChange={(e) => setRegion(e.target.value as any)} className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="head">{isEn ? 'Head (k = 0.0021)' : 'Kepala (k = 0.0021)'}</option>
               <option value="neck">{isEn ? 'Neck (k = 0.0059)' : 'Leher (k = 0.0059)'}</option>
               <option value="chest">{isEn ? 'Chest (k = 0.0140)' : 'Dada (k = 0.0140)'}</option>
@@ -1083,7 +1083,7 @@ function CtDoseCard({ lang }: { lang: 'en' | 'id' }) {
               type="number"
               value={dlp}
               onChange={(e) => setDlp(Math.max(0, Number(e.target.value)))}
-              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none font-mono"
+              className="w-full bg-[var(--card-bg-inset)] text-[var(--text-primary)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none font-mono"
             />
           </div>
         </div>
@@ -1176,7 +1176,7 @@ function Phq9Card({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="flex flex-col gap-2.5 mt-4 max-h-[300px] overflow-y-auto pr-1">
+        <div className="flex flex-col gap-4 mt-4">
           {qLabels.map((q, idx) => (
             <div key={idx} className="flex flex-col gap-1 pb-2 border-b border-[rgba(255,255,255,0.03)]" role="radiogroup" aria-label={`PHQ9 Question ${idx+1}: ${q}`}>
               <span className="text-[11px] text-[var(--text-secondary)]">{idx+1}. {q}</span>
@@ -1189,7 +1189,7 @@ function Phq9Card({ lang }: { lang: 'en' | 'id' }) {
                     aria-checked={answers[idx] === val}
                     aria-label={`Score +${val}`}
                     onClick={() => handleSelect(idx, val)}
-                    className={`py-0.5 rounded font-mono font-bold transition-all ${
+                    className={`py-2 px-1 rounded font-mono font-bold transition-all text-xs ${
                       answers[idx] === val 
                         ? 'bg-[var(--pastel-purple)] text-[var(--bg-color)]' 
                         : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
@@ -1275,7 +1275,7 @@ function Gad7Card({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="flex flex-col gap-2.5 mt-4 max-h-[300px] overflow-y-auto pr-1">
+        <div className="flex flex-col gap-4 mt-4">
           {qLabels.map((q, idx) => (
             <div key={idx} className="flex flex-col gap-1 pb-2 border-b border-[rgba(255,255,255,0.03)]" role="radiogroup" aria-label={`GAD7 Question ${idx+1}: ${q}`}>
               <span className="text-[11px] text-[var(--text-secondary)]">{idx+1}. {q}</span>
@@ -1288,7 +1288,7 @@ function Gad7Card({ lang }: { lang: 'en' | 'id' }) {
                     aria-checked={answers[idx] === val}
                     aria-label={`Score +${val}`}
                     onClick={() => handleSelect(idx, val)}
-                    className={`py-0.5 rounded font-mono font-bold transition-all ${
+                    className={`py-2 px-1 rounded font-mono font-bold transition-all text-xs ${
                       answers[idx] === val 
                         ? 'bg-[var(--pastel-purple)] text-[var(--bg-color)]' 
                         : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
@@ -1353,22 +1353,22 @@ function CageCard({ lang }: { lang: 'en' | 'id' }) {
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
         <div className="flex flex-col gap-3 mt-4 text-[11px]">
-          <div className="flex justify-between items-center py-1 bg-[var(--card-bg-inset)] px-2.5 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="cage-q1" className="text-[var(--text-secondary)] cursor-pointer">{t.q1}</label>
             <input id="cage-q1" type="checkbox" checked={q1 === 1} onChange={(e) => setQ1(e.target.checked ? 1 : 0)} className="w-4 h-4 cursor-pointer" />
           </div>
 
-          <div className="flex justify-between items-center py-1 bg-[var(--card-bg-inset)] px-2.5 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="cage-q2" className="text-[var(--text-secondary)] cursor-pointer">{t.q2}</label>
             <input id="cage-q2" type="checkbox" checked={q2 === 1} onChange={(e) => setQ2(e.target.checked ? 1 : 0)} className="w-4 h-4 cursor-pointer" />
           </div>
 
-          <div className="flex justify-between items-center py-1 bg-[var(--card-bg-inset)] px-2.5 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="cage-q3" className="text-[var(--text-secondary)] cursor-pointer">{t.q3}</label>
             <input id="cage-q3" type="checkbox" checked={q3 === 1} onChange={(e) => setQ3(e.target.checked ? 1 : 0)} className="w-4 h-4 cursor-pointer" />
           </div>
 
-          <div className="flex justify-between items-center py-1 bg-[var(--card-bg-inset)] px-2.5 rounded border border-[var(--border-color)]">
+          <div className="flex justify-between items-center py-2.5 px-3.5 bg-[var(--card-bg-inset)] rounded border border-[var(--border-color)]">
             <label htmlFor="cage-q4" className="text-[var(--text-secondary)] cursor-pointer">{t.q4}</label>
             <input id="cage-q4" type="checkbox" checked={q4 === 1} onChange={(e) => setQ4(e.target.checked ? 1 : 0)} className="w-4 h-4 cursor-pointer" />
           </div>
@@ -1452,10 +1452,10 @@ function CowsCard({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="flex flex-col gap-2.5 mt-4 max-h-[300px] overflow-y-auto pr-1 text-xs">
+        <div className="flex flex-col gap-4 mt-4 text-xs">
           <div>
             <label htmlFor="cows-pulse" className="text-[var(--text-secondary)] block mb-0.5">{t.pulse}</label>
-            <select id="cows-pulse" value={pulse} onChange={(e) => setPulse(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none text-[11px]">
+            <select id="cows-pulse" value={pulse} onChange={(e) => setPulse(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">{isEn ? 'Pulse \u2264 80 bpm (0)' : 'Nadi \u2264 80 bpm (0)'}</option>
               <option value="1">Pulse 81-100 bpm (1)</option>
               <option value="2">Pulse 101-120 bpm (2)</option>
@@ -1465,7 +1465,7 @@ function CowsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="cows-sweat" className="text-[var(--text-secondary)] block mb-0.5">{t.sweat}</label>
-            <select id="cows-sweat" value={sweat} onChange={(e) => setSweat(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none text-[11px]">
+            <select id="cows-sweat" value={sweat} onChange={(e) => setSweat(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">{isEn ? 'No chills or sweating (0)' : 'Tidak menggigil/berkeringat (0)'}</option>
               <option value="1">{isEn ? 'Subjective chills or flushing (1)' : 'Menggigil/panas subjektif (1)'}</option>
               <option value="2">{isEn ? 'Flushed, moist face / sweat on brow (2)' : 'Wajah merah/lembab, dahi berkeringat (2)'}</option>
@@ -1476,7 +1476,7 @@ function CowsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="cows-rest" className="text-[var(--text-secondary)] block mb-0.5">{t.rest}</label>
-            <select id="cows-rest" value={rest} onChange={(e) => setRest(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none text-[11px]">
+            <select id="cows-rest" value={rest} onChange={(e) => setRest(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">{isEn ? 'Able to sit still (0)' : 'Bisa duduk tenang (0)'}</option>
               <option value="1">{isEn ? 'Reports difficulty sitting still (1)' : 'Mengaku sulit duduk tenang (1)'}</option>
               <option value="3">{isEn ? 'Frequent shifting or squirming (3)' : 'Sering bergeser atau menggeliat (3)'}</option>
@@ -1486,7 +1486,7 @@ function CowsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="cows-pupil" className="text-[var(--text-secondary)] block mb-0.5">{t.pupil}</label>
-            <select id="cows-pupil" value={pupil} onChange={(e) => setPupil(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none text-[11px]">
+            <select id="cows-pupil" value={pupil} onChange={(e) => setPupil(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">{isEn ? 'Pupils pinned or normal (0)' : 'Pupil mengecil atau normal (0)'}</option>
               <option value="1">{isEn ? 'Pupils larger than normal (1)' : 'Pupil lebih besar dari normal (1)'}</option>
               <option value="2">{isEn ? 'Pupils moderately dilated (2)' : 'Pupil dilatasi sedang (2)'}</option>
@@ -1496,7 +1496,7 @@ function CowsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="cows-aches" className="text-[var(--text-secondary)] block mb-0.5">{t.aches}</label>
-            <select id="cows-aches" value={aches} onChange={(e) => setAches(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none text-[11px]">
+            <select id="cows-aches" value={aches} onChange={(e) => setAches(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">{isEn ? 'Not present (0)' : 'Tidak ada (0)'}</option>
               <option value="1">{isEn ? 'Mild diffuse discomfort (1)' : 'Ketidaknyamanan difus ringan (1)'}</option>
               <option value="2">{isEn ? 'Severe diffuse aches (2)' : 'Pegal difus parah (2)'}</option>
@@ -1506,7 +1506,7 @@ function CowsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="cows-gi" className="text-[var(--text-secondary)] block mb-0.5">{t.gi}</label>
-            <select id="cows-gi" value={gi} onChange={(e) => setGi(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none text-[11px]">
+            <select id="cows-gi" value={gi} onChange={(e) => setGi(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">{isEn ? 'No GI symptoms (0)' : 'Tidak ada gejala pencernaan (0)'}</option>
               <option value="1">{isEn ? 'Stomach cramps / nausea (1)' : 'Kram perut / mual (1)'}</option>
               <option value="2">{isEn ? 'Frequent diarrhea or loose stools (2)' : 'Sering diare atau feses cair (2)'}</option>
@@ -1517,7 +1517,7 @@ function CowsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="cows-tremor" className="text-[var(--text-secondary)] block mb-0.5">{t.tremor}</label>
-            <select id="cows-tremor" value={tremor} onChange={(e) => setTremor(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none text-[11px]">
+            <select id="cows-tremor" value={tremor} onChange={(e) => setTremor(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">{isEn ? 'No tremor (0)' : 'Tidak ada tremor (0)'}</option>
               <option value="1">{isEn ? 'Tremor felt, not observed (1)' : 'Tremor terasa tapi tidak tampak (1)'}</option>
               <option value="2">{isEn ? 'Slight tremor visible (2)' : 'Tremor ringan terlihat (2)'}</option>
@@ -1527,7 +1527,7 @@ function CowsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="cows-yawn" className="text-[var(--text-secondary)] block mb-0.5">{t.yawn}</label>
-            <select id="cows-yawn" value={yawn} onChange={(e) => setYawn(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none text-[11px]">
+            <select id="cows-yawn" value={yawn} onChange={(e) => setYawn(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">{isEn ? 'No yawning (0)' : 'Tidak menguap (0)'}</option>
               <option value="1">{isEn ? 'Yawning 1-2 times during interview (1)' : 'Menguap 1-2 kali selama wawancara (1)'}</option>
               <option value="2">{isEn ? 'Yawning 3 or more times (2)' : 'Menguap 3 kali atau lebih (2)'}</option>
@@ -1537,7 +1537,7 @@ function CowsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="cows-anx" className="text-[var(--text-secondary)] block mb-0.5">{t.anx}</label>
-            <select id="cows-anx" value={anx} onChange={(e) => setAnx(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none text-[11px]">
+            <select id="cows-anx" value={anx} onChange={(e) => setAnx(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">{isEn ? 'None (0)' : 'Tidak ada (0)'}</option>
               <option value="1">{isEn ? 'Patient reports slight anxiety / tension (1)' : 'Pasien mengeluh cemas/tegang ringan (1)'}</option>
               <option value="2">{isEn ? 'Patient is obviously anxious or irritable (2)' : 'Pasien tampak cemas atau iritabel (2)'}</option>
@@ -1547,7 +1547,7 @@ function CowsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="cows-goose" className="text-[var(--text-secondary)] block mb-0.5">{t.goose}</label>
-            <select id="cows-goose" value={goose} onChange={(e) => setGoose(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none text-[11px]">
+            <select id="cows-goose" value={goose} onChange={(e) => setGoose(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="0">{isEn ? 'Skin is smooth (0)' : 'Kulit halus (0)'}</option>
               <option value="3">{isEn ? 'Piloerection can be felt / hair stands up (3)' : 'Bulu kuduk terasa berdiri (3)'}</option>
               <option value="5">{isEn ? 'Prominent piloerection / goosebumps obvious (5)' : 'Merinding sangat menonjol / goosebumps jelas (5)'}</option>
@@ -1604,10 +1604,10 @@ function GcsCard({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="flex flex-col gap-3 mt-4 text-xs">
+        <div className="flex flex-col gap-4 mt-4 text-xs">
           <div>
             <label htmlFor="gcs-eye" className="text-[var(--text-secondary)] block mb-1">{t.eye}</label>
-            <select id="gcs-eye" value={eye} onChange={(e) => setEye(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none">
+            <select id="gcs-eye" value={eye} onChange={(e) => setEye(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="4">{isEn ? '4 - Spontaneous' : '4 - Spontan'}</option>
               <option value="3">{isEn ? '3 - To sound' : '3 - Terhadap suara'}</option>
               <option value="2">{isEn ? '2 - To pressure' : '2 - Terhadap nyeri/tekanan'}</option>
@@ -1617,7 +1617,7 @@ function GcsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="gcs-verbal" className="text-[var(--text-secondary)] block mb-1">{t.verbal}</label>
-            <select id="gcs-verbal" value={verbal} onChange={(e) => setVerbal(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none">
+            <select id="gcs-verbal" value={verbal} onChange={(e) => setVerbal(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="5">{isEn ? '5 - Oriented' : '5 - Orientasi baik'}</option>
               <option value="4">{isEn ? '4 - Confused' : '4 - Bingung (disorientasi)'}</option>
               <option value="3">{isEn ? '3 - Inappropriate words' : '3 - Kata-kata tidak tepat/kacau'}</option>
@@ -1628,7 +1628,7 @@ function GcsCard({ lang }: { lang: 'en' | 'id' }) {
 
           <div>
             <label htmlFor="gcs-motor" className="text-[var(--text-secondary)] block mb-1">{t.motor}</label>
-            <select id="gcs-motor" value={motor} onChange={(e) => setMotor(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1.5 focus:outline-none">
+            <select id="gcs-motor" value={motor} onChange={(e) => setMotor(Number(e.target.value))} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               <option value="6">{isEn ? '6 - Obeys commands' : '6 - Mematuhi perintah'}</option>
               <option value="5">{isEn ? '5 - Localising pain' : '5 - Melokalisir nyeri'}</option>
               <option value="4">{isEn ? '4 - Normal flexion (withdrawal)' : '4 - Menarik diri dari nyeri'}</option>
@@ -1703,7 +1703,7 @@ Pasien ${appearance} dan tampak ${behavior} selama wawancara. Bicara pasien ${sp
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4 text-[11px]">
           <div>
             <label htmlFor="mse-app" className="text-[var(--text-secondary)] block mb-0.5">{t.app}</label>
-            <select id="mse-app" value={appearance} onChange={(e) => setAppearance(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none">
+            <select id="mse-app" value={appearance} onChange={(e) => setAppearance(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               {isEn ? (
                 <>
                   <option value="neatly groomed and dressed appropriately">Neatly Groomed / Appropriate</option>
@@ -1722,7 +1722,7 @@ Pasien ${appearance} dan tampak ${behavior} selama wawancara. Bicara pasien ${sp
 
           <div>
             <label htmlFor="mse-beh" className="text-[var(--text-secondary)] block mb-0.5">{t.beh}</label>
-            <select id="mse-beh" value={behavior} onChange={(e) => setBehavior(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none">
+            <select id="mse-beh" value={behavior} onChange={(e) => setBehavior(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               {isEn ? (
                 <>
                   <option value="cooperative, establishing good eye contact">Cooperative / Good Eye Contact</option>
@@ -1741,7 +1741,7 @@ Pasien ${appearance} dan tampak ${behavior} selama wawancara. Bicara pasien ${sp
 
           <div>
             <label htmlFor="mse-sp" className="text-[var(--text-secondary)] block mb-0.5">{t.sp}</label>
-            <select id="mse-sp" value={speech} onChange={(e) => setSpeech(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none">
+            <select id="mse-sp" value={speech} onChange={(e) => setSpeech(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               {isEn ? (
                 <>
                   <option value="normal rate, volume, and modulation">Normal Rate & Volume</option>
@@ -1760,7 +1760,7 @@ Pasien ${appearance} dan tampak ${behavior} selama wawancara. Bicara pasien ${sp
 
           <div>
             <label htmlFor="mse-mood" className="text-[var(--text-secondary)] block mb-0.5">{t.mood}</label>
-            <select id="mse-mood" value={mood} onChange={(e) => setMood(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none">
+            <select id="mse-mood" value={mood} onChange={(e) => setMood(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               {isEn ? (
                 <>
                   <option value="euthymic">Euthymic</option>
@@ -1779,7 +1779,7 @@ Pasien ${appearance} dan tampak ${behavior} selama wawancara. Bicara pasien ${sp
 
           <div>
             <label htmlFor="mse-thought" className="text-[var(--text-secondary)] block mb-0.5">{t.thought}</label>
-            <select id="mse-thought" value={thoughtProcess} onChange={(e) => setThoughtProcess(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none">
+            <select id="mse-thought" value={thoughtProcess} onChange={(e) => setThoughtProcess(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               {isEn ? (
                 <>
                   <option value="linear, logical, and goal-directed">Linear & Goal-directed</option>
@@ -1798,7 +1798,7 @@ Pasien ${appearance} dan tampak ${behavior} selama wawancara. Bicara pasien ${sp
 
           <div>
             <label htmlFor="mse-cog" className="text-[var(--text-secondary)] block mb-0.5">{t.cog}</label>
-            <select id="mse-cog" value={cognition} onChange={(e) => setCognition(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none">
+            <select id="mse-cog" value={cognition} onChange={(e) => setCognition(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               {isEn ? (
                 <>
                   <option value="intact to gross examination">Intact</option>
@@ -1817,7 +1817,7 @@ Pasien ${appearance} dan tampak ${behavior} selama wawancara. Bicara pasien ${sp
 
           <div className="md:col-span-2">
             <label htmlFor="mse-content" className="text-[var(--text-secondary)] block mb-0.5">{t.content}</label>
-            <select id="mse-content" value={thoughtContent} onChange={(e) => setThoughtContent(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none">
+            <select id="mse-content" value={thoughtContent} onChange={(e) => setThoughtContent(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none">
               {isEn ? (
                 <>
                   <option value="denies suicidal or homicidal ideation, no evidence of delusions or hallucinations">Normal (Denies SI/HI, no delusions)</option>
@@ -1836,7 +1836,7 @@ Pasien ${appearance} dan tampak ${behavior} selama wawancara. Bicara pasien ${sp
 
           <div className="md:col-span-2">
             <label htmlFor="mse-insight" className="text-[var(--text-secondary)] block mb-0.5">{t.insight}</label>
-            <select id="mse-insight" value={judgment} onChange={(e) => setJudgment(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded p-1 focus:outline-none font-mono">
+            <select id="mse-insight" value={judgment} onChange={(e) => setJudgment(e.target.value)} className="w-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] rounded py-2 px-3 text-xs focus:outline-none font-mono">
               {isEn ? (
                 <>
                   <option value="good (appropriate awareness and decisions)">Good</option>
@@ -1862,7 +1862,7 @@ Pasien ${appearance} dan tampak ${behavior} selama wawancara. Bicara pasien ${sp
             type="button" 
             onClick={() => handleCopy(generatedNote, 'mse')}
             aria-label="Copy Generated Mental Status Exam Note"
-            className="text-[10px] px-2 py-0.5 rounded border border-[var(--border-color)] hover:border-[var(--pastel-purple)] text-[var(--text-secondary)] hover:text-[var(--pastel-purple)] flex items-center gap-1 transition-all"
+            className="text-[10px] px-3 py-1.5 rounded border border-[var(--border-color)] hover:border-[var(--pastel-purple)] text-[var(--text-secondary)] hover:text-[var(--pastel-purple)] flex items-center gap-1 transition-all"
           >
             {copiedText === 'mse' ? (
               <>
@@ -1937,7 +1937,7 @@ function AimsCard({ lang }: { lang: 'en' | 'id' }) {
 
         <h3 className="text-base font-bold mt-2 text-[var(--text-primary)]">{t.title}</h3>
 
-        <div className="flex flex-col gap-2.5 mt-4 max-h-[300px] overflow-y-auto pr-1">
+        <div className="flex flex-col gap-4 mt-4">
           {qLabels.map((q, idx) => (
             <div key={idx} className="flex flex-col gap-1 pb-2 border-b border-[rgba(255,255,255,0.03)] text-xs" role="radiogroup" aria-label={`AIMS Question ${idx+1}: ${q}`}>
               <span className="text-[11px] text-[var(--text-secondary)]">{idx+1}. {q}</span>
@@ -1950,7 +1950,7 @@ function AimsCard({ lang }: { lang: 'en' | 'id' }) {
                     aria-checked={answers[idx] === val}
                     aria-label={`Score ${val}`}
                     onClick={() => handleSelect(idx, val)}
-                    className={`py-0.5 rounded font-mono font-bold transition-all ${
+                    className={`py-2 px-1 rounded font-mono font-bold transition-all text-xs ${
                       answers[idx] === val 
                         ? 'bg-[var(--pastel-purple)] text-[var(--bg-color)]' 
                         : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
