@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '@fontsource-variable/plus-jakarta-sans';
 import '@fontsource-variable/plus-jakarta-sans/wght-italic.css';
+import normalFont from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url';
 
 
 interface Props {
@@ -24,6 +25,8 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preload" href={normalFont} as="font" type="font/woff2" crossorigin />
+
     
     <!-- SEO Meta Tags -->
     <title>{title}</title>
