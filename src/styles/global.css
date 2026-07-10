@@ -572,6 +572,8 @@ footer {
 .font-extrabold { font-weight: 800; }
 .font-semibold { font-weight: 600; }
 .font-mono { font-family: var(--font-mono); }
+.whitespace-pre-wrap { white-space: pre-wrap; }
+.whitespace-pre { white-space: pre; }
 
 /* Colors fallback for React icons background */
 .bg-\[rgba\(128\,203\,196\,0\.1\)\] { background-color: rgba(128, 203, 196, 0.1); }
