@@ -1,0 +1,30 @@
+[
+  {
+    "id": 8,
+    "title": "Custom OCR Service & RPA Engine",
+    "subtitle": "AI-powered Document Processing",
+    "description": "Engineered an AI-powered OCR microservice migrating legacy infrastructure to Google Gemini AI; built a custom RPA engine with Python parallel worker pools to automate multi-page shipping invoices ingestion, achieving high data fidelity on complex logistics edge cases.",
+    "tech_stack": "Python, Flask, Gemini API, PyMuPDF, Threading"
+  },
+  {
+    "id": 9,
+    "title": "The Pilot System: Autonomous Agent & PR Automator",
+    "subtitle": "AI-Augmented DevEx & Workflow Infrastructure",
+    "description": "Architected and deployed an autonomous internal engineering workflow wrapper on a Hostinger VPS utilizing Claude Code CLI and Asana webhooks, enabling self-orchestrating developer pipelines with max reasoning effort settings. Designed agentic automation mechanisms that integrate Asana triggers with parallel worker processes to auto-orchestrate workflows, alongside CI/CD lifecycle pipelines that parse commit messages, run four-layer test suites, execute AI-driven code reviews, and construct pull requests automatically.",
+    "tech_stack": "Claude Code, Python, Asana Webhooks, Hostinger VPS, GitHub Actions"
+  },
+  {
+    "id": 10,
+    "title": "CEISA & INSW Customs Gateway",
+    "subtitle": "Logistics Backend Services",
+    "description": "Developed concurrent Go/Gin backend compliance pipelines executing PEB/PIB declarations, integrating national customs and electronic Certificate-of-Origin (INSW) APIs with resilient fan-out caching and fallback schedulers.",
+    "tech_stack": "Go, Gin, PostgreSQL, Redis, REST APIs"
+  },
+  {
+    "id": 11,
+    "title": "Critical Web Applications",
+    "subtitle": "Tokopedia Plus Core Services",
+    "description": "Developed and maintained high-performance microservices for a premium subscription platform (Tokopedia Plus) using Golang, gRPC, GraphQL, NSQ, and Redis. Focused on optimizing database query caching, streamlining landing page and subscription logic APIs, and establishing resilient inter-service communication patterns under high traffic.",
+    "tech_stack": "Golang, gRPC, GraphQL, Redis, NSQ, Datadog"
+  }
+]

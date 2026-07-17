@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((art) => ({
+    params: { slug: art.slug || art.data.slug || art.id },
+    props: { art },
+  }));
+}
+
+const { art } = Astro.props;
+const { Content } = await render(art);
+---
+
+<Layout title={`${art.data.title} | Articles`} activeTab="articles">
+  <article class="article-shell">
+    <header class="article-header">
+      <a href="/articles" class="back-link"><span aria-hidden="true">←</span> Back to Articles</a>
+      <div>
+        <p class="eyebrow">{art.data.subtitle}</p>
+        <h1 class="article-title">{art.data.title}</h1>
+        <div class="article-meta">
+          <span>Untung Tanujaya</span>
+          <span>{art.data.read_time} min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <Content />
+    </div>
+  </article>
+</Layout>

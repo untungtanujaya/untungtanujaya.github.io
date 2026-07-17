@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 7">
+  <!-- Row 1: x o x o x o x -->
+  <rect x="0" y="2" width="1" height="1" />
+  <rect x="2" y="2" width="1" height="1" />
+  <rect x="4" y="2" width="1" height="1" />
+  <rect x="6" y="2" width="1" height="1" />
+
+  <!-- Row 2: x o x o o x o -->
+  <rect x="0" y="3" width="1" height="1" />
+  <rect x="2" y="3" width="1" height="1" />
+  <rect x="5" y="3" width="1" height="1" />
+
+  <!-- Row 3: o x o o o x o -->
+  <rect x="1" y="4" width="1" height="1" />
+  <rect x="5" y="4" width="1" height="1" />
+
+  <style>
+    rect {
+      fill: #060907; /* Matches --bg-primary (dark soil/forest floor black) */
+    }
+    @media (prefers-color-scheme: dark) {
+      rect {
+        fill: #e6eae7; /* Matches --text-primary (warm sand/cream off-white) */
+      }
+    }
+  </style>
+</svg>

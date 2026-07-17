@@ -1,0 +1,33 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import MedicalTools from '../../../components/MedicalTools';
+
+export async function getStaticPaths() {
+  const slugs = [
+    'phq-9',
+    'gad-7',
+    'cage',
+    'cows',
+    'gcs',
+    'mse-builder',
+    'aims'
+  ];
+  return slugs.map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+---
+
+<Layout title={`Psychiatry Scale | Clinical Apps`} activeTab="apps">
+  <div class="bento-grid">
+    <div class="tool-shell span-12">
+      <MedicalTools client:load specialty="psychiatry" slug={slug} lang="en" navigate={(path) => {
+        if (typeof window !== 'undefined') {
+          window.location.href = path;
+        }
+      }} />
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,33 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import MedicalTools from '../../../components/MedicalTools';
+
+export async function getStaticPaths() {
+  const slugs = [
+    'acr-ti-rads',
+    'lung-rads',
+    'spn-malignancy',
+    'mehran-cin',
+    'pi-rads',
+    'pediatric-egfr',
+    'ct-dose'
+  ];
+  return slugs.map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+---
+
+<Layout title={`Radiology Tool | Clinical Apps`} activeTab="apps">
+  <div class="bento-grid">
+    <div class="tool-shell span-12">
+      <MedicalTools client:load specialty="radiology" slug={slug} lang="en" navigate={(path) => {
+        if (typeof window !== 'undefined') {
+          window.location.href = path;
+        }
+      }} />
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import projects from '../../data/projects.json';
+import { getProjSlug } from '../../utils/slugify';
+---
+
+<Layout title="Projects | Untung Tanujaya" activeTab="projects" description="Featured software projects, automation RPA systems, compliance gateways, and web apps built by Untung Tanujaya.">
+  <div class="bento-grid">
+    <header class="page-hero span-12">
+      <div>
+        <p class="eyebrow">Portfolio</p>
+        <h1 class="page-title">Featured Projects</h1>
+        <p class="page-copy">
+          Production work across AI-powered document processing, autonomous developer workflows, logistics compliance backends, and high-traffic commerce services.
+        </p>
+      </div>
+
+      <div class="page-tools">
+        <label class="eyebrow" for="project-search">Search projects</label>
+        <div class="search-container">
+          <input
+            type="text"
+            id="project-search"
+            class="search-input"
+            placeholder="Search title, stack, or description"
+            aria-label="Search projects"
+          />
+        </div>
+      </div>
+    </header>
+
+    <div id="empty-state" class="empty-state span-12">
+      <div>
+        <h3>No projects found</h3>
+        <p>Try a different keyword.</p>
+      </div>
+    </div>
+
+    {projects.map((proj) => {
+      const slug = getProjSlug(proj);
+      return (
+        <a href={`/projects/${slug}`} class="project-card span-6">
+          <div class="project-card-top">
+            <p class="card-meta">{proj.subtitle}</p>
+            <h3 class="proj-title">{proj.title}</h3>
+            <p class="proj-desc">{proj.description}</p>
+          </div>
+          <div class="tech-row" aria-label={`${proj.title} technologies`}>
+            {proj.tech_stack.split(',').map((tech) => (
+              <span class="tech-badge">{tech.trim()}</span>
+            ))}
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <script is:inline>
+    const searchInput = document.getElementById('project-search');
+    const cards = document.querySelectorAll('.project-card');
+    const emptyState = document.getElementById('empty-state');
+
+    if (searchInput && emptyState) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const title = card.querySelector('.proj-title')?.textContent.toLowerCase() || '';
+          const desc = card.querySelector('.proj-desc')?.textContent.toLowerCase() || '';
+          const badges = Array.from(card.querySelectorAll('.tech-badge')).map((badge) => badge.textContent.toLowerCase()).join(' ');
+          const isMatch = title.includes(query) || desc.includes(query) || badges.includes(query);
+
+          card.style.display = isMatch ? 'flex' : 'none';
+          if (isMatch) visibleCount++;
+        });
+
+        emptyState.style.display = visibleCount === 0 ? 'grid' : 'none';
+      });
+    }
+  </script>
+</Layout>

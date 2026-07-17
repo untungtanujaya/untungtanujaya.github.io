@@ -1,0 +1,70 @@
+[
+  {
+    "id": 1,
+    "title": "Software Engineer",
+    "company": "fr8co",
+    "location": "West Jakarta, Jakarta",
+    "start_date": "May 2025",
+    "end_date": "Present",
+    "summary": "Led the development of concurrent customs reporting systems and RPA engines, improving data ingestion speed by 10x using Go and Python.",
+    "description": [
+      "Engineered and maintained Go-based backend services and Python-powered microservices for a logistics and customs-compliance platform, opening 367 Pull Requests and shipping 267 merges to production within a 13-month tenure, contributing over 86,000 lines of production-stable code across three core repositories.",
+      "Designed and implemented goroutine-based concurrent worker pools and channel fan-out patterns in Go to parallelize batch document fetching, materially reducing list-endpoint latency on high-traffic tenant queries and stabilizing critical-path read pipelines under production load.",
+      "Architected a multi-strategy OCR fallback pipeline (Gemini AI primary → PNG rasterization → PyMuPDF) and a parallel 10-thread worker pool for invoice/packing-list extraction, raising completeness of multi-page enterprise document ingestion to near-100% on edge cases that previously produced silent page-loss.",
+      "Spearheaded Linux-based cloud infrastructure on a self-managed VPS, deploying four systemd-managed autonomous daemons with `Restart=always` self-healing, authoring an idempotent recovery wrapper, and applying a four-layer RAM-hardening profile (GOMAXPROCS caps · systemd MemoryMax · zram zstd-compressed swap · in-loop test prevention) that eliminated OOM incidents without infrastructure cost increase.",
+      "Architected and deployed a production-grade automation pipeline that seamlessly integrates an enterprise task-management system (Asana) with Anthropic Claude API via a real-time idempotent webhook router, achieving end-to-end spec-to-Pull-Request automation while enforcing conventional-commit format, four-layer test gates, and manual human review at the production promotion step.",
+      "Designed and optimized PostgreSQL repositories and per-service SQLite isolation patterns, resolved a critical multi-tenant data-leakage scoping defect on a high-traffic list endpoint, and hardened cross-tenant boundaries to meet enterprise compliance audit requirements.",
+      "Built and stabilized integrations with multiple government-grade external APIs — national customs submission, electronic Certificate-of-Origin validation, and currency exchange-rate synchronization — with retry, fallback, and scraper-based resiliency to guarantee operability under upstream outages.",
+      "Implemented ISO-27001-aligned token lifecycle management, Microsoft Azure-AD SSO, and a three-tier PDF repair pipeline (Ghostscript / pdfcpu / qpdf) for corrupted-upload recovery, reducing failed-upload rate on high-stakes regulatory document submissions.",
+      "Bootstrapped a four-layer CI test workflow (build / unit / integration / regression / e2e) across three repositories, authored production-grade multi-stage Dockerfiles (Go backend, Next.js standalone frontend, Python microservice), and codified a `staging-as-divider` branch model with hard-rule SOP to enforce manual production promotion and zero auto-deploy to live customer environments.",
+      "Championed the integration of advanced AI coding assistants (Claude Code CLI, Claude API) into the core engineering workflow, accelerating feature-delivery cycles while maintaining high engineering standards through automated code review, conventional-commit enforcement, and reproducible production-grade Docker images."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Software Engineer",
+    "company": "PT Tokopedia",
+    "location": "South Jakarta, Jakarta",
+    "start_date": "March 2022",
+    "end_date": "August 2024",
+    "summary": "Developed and maintained critical microservices and caching systems for Tokopedia Plus, enhancing subscription stability under high traffic.",
+    "description": [
+      "Developed and maintained robust backend services for Tokopedia Plus using Golang, gRPC, GraphQL, NSQ, and Redis, ensuring high application performance and reliability.",
+      "Optimized inter-service communication and implemented effective Redis caching mechanisms, leading to faster API response times and improved resource efficiency.",
+      "Utilized Datadog for real-time system monitoring and trace logging, which streamlined troubleshooting and helped reduce system downtime.",
+      "Maintained high code quality standards within the team through rigorous peer code reviews and actively assisted junior members in resolving technical blockers.",
+      "Supported backend operations and maintained system stability during the company's acquisition phase through effective technical planning and cross-functional collaboration.",
+      "Collaborated closely with project managers and stakeholders to communicate progress, manage technical expectations, and ensure timely delivery of features."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Software Developer Officer",
+    "company": "Konimex Group",
+    "location": "Sukoharjo, Central Java",
+    "start_date": "March 2021",
+    "end_date": "March 2022",
+    "summary": "Designed and implemented internal web applications from scratch, supporting UAT and business process automation.",
+    "description": [
+      "Developed and maintained various internal web applications, collaborating with cross-functional teams to translate business requirements into functional software.",
+      "Built a dedicated web application from scratch based on management directives, handling the end-to-end development process to successfully meet stakeholder needs.",
+      "Supported the User Acceptance Testing (UAT) phase by actively identifying issues, implementing technical fixes, and ensuring system stability prior to deployment.",
+      "Delivered assigned application modules on schedule, consistently meeting code quality standards and improving operational workflows."
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Software Engineer Intern",
+    "company": "Blibli",
+    "location": "Central Jakarta, Jakarta",
+    "start_date": "May 2019",
+    "end_date": "August 2019",
+    "summary": "Assisted senior engineers in developing and debugging responsive user interface components in an agile setting.",
+    "description": [
+      "Contributed to the development of frontend features and UI components under the direct mentorship and guidance of senior engineers.",
+      "Assisted in debugging and implementing specific frontend enhancements, which helped improve overall application responsiveness and user experience.",
+      "Participated in agile team rituals and technical discussions to understand industry best practices, version control workflows, and coding standards.",
+      "Collaborated with the engineering team to support daily development tasks, executing assigned tickets effectively and efficiently."
+    ]
+  }
+]

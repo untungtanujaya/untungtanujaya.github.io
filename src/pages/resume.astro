@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import experiences from '../data/experiences.json';
+import educations from '../data/educations.json';
+import skills from '../data/skills.json';
+---
+
+<Layout title="Resume | Untung Tanujaya" activeTab="resume" description="Detailed professional experience, education, and technical skills of Untung Tanujaya.">
+  <div class="bento-grid">
+    <header class="resume-hero span-12">
+      <div>
+        <p class="eyebrow">Resume</p>
+        <h1 class="page-title">Untung Tanujaya</h1>
+        <p class="resume-summary">
+          Software Engineer specializing in backend architecture, API integration, and high-performance distributed systems. Core expertise spans Golang, gRPC, GraphQL, Redis, PostgreSQL, Python automation, and resilient data pipelines.
+        </p>
+      </div>
+      <div class="contact-grid" aria-label="Contact details">
+        <a class="contact-link" href="mailto:utanujaya@gmail.com">utanujaya@gmail.com</a>
+        <a class="contact-link" href="https://github.com/untungtanujaya" target="_blank" rel="noopener noreferrer">github.com/untungtanujaya</a>
+        <a class="contact-link" href="https://linkedin.com/in/tanujaya" target="_blank" rel="noopener noreferrer">linkedin.com/in/tanujaya</a>
+        <span class="contact-link">Jakarta Barat, Indonesia</span>
+      </div>
+    </header>
+
+    <section class="resume-main span-8" aria-labelledby="work-title">
+      <div class="section-heading">
+        <p class="eyebrow">Experience</p>
+        <h2 id="work-title">Work Experience</h2>
+      </div>
+      <div class="timeline">
+        {experiences.map((exp) => (
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-header">
+              <h3 class="timeline-title">{exp.title}</h3>
+              <span class="timeline-meta">{exp.company} | {exp.start_date} - {exp.end_date}</span>
+            </div>
+            <p class="timeline-meta">{exp.location}</p>
+            <p class="timeline-desc">{exp.summary}</p>
+            <ul class="timeline-list">
+              {exp.description.map((bullet) => (
+                <li>{bullet}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <aside class="side-stack span-4">
+      <section class="detail-panel" aria-labelledby="education-title">
+        <div class="section-heading">
+          <p class="eyebrow">Education</p>
+          <h2 id="education-title">Education</h2>
+        </div>
+        {educations.map((edu) => (
+          <article class="detail-item">
+            <h4>{edu.degree}</h4>
+            <p class="card-meta">{edu.institution}</p>
+            <p>{edu.completion_date} | {edu.location}</p>
+            <p>{edu.description}</p>
+          </article>
+        ))}
+      </section>
+
+      <section class="detail-panel" aria-labelledby="skills-title">
+        <div class="section-heading">
+          <p class="eyebrow">Stack</p>
+          <h2 id="skills-title">Technical Skills</h2>
+        </div>
+        {skills.map((group) => (
+          <div class="skill-group">
+            <h4>{group.category}</h4>
+            <div class="skill-list">
+              {group.items.map((skill) => (
+                <span class="skill-pill">{skill}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+    </aside>
+  </div>
+</Layout>

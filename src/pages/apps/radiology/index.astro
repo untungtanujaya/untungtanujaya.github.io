@@ -1,0 +1,16 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import MedicalTools from '../../../components/MedicalTools';
+---
+
+<Layout title="Radiology Calculators | Clinical Apps" activeTab="apps">
+  <div class="bento-grid">
+    <div class="tool-shell span-12">
+      <MedicalTools client:load specialty="radiology" lang="en" navigate={(path) => {
+        if (typeof window !== 'undefined') {
+          window.location.href = path;
+        }
+      }} />
+    </div>
+  </div>
+</Layout>

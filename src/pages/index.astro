@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Untung Tanujaya | Backend Developer" activeTab="home">
+  <div class="bento-grid">
+    <section class="portfolio-hero span-12" aria-labelledby="home-title">
+      <div class="hero-copy">
+        <p class="hero-kicker">Backend & Distributed Systems</p>
+        <h1 id="home-title" class="hero-title">
+          Hi, I'm <span>Untung</span>.
+        </h1>
+        <p class="hero-lede">
+          I design and build high-performance, type-safe API backends and highly concurrent compliance data pipelines in Go and Python, with a practical eye for production reliability.
+        </p>
+        <div class="hero-actions" aria-label="Primary links">
+          <a class="button button-primary" href="/projects">
+            Browse Projects <span aria-hidden="true">→</span>
+          </a>
+          <a class="button button-secondary" href="/resume">View Resume</a>
+        </div>
+      </div>
+
+      <div class="hero-portrait" aria-label="Profile">
+        <div class="portrait-frame">
+          <img
+            class="profile-image"
+            src="/untung-tanujaya.webp"
+            alt="Untung Tanujaya"
+            width="360"
+            height="450"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="hero-meta">
+          <span>Jakarta Barat, Indonesia</span>
+          <span>Incoming M.S. Software Engineering student at Harbin Institute of Technology</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="metric-strip span-12" aria-label="Career highlights">
+      <div class="metric-card">
+        <div class="metric-value">10x</div>
+        <div class="metric-label">faster document ingestion workflows</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">267</div>
+        <div class="metric-label">production merges in recent backend work</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">4</div>
+        <div class="metric-label">portfolio areas: resume, projects, writing, apps</div>
+      </div>
+    </div>
+
+    <section class="focus-panel span-7" aria-labelledby="focus-title">
+      <div class="section-heading">
+        <p class="eyebrow">What I build</p>
+        <h2 id="focus-title">Reliable systems for messy real-world workflows.</h2>
+      </div>
+      <ul class="focus-list">
+        <li>
+          <strong>Compliance-grade backends</strong>
+          <span>Go services, PostgreSQL repositories, Redis-backed caching, and resilient external API integrations.</span>
+        </li>
+        <li>
+          <strong>AI-assisted operations</strong>
+          <span>OCR fallback pipelines, autonomous workflow wrappers, and spec-to-pull-request automation.</span>
+        </li>
+        <li>
+          <strong>Clinical utility apps</strong>
+          <span>Client-side calculators and assessment tools designed to stay fast, private, and low-bandwidth.</span>
+        </li>
+      </ul>
+    </section>
+
+    <aside class="now-panel span-5" aria-labelledby="now-title">
+      <div class="section-heading">
+        <p class="eyebrow">Currently</p>
+        <h2 id="now-title">Software engineering, systems, and computational biology.</h2>
+      </div>
+      <p>
+        Preparing for graduate study while continuing to sharpen backend architecture, scalable software systems, and applied deep learning foundations.
+      </p>
+      <div class="contact-list" aria-label="Contact links">
+        <a href="mailto:utanujaya@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/tanujaya" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/untungtanujaya" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </aside>
+
+    <a class="feature-card span-4" href="/projects">
+      <div class="feature-card-header">
+        <p class="eyebrow">Projects</p>
+        <span class="feature-number">01</span>
+      </div>
+      <h3>Systems, automation, and backend case studies.</h3>
+      <p>See selected production work across logistics, AI workflow automation, and commerce infrastructure.</p>
+    </a>
+
+    <a class="feature-card span-4" href="/articles">
+      <div class="feature-card-header">
+        <p class="eyebrow">Articles</p>
+        <span class="feature-number">02</span>
+      </div>
+      <h3>Notes on performance and backend edge cases.</h3>
+      <p>Read compact technical writeups on concurrency, idempotency, rate limits, and testing pitfalls.</p>
+    </a>
+
+    <a class="feature-card span-4" href="/apps">
+      <div class="feature-card-header">
+        <p class="eyebrow">Apps</p>
+        <span class="feature-number">03</span>
+      </div>
+      <h3>Clinical calculators that stay client-side.</h3>
+      <p>Open radiology and psychiatry tools designed for fast loading and predictable interaction.</p>
+    </a>
+  </div>
+</Layout>

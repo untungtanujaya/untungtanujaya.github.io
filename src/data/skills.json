@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "category": "Programming & Tools",
+    "items": [
+      "Go",
+      "Python",
+      "TypeScript",
+      "Next.js",
+      "React",
+      "HTML/CSS",
+      "SQL",
+      "Gin",
+      "Flask",
+      "Playwright",
+      "Jest",
+      "Git"
+    ]
+  },
+  {
+    "id": 2,
+    "category": "Core Competencies",
+    "items": [
+      "Backend Architecture",
+      "API Development & Optimization",
+      "Microservices",
+      "Concurrent Programming",
+      "Distributed Systems",
+      "System Observability",
+      "Database Design & Optimization",
+      "AI/LLM Integration"
+    ]
+  },
+  {
+    "id": 3,
+    "category": "Additional Strengths",
+    "items": [
+      "Cross-functional Communication",
+      "Rapid Problem-Solving",
+      "Continuous Technical Learning",
+      "DevOps & CI/CD",
+      "Containerization (Docker)",
+      "Linux System Administration (systemd)"
+    ]
+  }
+]

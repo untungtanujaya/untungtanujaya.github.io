@@ -1,0 +1,99 @@
+---
+import '../styles/global.css';
+import '@fontsource-variable/plus-jakarta-sans';
+import '@fontsource-variable/plus-jakarta-sans/wght-italic.css';
+import normalFont from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  activeTab?: 'home' | 'resume' | 'projects' | 'articles' | 'apps';
+}
+
+const { 
+  title = "Untung Tanujaya | Software Engineer", 
+  description = "Software Engineer specializing in high-performance backends and clean architectures.",
+  activeTab = "home"
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preload" href={normalFont} as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#07090d" />
+    <meta name="color-scheme" content="dark" />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Untung Tanujaya" />
+    <meta name="keywords" content="Untung Tanujaya, Software Engineer, Go, React, Astro, Backend Developer, Portfolio" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="glass-nav">
+      <nav class="nav-content">
+        <a href="/" class="logo" aria-label="Untung Tanujaya Home">
+          <img src="/logo-ut.webp" alt="UT Logo" class="logo-icon" width="70" height="32" />
+        </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-menu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+        <div class="nav-links" id="site-menu">
+          <a href="/" class={activeTab === 'home' ? 'active' : ''}>Home</a>
+          <a href="/resume" class={activeTab === 'resume' ? 'active' : ''}>Resume</a>
+          <a href="/projects" class={activeTab === 'projects' ? 'active' : ''}>Projects</a>
+          <a href="/articles" class={activeTab === 'articles' ? 'active' : ''}>Articles</a>
+          <a href="/apps" class={activeTab === 'apps' ? 'active' : ''}>Apps</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="content">
+      <slot />
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <p>&copy; {new Date().getFullYear()} Untung Tanujaya. Built with Astro and kept intentionally lightweight.</p>
+        <div class="footer-links" aria-label="Footer links">
+          <a href="mailto:utanujaya@gmail.com">Email</a>
+          <a href="https://github.com/untungtanujaya" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/tanujaya" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline>
+      const menuToggle = document.getElementById('menu-toggle');
+      const navLinks = document.getElementById('site-menu');
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+          navLinks.classList.toggle('active', !isExpanded);
+        });
+
+        navLinks.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            menuToggle.setAttribute('aria-expanded', 'false');
+            navLinks.classList.remove('active');
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

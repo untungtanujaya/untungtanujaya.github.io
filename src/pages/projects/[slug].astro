@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import projects from '../../data/projects.json';
+import { getProjSlug } from '../../utils/slugify';
+
+export async function getStaticPaths() {
+  return projects.map((proj) => ({
+    params: { slug: getProjSlug(proj) },
+    props: { proj },
+  }));
+}
+
+const { proj } = Astro.props;
+---
+
+<Layout title={`${proj.title} | Projects`} activeTab="projects">
+  <div class="detail-shell">
+    <a href="/projects" class="back-link"><span aria-hidden="true">←</span> Back to Projects</a>
+
+    <header class="page-hero">
+      <div>
+        <p class="eyebrow">{proj.subtitle}</p>
+        <h1 class="page-title">{proj.title}</h1>
+      </div>
+    </header>
+
+    <section class="detail-section" aria-labelledby="project-description-title">
+      <h3 id="project-description-title">Project Description</h3>
+      <p>{proj.description}</p>
+    </section>
+
+    <section class="detail-section" aria-labelledby="project-stack-title">
+      <h3 id="project-stack-title">Technologies Applied</h3>
+      <div class="tech-row">
+        {proj.tech_stack.split(',').map((tech) => (
+          <span class="tech-badge">{tech.trim()}</span>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>
