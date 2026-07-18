@@ -1222,7 +1222,7 @@ footer {
 }
 
 /* Remove bento-card backgrounds, shadows, and borders in apps */
-.tool-shell :where(.bento-card) {
+.tool-shell:not(.overview) :where(.bento-card) {
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
