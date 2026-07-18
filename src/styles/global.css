@@ -681,11 +681,17 @@ main {
   color: var(--text-primary);
 }
 
-.resume-main,
-.side-stack {
+.resume-main {
   display: grid;
   gap: 1rem;
 }
+
+.side-stack {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
 
 .timeline {
   display: grid;
@@ -747,6 +753,7 @@ main {
   display: grid;
   gap: 0.75rem;
   padding: 1rem;
+  align-content: start;
 }
 
 @media (min-width: 1024px) {
@@ -760,6 +767,7 @@ main {
   gap: 0.35rem;
   padding-bottom: 0.9rem;
   border-bottom: 1px solid var(--border-color);
+  align-content: start;
 }
 
 .detail-item:last-child {
