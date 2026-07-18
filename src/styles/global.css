@@ -1180,3 +1180,142 @@ footer {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ==========================================================================
+   Clinical Apps Redesign (Flat Layout, Premium Padding, No Bento Grid/Cards)
+   ========================================================================== */
+
+.tool-shell {
+  display: block;
+  max-width: 680px; /* Centered, focused layout for medical calculators */
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.2rem;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .tool-shell {
+    padding: 0;
+  }
+}
+
+/* Remove bento-card backgrounds, shadows, and borders in apps */
+.tool-shell :where(.bento-card) {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Improve padding, word spacing, and typography of inputs and select lists */
+.tool-shell input[type="number"],
+.tool-shell input[type="text"],
+.tool-shell select,
+.tool-shell textarea {
+  padding: 0.75rem 1rem !important;
+  border-radius: 8px !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0.5rem !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-primary) !important;
+  transition: all 0.2s ease !important;
+  font-family: var(--font-sans) !important;
+}
+
+.tool-shell input[type="number"]:focus,
+.tool-shell input[type="text"]:focus,
+.tool-shell select:focus,
+.tool-shell textarea:focus {
+  border-color: var(--pastel-teal) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(128, 203, 196, 0.15) !important;
+}
+
+/* Choices/options select buttons (e.g. +0, +1, +2, +3 in PHQ-9 and GAD-7) */
+.tool-shell button[role="radio"] {
+  padding: 0.8rem 0.5rem !important; /* Premium button padding */
+  font-size: 0.95rem !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Option checkbox rows or card choices (e.g., in SPN malignancy or Mehran CIN) */
+.tool-shell .flex.justify-between.items-center.py-2.5.px-3.5,
+.tool-shell .flex.justify-between.items-center.py-2\.5.px-3\.5 {
+  padding: 1rem 1.2rem !important; /* Premium padding */
+  border-radius: 8px !important;
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  font-size: 0.95rem !important;
+  margin-bottom: 0.25rem !important;
+  min-height: 52px !important;
+}
+
+/* Ensure labels have clear spacing and weight */
+.tool-shell label {
+  display: block !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  margin-bottom: 0.5rem !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Header titles */
+.tool-shell h3 {
+  font-size: 1.35rem !important;
+  line-height: 1.4 !important;
+  margin-top: 0.75rem !important;
+  margin-bottom: 1.25rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Question texts in questionnaires */
+.tool-shell span.text-\[11px\] {
+  font-size: 0.95rem !important;
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0.5rem !important;
+  display: block !important;
+}
+
+/* Spacing and borders */
+.tool-shell .border-b {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  padding-bottom: 0.75rem !important;
+}
+
+.tool-shell .border-t {
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+  padding-top: 1rem !important;
+}
+
+/* Large dashboard launcher cards styling for index */
+.tool-shell .grid-cols-1.md\:grid-cols-2 {
+  grid-template-columns: 1fr !important;
+  gap: 1.25rem !important;
+}
+
+.tool-shell .grid-cols-1.md\:grid-cols-2 > div {
+  padding: 1.5rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.tool-shell .grid-cols-1.md\:grid-cols-2 > div:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+

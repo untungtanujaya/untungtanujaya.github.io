@@ -4,13 +4,11 @@ import AppsDashboard from '../../components/AppsDashboard';
 ---
 
 <Layout title="Clinical Apps Suite | Untung Tanujaya" activeTab="apps" description="Clinical specialty calculators and assessments tools.">
-  <div class="bento-grid">
-    <div class="tool-shell span-12">
-      <AppsDashboard client:load navigate={(path) => {
-        if (typeof window !== 'undefined') {
-          window.location.href = path;
-        }
-      }} lang="en" />
-    </div>
+  <div class="tool-shell">
+    <AppsDashboard client:load navigate={(path) => {
+      if (typeof window !== 'undefined') {
+        window.location.href = path;
+      }
+    }} lang="en" />
   </div>
 </Layout>

@@ -247,8 +247,8 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
         </div>
       </div>
 
-      {/* Grid of calculators list */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2">
+      {/* List of calculators */}
+      <div className="flex flex-col gap-1 mt-2 border-t border-[var(--border-color)]">
         {activeApps.map((app) => (
           <div
             key={app.slug}
@@ -257,18 +257,13 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
             tabIndex={0}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate(`/apps/${specialty}/${app.slug}`); }}
             aria-label={`Open ${app.name} calculator`}
-            className="bento-card p-4 cursor-pointer flex flex-col justify-between gap-4 group transition-all duration-300"
-            style={{
-              borderColor: hoveredCard === app.slug ? accentColor : 'var(--border-color)',
-              transform: hoveredCard === app.slug ? 'translateY(-2px)' : 'none',
-              boxShadow: hoveredCard === app.slug ? '0 10px 40px rgba(0, 0, 0, 0.4)' : '0 4px 30px rgba(0, 0, 0, 0.25)'
-            }}
+            className="flex justify-between items-center py-4 px-2 border-b border-[var(--border-color)] group hover:bg-[rgba(255,255,255,0.02)] transition-all cursor-pointer rounded-lg"
             onMouseEnter={() => setHoveredCard(app.slug)}
             onMouseLeave={() => setHoveredCard(null)}
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
               <h2 
-                className="text-sm font-bold transition-colors mt-1"
+                className="text-sm font-bold transition-colors"
                 style={{ color: hoveredCard === app.slug ? accentColor : 'var(--text-primary)' }}
               >
                 {app.name}
@@ -279,10 +274,10 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
             </div>
             
             <div 
-              className="text-[10px] font-semibold flex items-center gap-1.5 mt-1"
-              style={{ color: accentColor }}
+              className="text-[10px] font-semibold flex items-center gap-1.5 shrink-0 ml-4"
+              style={{ color: hoveredCard === app.slug ? accentColor : 'var(--text-muted)' }}
             >
-              {ui.launch}
+              {ui.launch} &rarr;
             </div>
           </div>
         ))}
