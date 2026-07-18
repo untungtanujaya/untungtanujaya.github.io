@@ -1318,13 +1318,13 @@ footer {
   padding-top: 1rem !important;
 }
 
-/* Large dashboard launcher cards styling for index */
-.tool-shell .grid-cols-1.md\:grid-cols-2 {
+/* Calculator detail grids: keep single column for focused input layout */
+.tool-shell:not(.overview) .grid-cols-1.md\:grid-cols-2 {
   grid-template-columns: 1fr !important;
   gap: 1.25rem !important;
 }
 
-.tool-shell .grid-cols-1.md\:grid-cols-2 > div {
+.tool-shell:not(.overview) .grid-cols-1.md\:grid-cols-2 > div {
   padding: 1.5rem !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 12px !important;
@@ -1333,7 +1333,7 @@ footer {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.tool-shell .grid-cols-1.md\:grid-cols-2 > div:hover {
+.tool-shell:not(.overview) .grid-cols-1.md\:grid-cols-2 > div:hover {
   background: rgba(255, 255, 255, 0.04) !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
