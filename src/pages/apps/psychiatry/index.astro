@@ -4,7 +4,7 @@ import MedicalTools from '../../../components/MedicalTools';
 ---
 
 <Layout title="Psychiatry Scales | Clinical Apps" activeTab="apps">
-  <div class="tool-shell">
+  <div class="tool-shell overview">
     <MedicalTools client:idle specialty="psychiatry" lang="en" navigate={(path) => {
       if (typeof window !== 'undefined') {
         window.location.href = path;

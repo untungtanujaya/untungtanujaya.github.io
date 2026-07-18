@@ -182,17 +182,9 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
               onClick={() => setLang(l => l === 'en' ? 'id' : 'en')}
               className="px-4 py-2 rounded-xl border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--text-primary)] font-semibold text-xs transition-all cursor-pointer bg-[var(--card-bg-inset)] font-mono"
             >
-              {lang === 'en' ? '🇮🇩 ID' : '🇬🇧 EN'}
+              {lang === 'en' ? '🇮🇩 Bahasa Indonesia' : '🇬🇧 English'}
             </button>
           </div>
-          
-          <button 
-            onClick={() => navigate('/')} 
-            aria-label={ui.backToHome}
-            className="px-4 py-2 rounded-xl border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--text-primary)] font-semibold text-xs transition-all flex items-center gap-2 cursor-pointer bg-[var(--card-bg-inset)]"
-          >
-            {ui.backToHome}
-          </button>
         </div>
 
         {/* Render single detailed interactive calculator */}
@@ -215,10 +207,10 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
   return (
     <div className="w-full flex flex-col gap-6 text-[var(--text-primary)]">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-[var(--border-color)]">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-[var(--border-color)]">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight">{pageTitle}</h1>
-          <p className="text-sm text-[var(--text-secondary)] mt-1 font-mono">
+          <p className="text-sm text-[var(--text-secondary)] mt-2 font-mono">
             {pageDesc}
           </p>
         </div>
@@ -228,21 +220,14 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
             onClick={() => setLang(l => l === 'en' ? 'id' : 'en')}
             className="px-4 py-2 rounded-xl border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--text-primary)] font-semibold text-xs transition-all cursor-pointer bg-[var(--card-bg-inset)] font-mono"
           >
-            {lang === 'en' ? '🇮🇩 ID' : '🇬🇧 EN'}
+            {lang === 'en' ? '🇮🇩 Bahasa Indonesia' : '🇬🇧 English'}
           </button>
           <button 
-            onClick={() => navigate('/apps')} 
+            onClick={() => navigate('/apps/')} 
             aria-label={ui.backToApps}
             className="px-4 py-2 rounded-xl border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--text-primary)] font-semibold text-xs transition-all flex items-center gap-2 cursor-pointer bg-[var(--card-bg-inset)]"
           >
             <ArrowLeft size={14} /> {ui.backToApps}
-          </button>
-          <button 
-            onClick={() => navigate('/')} 
-            aria-label={ui.backToHome}
-            className="px-4 py-2 rounded-xl border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--text-primary)] font-semibold text-xs transition-all flex items-center gap-2 cursor-pointer bg-[var(--card-bg-inset)]"
-          >
-            {ui.backToHome}
           </button>
         </div>
       </div>
