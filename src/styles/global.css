@@ -1316,6 +1316,66 @@ footer {
 .tool-shell .grid-cols-1.md\:grid-cols-2 > div:hover {
   background: rgba(255, 255, 255, 0.04) !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
-  transform: translateY(-1px) !important;
+}
+
+/* ==========================================================================
+   Apple Design System (Spring Hover Lift, Touch Compression, Inset Border)
+   ========================================================================== */
+
+:root {
+  /* Apple physical spring curve: overshoots slightly and settles beautifully */
+  --apple-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Snappy response curve for active press and release */
+  --apple-response: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Apply transition rules to all key redirect buttons and cards */
+.button,
+.nav-links a,
+.project-card,
+.article-card,
+.tool-shell .grid-cols-1.md\:grid-cols-2 > div,
+.tool-shell .flex-col.gap-1.mt-2 > div,
+.tool-shell button {
+  transition: transform 0.4s var(--apple-spring), 
+              background-color 0.2s var(--apple-response),
+              border-color 0.2s var(--apple-response),
+              box-shadow 0.4s var(--apple-spring) !important;
+  will-change: transform;
+}
+
+/* Physical Spring Hover Lift & Scale */
+.button:hover,
+.nav-links a:hover,
+.tool-shell button:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+}
+
+.project-card:hover,
+.article-card:hover,
+.tool-shell .grid-cols-1.md\:grid-cols-2 > div:hover,
+.tool-shell .flex-col.gap-1.mt-2 > div:hover {
+  transform: translateY(-3px) scale(1.015) !important;
+}
+
+/* Apple light-catching Inset Border Highlights on buttons */
+.button:hover,
+.button-primary:hover,
+.button-secondary:hover,
+.tool-shell button:hover {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Physical compression on click/pointer-down */
+.button:active,
+.nav-links a:active,
+.project-card:active,
+.article-card:active,
+.tool-shell .grid-cols-1.md\:grid-cols-2 > div:active,
+.tool-shell .flex-col.gap-1.mt-2 > div:active,
+.tool-shell button:active {
+  transform: scale(0.95) translateY(0) !important;
+  transition: transform 0.08s var(--apple-response) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset !important;
 }
 
