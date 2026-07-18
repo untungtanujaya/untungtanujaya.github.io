@@ -88,7 +88,6 @@ export default function AppsDashboard({ navigate: propNavigate, lang: initialLan
           <button
             onClick={() => setLang(l => l === 'en' ? 'id' : 'en')}
             className="text-xs font-semibold px-3 py-1.5 rounded-full bg-[var(--card-bg-inset)] border border-[var(--border-color)] hover:border-[var(--pastel-teal)] transition-all cursor-pointer font-mono"
-            aria-label="Toggle Language"
           >
             {lang === 'en' ? '🇮🇩 Bahasa Indonesia' : '🇬🇧 English'}
           </button>

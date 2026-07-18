@@ -15,6 +15,9 @@ const {
   description = "Software Engineer specializing in high-performance backends and clean architectures.",
   activeTab = "home"
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/untung-tanujaya.webp', Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -34,10 +37,21 @@ const {
     <meta name="author" content="Untung Tanujaya" />
     <meta name="keywords" content="Untung Tanujaya, Software Engineer, Go, React, Astro, Backend Developer, Portfolio" />
 
+    <link rel="canonical" href={canonicalURL} />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Untung Tanujaya" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
@@ -54,10 +68,10 @@ const {
         </button>
         <div class="nav-links" id="site-menu">
           <a href="/" class={activeTab === 'home' ? 'active' : ''}>Home</a>
-          <a href="/resume" class={activeTab === 'resume' ? 'active' : ''}>Resume</a>
-          <a href="/projects" class={activeTab === 'projects' ? 'active' : ''}>Projects</a>
-          <a href="/articles" class={activeTab === 'articles' ? 'active' : ''}>Articles</a>
-          <a href="/apps" class={activeTab === 'apps' ? 'active' : ''}>Apps</a>
+          <a href="/resume/" class={activeTab === 'resume' ? 'active' : ''}>Resume</a>
+          <a href="/projects/" class={activeTab === 'projects' ? 'active' : ''}>Projects</a>
+          <a href="/articles/" class={activeTab === 'articles' ? 'active' : ''}>Articles</a>
+          <a href="/apps/" class={activeTab === 'apps' ? 'active' : ''}>Apps</a>
         </div>
       </nav>
     </header>

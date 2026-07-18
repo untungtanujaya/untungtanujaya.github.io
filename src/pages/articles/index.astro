@@ -42,10 +42,10 @@ const sortedArticles = articles.sort((a, b) => b.data.pubDate.getTime() - a.data
       {sortedArticles.map((art) => {
         const slug = art.data.slug || art.id;
         return (
-          <a href={`/articles/${slug}`} class="article-card">
+          <a href={`/articles/${slug}/`} class="article-card">
             <div class="article-card-top">
               <p class="card-meta">{art.data.subtitle}</p>
-              <h3 class="art-title">{art.data.title}</h3>
+              <h2 class="art-title">{art.data.title}</h2>
               <p class="art-desc">{art.data.summary}</p>
             </div>
             <div class="article-card-meta">

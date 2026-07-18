@@ -5,7 +5,7 @@ import AppsDashboard from '../../components/AppsDashboard';
 
 <Layout title="Clinical Apps Suite | Untung Tanujaya" activeTab="apps" description="Clinical specialty calculators and assessments tools.">
   <div class="tool-shell">
-    <AppsDashboard client:load navigate={(path) => {
+    <AppsDashboard client:idle navigate={(path) => {
       if (typeof window !== 'undefined') {
         window.location.href = path;
       }

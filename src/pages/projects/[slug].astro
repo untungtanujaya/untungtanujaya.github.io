@@ -15,7 +15,7 @@ const { proj } = Astro.props;
 
 <Layout title={`${proj.title} | Projects`} activeTab="projects">
   <div class="detail-shell">
-    <a href="/projects" class="back-link"><span aria-hidden="true">←</span> Back to Projects</a>
+    <a href="/projects/" class="back-link"><span aria-hidden="true">←</span> Back to Projects</a>
 
     <header class="page-hero">
       <div>
@@ -30,7 +30,7 @@ const { proj } = Astro.props;
     </section>
 
     <section class="detail-section" aria-labelledby="project-stack-title">
-      <h3 id="project-stack-title">Technologies Applied</h3>
+      <h2 id="project-stack-title">Technologies Applied</h2>
       <div class="tech-row">
         {proj.tech_stack.split(',').map((tech) => (
           <span class="tech-badge">{tech.trim()}</span>

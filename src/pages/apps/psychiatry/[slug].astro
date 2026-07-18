@@ -20,9 +20,10 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 ---
 
+
 <Layout title={`Psychiatry Scale | Clinical Apps`} activeTab="apps">
   <div class="tool-shell">
-    <MedicalTools client:load specialty="psychiatry" slug={slug} lang="en" navigate={(path) => {
+    <MedicalTools client:idle specialty="psychiatry" slug={slug} lang="en" navigate={(path) => {
       if (typeof window !== 'undefined') {
         window.location.href = path;
       }

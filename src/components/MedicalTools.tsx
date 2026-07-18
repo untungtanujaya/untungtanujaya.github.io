@@ -151,7 +151,7 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
         case 'pi-rads': calculatorComponent = <PiRadsCard lang={lang} />; break;
         case 'pediatric-egfr': calculatorComponent = <PediatricEGfrCard lang={lang} />; break;
         case 'ct-dose': calculatorComponent = <CtDoseCard lang={lang} />; break;
-        default: navigate('/apps/radiology'); return null;
+        default: navigate('/apps/radiology/'); return null;
       }
     } else {
       switch (slug) {
@@ -162,7 +162,7 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
         case 'gcs': calculatorComponent = <GcsCard lang={lang} />; break;
         case 'mse-builder': calculatorComponent = <MseBuilderCard lang={lang} handleCopy={handleCopy} copiedText={copiedText} />; break;
         case 'aims': calculatorComponent = <AimsCard lang={lang} />; break;
-        default: navigate('/apps/psychiatry'); return null;
+        default: navigate('/apps/psychiatry/'); return null;
       }
     }
 
@@ -172,7 +172,7 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
         <div className="flex flex-wrap justify-between items-center gap-4 pb-4 border-b border-[var(--border-color)]">
           <div className="flex flex-wrap gap-2">
             <button 
-              onClick={() => navigate(`/apps/${specialty}`)} 
+              onClick={() => navigate(`/apps/${specialty}/`)} 
               aria-label={ui.backToApps}
               className="px-4 py-2 rounded-xl border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--text-primary)] font-semibold text-xs transition-all flex items-center gap-2 cursor-pointer bg-[var(--card-bg-inset)]"
             >
@@ -252,11 +252,10 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
         {activeApps.map((app) => (
           <div
             key={app.slug}
-            onClick={() => navigate(`/apps/${specialty}/${app.slug}`)}
+            onClick={() => navigate(`/apps/${specialty}/${app.slug}/`)}
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate(`/apps/${specialty}/${app.slug}`); }}
-            aria-label={`Open ${app.name} calculator`}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate(`/apps/${specialty}/${app.slug}/`); }}
             className="flex justify-between items-center py-4 px-2 border-b border-[var(--border-color)] group hover:bg-[rgba(255,255,255,0.02)] transition-all cursor-pointer rounded-lg"
             onMouseEnter={() => setHoveredCard(app.slug)}
             onMouseLeave={() => setHoveredCard(null)}
@@ -277,7 +276,7 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
               className="text-[10px] font-semibold flex items-center gap-1.5 shrink-0 ml-4"
               style={{ color: hoveredCard === app.slug ? accentColor : 'var(--text-muted)' }}
             >
-              {ui.launch} &rarr;
+              {ui.launch}
             </div>
           </div>
         ))}
