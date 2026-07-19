@@ -77,9 +77,9 @@ export default function AppsDashboard({ navigate: propNavigate, lang: initialLan
     <div className="w-full flex flex-col gap-6 text-[var(--text-primary)]">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-[var(--border-color)]">
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-tight">{translations.title}</h1>
-          <p className="text-sm text-[var(--text-secondary)] mt-1 font-mono">
+        <div className="flex flex-col gap-2.5">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">{translations.title}</h1>
+          <p className="text-xs sm:text-sm text-[var(--text-secondary)] font-mono leading-relaxed">
             {translations.subtitle}
           </p>
         </div>

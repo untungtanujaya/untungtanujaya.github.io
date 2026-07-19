@@ -1217,6 +1217,10 @@ footer {
   min-width: 0;
 }
 
+.tool-shell h1 + p {
+  margin-top: 0.5rem;
+}
+
 @media (min-width: 768px) {
   .tool-shell {
     padding: 0;
