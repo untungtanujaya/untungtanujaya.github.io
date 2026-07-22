@@ -6,19 +6,21 @@ import Layout from '../layouts/Layout.astro';
   <div class="bento-grid">
     <section class="portfolio-hero span-12" aria-labelledby="home-title">
       <div class="hero-copy">
-        <p class="hero-kicker">Backend & Distributed Systems</p>
+        <p class="hero-kicker" data-reveal="shift">Backend & Distributed Systems</p>
         <h1 id="home-title" class="hero-title">
-          Hi, I'm <span>Untung</span>.
+          <span class="word">Hi,</span>{' '}
+          <span class="word">I'm</span>{' '}
+          <span class="word"><span class="accent">Untung</span>.</span>
         </h1>
-        <p class="hero-lede">
+        <p class="hero-lede" data-reveal="shift">
           I design and build high-performance, type-safe API backends and highly concurrent compliance data pipelines in Go and Python, with a practical eye for production reliability.
         </p>
-        <div class="hero-meta" style="margin-top: 0.5rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center;">
+        <div class="hero-meta" data-reveal="shift" style="margin-top: 0.5rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center;">
           <span>Jakarta Barat, Indonesia</span>
           <span class="meta-divider" style="color: var(--text-muted); opacity: 0.5;">&bull;</span>
           <span>Incoming M.S. Software Engineering student at Harbin Institute of Technology</span>
         </div>
-        <div class="hero-actions" aria-label="Primary links">
+        <div class="hero-actions" data-reveal="shift" aria-label="Primary links">
           <a class="button button-primary" href="/resume/">
             View Resume <span aria-hidden="true">→</span>
           </a>
@@ -27,7 +29,7 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
 
-    <aside class="now-panel span-12" aria-labelledby="now-title">
+    <aside class="now-panel span-12" data-reveal aria-labelledby="now-title">
       <div class="section-heading">
         <p class="eyebrow">Currently</p>
         <h2 id="now-title">Software engineering, systems, and computational biology.</h2>

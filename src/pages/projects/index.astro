@@ -39,7 +39,7 @@ import { getProjSlug } from '../../utils/slugify';
     {projects.map((proj) => {
       const slug = getProjSlug(proj);
       return (
-        <a href={`/projects/${slug}/`} class="project-card span-6">
+        <a href={`/projects/${slug}/`} class="project-card span-6" data-reveal>
           <div class="project-card-top">
             <p class="card-meta">{proj.subtitle}</p>
             <h2 class="proj-title">{proj.title}</h2>

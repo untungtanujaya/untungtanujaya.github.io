@@ -3,6 +3,7 @@ import '../styles/global.css';
 import '@fontsource-variable/plus-jakarta-sans';
 import '@fontsource-variable/plus-jakarta-sans/wght-italic.css';
 import normalFont from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title?: string;
@@ -10,11 +11,14 @@ interface Props {
   activeTab?: 'home' | 'resume' | 'projects' | 'articles' | 'apps';
 }
 
-const { 
-  title = "Untung Tanujaya | Software Engineer", 
+const {
+  title = "Untung Tanujaya | Software Engineer",
   description = "Software Engineer specializing in high-performance backends and clean architectures.",
   activeTab = "home"
 } = Astro.props;
+
+// Motion System kill-switch — see docs/adr/0001-motion-system-zero-regression.md
+const MOTION = { pageTransitions: true };
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/untung-tanujaya.webp', Astro.site);
@@ -30,6 +34,22 @@ const ogImage = new URL('/untung-tanujaya.webp', Astro.site);
     <link rel="preload" href={normalFont} as="font" type="font/woff2" crossorigin />
     <meta name="theme-color" content="#07090d" />
     <meta name="color-scheme" content="dark" />
+    {MOTION.pageTransitions && <ClientRouter />}
+
+    <!-- Motion gate: add .motion-ok ONLY when the user has no reduced-motion
+         preference. Without this class, all motion start-states stay inert and
+         content renders fully visible (reduced-motion = off total, no-JS safe).
+         Failsafe: if the motion module fails to load/run, .motion-off is added
+         after 2.5s and every start-state is released (content stays visible). -->
+    <script is:inline>
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('motion-ok');
+        window.clearTimeout(window.__motionFailsafe);
+        window.__motionFailsafe = window.setTimeout(function () {
+          document.documentElement.classList.add('motion-off');
+        }, 2500);
+      }
+    </script>
     
     <!-- SEO Meta Tags -->
     <title>{title}</title>
@@ -108,6 +128,9 @@ const ogImage = new URL('/untung-tanujaya.webp', Astro.site);
           });
         });
       }
+    </script>
+    <script>
+      import '../scripts/motion';
     </script>
   </body>
 </html>

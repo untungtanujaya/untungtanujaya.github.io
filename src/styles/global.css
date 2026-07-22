@@ -334,7 +334,11 @@ main {
   line-height: 0.98;
 }
 
-.hero-title span {
+.hero-title .word {
+  display: inline-block;
+}
+
+.hero-title .accent {
   color: var(--accent-teal);
 }
 
@@ -1355,8 +1359,10 @@ footer {
    ========================================================================== */
 
 :root {
-  /* Apple physical spring curve: overshoots slightly and settles beautifully */
-  --apple-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Critically damped spring (damping ratio 1.0 per Apple doctrine):
+     no overshoot — bounce is reserved for momentum-driven gestures only. */
+  --apple-spring: cubic-bezier(0.16, 1, 0.3, 1); /* fallback if linear() unsupported */
+  --apple-spring: linear(0.0% 0.000, 3.3% 0.024, 6.7% 0.083, 10.0% 0.161, 13.3% 0.247, 16.7% 0.334, 20.0% 0.418, 23.3% 0.497, 26.7% 0.568, 30.0% 0.632, 33.3% 0.688, 36.7% 0.737, 40.0% 0.779, 43.3% 0.815, 46.7% 0.846, 50.0% 0.872, 53.3% 0.894, 56.7% 0.912, 60.0% 0.928, 63.3% 0.940, 66.7% 0.951, 70.0% 0.960, 73.3% 0.967, 76.7% 0.973, 80.0% 0.978, 83.3% 0.982, 86.7% 0.985, 90.0% 0.988, 93.3% 0.990, 96.7% 0.992, 100.0% 0.994);
   /* Snappy response curve for active press and release */
   --apple-response: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1408,5 +1414,56 @@ footer {
   transform: scale(0.95) translateY(0) !important;
   transition: transform 0.08s var(--apple-response) !important;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset !important;
+}
+
+/* ==========================================================================
+   Motion System (see docs/adr/0001-motion-system-zero-regression.md)
+   Start-states live behind the .motion-ok gate (added by JS only when the
+   user has no reduced-motion preference) and are released by .motion-off
+   (failsafe if the motion module fails to load). No-JS = fully visible.
+   ========================================================================== */
+
+/* Scroll reveals — below-fold fade variant (opacity+transform, IO-driven) */
+html.motion-ok:not(.motion-off) [data-reveal]:not([data-reveal="shift"]):not([data-reveal-done]) {
+  opacity: 0;
+}
+
+/* Scroll reveals — above-fold shift variant: transform-only, opacity never
+   touched (LCP guard: paint is never delayed for these elements) */
+html.motion-ok:not(.motion-off) [data-reveal="shift"]:not([data-reveal-done]) {
+  transform: translateY(14px);
+}
+
+/* Hero word reveal — transform-only for the same LCP reason */
+html.motion-ok:not(.motion-off) .hero-title .word:not([data-reveal-done]) {
+  transform: translateY(0.35em);
+}
+
+/* Page transitions (Astro ClientRouter, native View Transitions API).
+   Mirrored easing for spatial consistency: old fades out, new rises in. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-fade-out 160ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+
+  ::view-transition-new(root) {
+    animation: vt-fade-in-up 260ms var(--apple-response) both;
+  }
+
+  @keyframes vt-fade-out {
+    to { opacity: 0; }
+  }
+
+  @keyframes vt-fade-in-up {
+    from { opacity: 0; transform: translateY(10px); }
+  }
+}
+
+/* Reduced motion = OFF TOTAL: page swaps become instant */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
 }
 
