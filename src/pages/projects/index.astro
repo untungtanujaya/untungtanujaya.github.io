@@ -56,13 +56,14 @@ import { getProjSlug } from '../../utils/slugify';
   </div>
 
   <script is:inline>
-    const searchInput = document.getElementById('project-search');
-    const cards = document.querySelectorAll('.project-card');
-    const emptyState = document.getElementById('empty-state');
-
-    if (searchInput && emptyState) {
-      searchInput.addEventListener('input', (e) => {
+    // Delegated on document (survives ClientRouter swaps) — see Layout.astro note.
+    if (!window.__projectSearchDelegated) {
+      window.__projectSearchDelegated = true;
+      document.addEventListener('input', (e) => {
+        if (e.target.id !== 'project-search') return;
         const query = e.target.value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.project-card');
+        const emptyState = document.getElementById('empty-state');
         let visibleCount = 0;
 
         cards.forEach((card) => {
@@ -75,7 +76,7 @@ import { getProjSlug } from '../../utils/slugify';
           if (isMatch) visibleCount++;
         });
 
-        emptyState.style.display = visibleCount === 0 ? 'grid' : 'none';
+        if (emptyState) emptyState.style.display = visibleCount === 0 ? 'grid' : 'none';
       });
     }
   </script>

@@ -112,20 +112,28 @@ const ogImage = new URL('/untung-tanujaya.webp', Astro.site);
     </footer>
 
     <script is:inline>
-      const menuToggle = document.getElementById('menu-toggle');
-      const navLinks = document.getElementById('site-menu');
-      if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', () => {
-          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-          menuToggle.setAttribute('aria-expanded', String(!isExpanded));
-          navLinks.classList.toggle('active', !isExpanded);
-        });
-
-        navLinks.querySelectorAll('a').forEach((link) => {
-          link.addEventListener('click', () => {
-            menuToggle.setAttribute('aria-expanded', 'false');
-            navLinks.classList.remove('active');
-          });
+      // Event delegation on `document` — survives ClientRouter body swaps
+      // (document itself is never swapped). Per-element listeners would die
+      // with the old DOM and is:inline scripts are not re-executed by the
+      // router, so delegation + idempotent registration is the robust pattern.
+      if (!window.__menuDelegated) {
+        window.__menuDelegated = true;
+        document.addEventListener('click', (e) => {
+          const toggle = e.target.closest('#menu-toggle');
+          if (toggle) {
+            const navLinks = document.getElementById('site-menu');
+            if (!navLinks) return;
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!isExpanded));
+            navLinks.classList.toggle('active', !isExpanded);
+            return;
+          }
+          if (e.target.closest('#site-menu a')) {
+            const toggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('site-menu');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+            if (navLinks) navLinks.classList.remove('active');
+          }
         });
       }
     </script>

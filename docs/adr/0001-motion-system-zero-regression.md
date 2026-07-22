@@ -65,6 +65,12 @@ heroReveal), `MOTION.pageTransitions` in `Layout.astro`, `--apple-spring` in
   no animation, which is acceptable by design); the `.motion-ok` gate +
   failsafe adds two small concepts contributors must understand before touching
   reveal markup.
+- **Script lifecycle constraint (discovered 2026-07-22):** with ClientRouter,
+  `is:inline` scripts execute only once and the `<body>` DOM is replaced on
+  every navigation — listeners attached to elements die with the old DOM. Any
+  persistent UI behavior (menu toggle, search inputs) MUST use document-level
+  event delegation with idempotent registration, not per-element listeners.
+  Violating this produced the "burger menu dead after navigation" bug.
 - Neutral: reveal choreography constants (distance 14px, duration 450ms,
   stagger 60ms) live in `motion.ts` and are tuning, not contract.
 
