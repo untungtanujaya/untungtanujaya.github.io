@@ -48,13 +48,14 @@ function settle(el: HTMLElement, anim: Animation) {
 
 function initScrollReveals() {
   // Split into two cohorts:
-  //  - immediate: explicit shift variants + anything above the fold at load.
+  //  - immediate: explicit shift variants + anything in the viewport at load.
   //    These animate transform-only RIGHT NOW with stagger — opacity is never
-  //    animated above the fold (LCP guard: a fade would delay the LCP paint).
-  //  - observed: below the fold — opacity+transform reveal on scroll (IO).
+  //    animated on visible-at-load elements (LCP guard: LCP only counts
+  //    elements in the viewport, and a fade delays its registration).
+  //  - observed: outside the viewport — opacity+transform reveal on scroll.
   const immediate: HTMLElement[] = [];
   const observed: HTMLElement[] = [];
-  const foldLine = window.innerHeight * 0.9;
+  const foldLine = window.innerHeight;
 
   document
     .querySelectorAll<HTMLElement>('[data-reveal]:not([data-reveal-done])')
