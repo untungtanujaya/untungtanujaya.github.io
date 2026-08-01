@@ -40,7 +40,7 @@ test.describe('Navigation lifecycle (ClientRouter)', () => {
     await expect(page).toHaveURL(/\/articles\//);
 
     await page.goBack();
-    await expect(page).toHaveURL(/localhost:4321\/?$/);
+    await expect(page).toHaveURL((url) => url.pathname === '/');
 
     const toggle = page.locator('#menu-toggle');
     await toggle.click();
