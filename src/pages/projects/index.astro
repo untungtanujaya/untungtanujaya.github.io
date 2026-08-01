@@ -14,27 +14,7 @@ import { getProjSlug } from '../../utils/slugify';
           Production work across AI-powered document processing, autonomous developer workflows, logistics compliance backends, and high-traffic commerce services.
         </p>
       </div>
-
-      <div class="page-tools">
-        <label class="eyebrow" for="project-search">Search projects</label>
-        <div class="search-container">
-          <input
-            type="text"
-            id="project-search"
-            class="search-input"
-            placeholder="Search title, stack, or description"
-            aria-label="Search projects"
-          />
-        </div>
-      </div>
     </header>
-
-    <div id="empty-state" class="empty-state span-12">
-      <div>
-        <h3>No projects found</h3>
-        <p>Try a different keyword.</p>
-      </div>
-    </div>
 
     {projects.map((proj) => {
       const slug = getProjSlug(proj);
@@ -54,30 +34,4 @@ import { getProjSlug } from '../../utils/slugify';
       );
     })}
   </div>
-
-  <script is:inline>
-    // Delegated on document (survives ClientRouter swaps) — see Layout.astro note.
-    if (!window.__projectSearchDelegated) {
-      window.__projectSearchDelegated = true;
-      document.addEventListener('input', (e) => {
-        if (e.target.id !== 'project-search') return;
-        const query = e.target.value.toLowerCase().trim();
-        const cards = document.querySelectorAll('.project-card');
-        const emptyState = document.getElementById('empty-state');
-        let visibleCount = 0;
-
-        cards.forEach((card) => {
-          const title = card.querySelector('.proj-title')?.textContent.toLowerCase() || '';
-          const desc = card.querySelector('.proj-desc')?.textContent.toLowerCase() || '';
-          const badges = Array.from(card.querySelectorAll('.tech-badge')).map((badge) => badge.textContent.toLowerCase()).join(' ');
-          const isMatch = title.includes(query) || desc.includes(query) || badges.includes(query);
-
-          card.style.display = isMatch ? 'flex' : 'none';
-          if (isMatch) visibleCount++;
-        });
-
-        if (emptyState) emptyState.style.display = visibleCount === 0 ? 'grid' : 'none';
-      });
-    }
-  </script>
 </Layout>

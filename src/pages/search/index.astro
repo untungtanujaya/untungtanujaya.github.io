@@ -1,0 +1,379 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import projects from '../../data/projects.json';
+import experiences from '../../data/experiences.json';
+import educations from '../../data/educations.json';
+import skills from '../../data/skills.json';
+import { getProjSlug } from '../../utils/slugify';
+
+// ---------------------------------------------------------------------------
+// Search Index (see docs/adr/0002). Metadata only — no article bodies, so the
+// index stays tiny (~10KB) and the page works on flaky connections.
+// NOTE: clinical tool entries mirror src/components/MedicalTools.tsx (EN).
+// ---------------------------------------------------------------------------
+
+interface SearchItem {
+  type: 'Page' | 'Project' | 'Article' | 'Clinical App' | 'Resume';
+  title: string;
+  desc: string;
+  href: string;
+  keywords: string;
+}
+
+const articles = await getCollection('articles');
+
+const radiologyTools: Array<[string, string, string, string]> = [
+  ['acr-ti-rads', 'ACR TI-RADS', 'Thyroid nodule risk stratification and management.', 'Thyroid'],
+  ['lung-rads', 'Lung-RADS v2022', 'Solitary pulmonary nodule classification and screening.', 'Lung'],
+  ['spn-malignancy', 'Mayo SPN Risk', 'Solitary pulmonary nodule cancer probability calculator.', 'Nodule Risk'],
+  ['mehran-cin', 'Mehran Score', 'Contrast-induced nephropathy risk evaluation post-PCI.', 'Contrast Risk'],
+  ['pi-rads', 'PI-RADS v2.1', 'Prostate MRI imaging scoring and zone findings.', 'Prostate'],
+  ['pediatric-egfr', 'Pediatric eGFR', 'GFR estimator using height and creatinine (Schwartz).', 'Renal Function'],
+  ['ct-dose', 'CT Effective Dose', 'Estimates effective dose (mSv) from Dose Length Product.', 'Dose Estimator'],
+];
+
+const psychiatryTools: Array<[string, string, string, string]> = [
+  ['phq-9', 'PHQ-9', 'Patient Health Questionnaire depression severity scale.', 'Depression'],
+  ['gad-7', 'GAD-7', 'Generalized Anxiety Disorder assessment scale.', 'Anxiety'],
+  ['cage', 'CAGE', 'Quick screening tool for alcohol use disorder.', 'Alcohol'],
+  ['cows', 'COWS', 'Clinical Opiate Withdrawal Scale assessment.', 'Withdrawal'],
+  ['gcs', 'GCS', 'Glasgow Coma Scale evaluation (3-15 rating).', 'Consciousness'],
+  ['mse-builder', 'MSE Builder', 'Mental Status Examination note snippet generator.', 'Documentation'],
+  ['aims', 'AIMS', 'Abnormal Involuntary Movement Scale tracker.', 'Dyskinesia'],
+];
+
+const searchIndex: SearchItem[] = [
+  { type: 'Page', title: 'Home', desc: 'Portfolio home of Untung Tanujaya, software engineer.', href: '/', keywords: 'home portfolio profile software engineer' },
+  { type: 'Page', title: 'Resume', desc: 'Work experience, education, and technical skills.', href: '/resume/', keywords: 'resume cv experience education skills career' },
+  { type: 'Page', title: 'Projects', desc: 'Featured software projects and production work.', href: '/projects/', keywords: 'projects portfolio work case study' },
+  { type: 'Page', title: 'Articles', desc: 'Technical writeups on backend engineering.', href: '/articles/', keywords: 'articles writing blog engineering' },
+  { type: 'Page', title: 'Clinical Apps', desc: 'Clinical specialty calculators and assessment tools.', href: '/apps/', keywords: 'apps clinical calculators radiology psychiatry tools' },
+  ...projects.map((p): SearchItem => ({
+    type: 'Project',
+    title: p.title,
+    desc: p.description,
+    href: `/projects/${getProjSlug(p)}/`,
+    keywords: `${p.subtitle} ${p.tech_stack}`,
+  })),
+  ...articles.map((a): SearchItem => ({
+    type: 'Article',
+    title: a.data.title,
+    desc: a.data.summary,
+    href: `/articles/${a.data.slug || a.id}/`,
+    keywords: a.data.subtitle,
+  })),
+  ...radiologyTools.map(([slug, name, desc, badge]): SearchItem => ({
+    type: 'Clinical App',
+    title: name,
+    desc,
+    href: `/apps/radiology/${slug}/`,
+    keywords: `${badge} radiology calculator medical`,
+  })),
+  ...psychiatryTools.map(([slug, name, desc, badge]): SearchItem => ({
+    type: 'Clinical App',
+    title: name,
+    desc,
+    href: `/apps/psychiatry/${slug}/`,
+    keywords: `${badge} psychiatry scale assessment medical`,
+  })),
+  ...experiences.map((e): SearchItem => ({
+    type: 'Resume',
+    title: `${e.title} — ${e.company}`,
+    desc: e.summary,
+    href: '/resume/',
+    keywords: `${e.company} ${e.title} ${e.location} experience work`,
+  })),
+  ...educations.map((e): SearchItem => ({
+    type: 'Resume',
+    title: e.degree,
+    desc: `${e.institution}. ${e.description}`,
+    href: '/resume/',
+    keywords: `${e.institution} ${e.degree} ${e.location} education university` ,
+  })),
+  ...skills.map((s): SearchItem => ({
+    type: 'Resume',
+    title: `Skills: ${s.category}`,
+    desc: s.items.join(', '),
+    href: '/resume/',
+    keywords: `${s.category} ${s.items.join(' ')} skills stack`,
+  })),
+];
+
+const PAGE_SIZE = 10;
+const firstPageItems = searchIndex.slice(0, PAGE_SIZE);
+
+const badgeClass: Record<SearchItem['type'], string> = {
+  Page: 'badge-fern',
+  Project: 'badge-gold',
+  Article: 'badge-teal',
+  'Clinical App': 'badge-purple',
+  Resume: 'badge-blue',
+};
+---
+
+<Layout title="Search | Untung Tanujaya" activeTab="search" description="Search projects, articles, clinical apps, and resume content across the whole site.">
+  <div class="bento-grid">
+    <header class="page-hero span-12">
+      <div>
+        <p class="eyebrow">Search</p>
+        <h1 class="page-title">Search the Site</h1>
+        <p class="page-copy">
+          One place to find everything — projects, technical articles, clinical apps, and resume details.
+        </p>
+      </div>
+    </header>
+
+    <div class="search-panel span-12">
+      <form class="search-form" action="/search/" method="get" role="search">
+        <input
+          type="search"
+          id="search-page-input"
+          name="q"
+          class="search-input"
+          placeholder="Search title, keyword, or stack"
+          aria-label="Search the site"
+          autocomplete="off"
+        />
+      </form>
+
+      <p id="search-count" class="search-count" role="status" aria-live="polite">
+        Browse all {searchIndex.length} items
+      </p>
+
+      <div id="search-results" class="search-results">
+        {firstPageItems.map((item) => (
+          <a href={item.href} class="search-result">
+            <span class={`search-result-type badge ${badgeClass[item.type]}`}>{item.type}</span>
+            <span class="search-result-body">
+              <span class="search-result-title">{item.title}</span>
+              <span class="search-result-desc">{item.desc}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <div id="search-empty" class="empty-state">
+        <div>
+          <h3>No results found</h3>
+          <p>Try a different keyword, or <a href="/search/">browse all items</a>.</p>
+        </div>
+      </div>
+
+      <!-- Pagination is rendered by JS (static hosting cannot vary a page by
+           query string). No-JS users get the first page above with no
+           pagination — graceful, never broken. -->
+      <nav id="search-pagination" class="search-pagination" aria-label="Search results pages"></nav>
+    </div>
+  </div>
+
+  <!-- Search Index lives in the DOM (not window) so ClientRouter body swaps
+       always restore it fresh. Astro HTML-escapes the JSON text; the DOM
+       parser decodes it back, so JSON.parse(textContent) is safe. -->
+  <div id="search-index" hidden>{JSON.stringify(searchIndex)}</div>
+
+  <script is:inline>
+    // Global Search — delegated + idempotent per ADR-0001 script-lifecycle
+    // constraints: is:inline scripts run once per session, so all listeners
+    // live on `document` and shared state lives on `window`.
+    if (!window.__globalSearchDelegated) {
+      window.__globalSearchDelegated = true;
+
+      var SEARCH_PAGE_SIZE = 10;
+
+      function getSearchIndex() {
+        var el = document.getElementById('search-index');
+        if (!el) return [];
+        try {
+          return JSON.parse(el.textContent || '[]');
+        } catch (err) {
+          return [];
+        }
+      }
+
+      // Relevance: title matches outrank keyword matches, which outrank
+      // description matches (NN/g: "the first results page is golden").
+      // Every token must match somewhere (AND semantics).
+      function scoreSearchItem(item, tokens) {
+        var total = 0;
+        var title = item.title.toLowerCase();
+        var keywords = item.keywords.toLowerCase();
+        var desc = item.desc.toLowerCase();
+        for (var i = 0; i < tokens.length; i++) {
+          var t = tokens[i];
+          var inTitle = title.indexOf(t) !== -1;
+          var inKeywords = keywords.indexOf(t) !== -1;
+          var inDesc = desc.indexOf(t) !== -1;
+          if (!inTitle && !inKeywords && !inDesc) return 0;
+          total += (inTitle ? 4 : 0) + (inKeywords ? 2 : 0) + (inDesc ? 1 : 0);
+        }
+        return total;
+      }
+
+      function searchParams() {
+        var p = new URLSearchParams(window.location.search);
+        var page = parseInt(p.get('page') || '1', 10);
+        return {
+          q: p.get('q') || '',
+          page: isNaN(page) || page < 1 ? 1 : page,
+        };
+      }
+
+      function searchPageUrl(q, n) {
+        var params = new URLSearchParams();
+        if (q) params.set('q', q);
+        if (n > 1) params.set('page', String(n));
+        var qs = params.toString();
+        return '/search/' + (qs ? '?' + qs : '');
+      }
+
+      var badgeClassMap = {
+        Page: 'badge-fern',
+        Project: 'badge-gold',
+        Article: 'badge-teal',
+        'Clinical App': 'badge-purple',
+        Resume: 'badge-blue',
+      };
+
+      window.__renderGlobalSearch = function () {
+        var resultsEl = document.getElementById('search-results');
+        if (!resultsEl) return; // not on the search page
+        var input = document.getElementById('search-page-input');
+        var countEl = document.getElementById('search-count');
+        var pagEl = document.getElementById('search-pagination');
+        var emptyEl = document.getElementById('search-empty');
+
+        var params = searchParams();
+        var q = params.q;
+        var tokens = q.toLowerCase().trim().split(/\s+/).filter(Boolean);
+        if (input && input.value !== q) input.value = q;
+
+        var index = getSearchIndex();
+        var matched;
+        if (tokens.length) {
+          matched = [];
+          for (var i = 0; i < index.length; i++) {
+            var s = scoreSearchItem(index[i], tokens);
+            if (s > 0) matched.push([s, i, index[i]]);
+          }
+          // Stable sort: score desc, then original index asc
+          matched.sort(function (a, b) { return b[0] - a[0] || a[1] - b[1]; });
+          matched = matched.map(function (entry) { return entry[2]; });
+        } else {
+          matched = index;
+        }
+
+        var totalPages = Math.max(1, Math.ceil(matched.length / SEARCH_PAGE_SIZE));
+        var safePage = Math.min(params.page, totalPages);
+        var start = (safePage - 1) * SEARCH_PAGE_SIZE;
+        var slice = matched.slice(start, start + SEARCH_PAGE_SIZE);
+
+        if (countEl) {
+          countEl.textContent = tokens.length
+            ? matched.length + ' result' + (matched.length === 1 ? '' : 's') + ' for "' + q + '"'
+            : 'Browse all ' + matched.length + ' items';
+        }
+
+        // Render results via DOM APIs only (textContent) — no innerHTML, so a
+        // query can never inject markup.
+        resultsEl.textContent = '';
+        slice.forEach(function (item) {
+          var a = document.createElement('a');
+          a.href = item.href;
+          a.className = 'search-result';
+
+          var type = document.createElement('span');
+          type.className = 'search-result-type badge ' + (badgeClassMap[item.type] || 'badge-fern');
+          type.textContent = item.type;
+
+          var body = document.createElement('span');
+          body.className = 'search-result-body';
+          var title = document.createElement('span');
+          title.className = 'search-result-title';
+          title.textContent = item.title;
+          var desc = document.createElement('span');
+          desc.className = 'search-result-desc';
+          desc.textContent = item.desc;
+          body.appendChild(title);
+          body.appendChild(desc);
+
+          a.appendChild(type);
+          a.appendChild(body);
+          resultsEl.appendChild(a);
+        });
+
+        if (emptyEl) {
+          emptyEl.style.display = matched.length === 0 ? 'grid' : 'none';
+        }
+
+        // Pagination as REAL links: works without JS (server renders page 1)
+        // and ClientRouter soft-navigates when JS is on.
+        if (pagEl) {
+          pagEl.textContent = '';
+          if (totalPages > 1) {
+            if (safePage > 1) {
+              var prev = document.createElement('a');
+              prev.href = searchPageUrl(q, safePage - 1);
+              prev.setAttribute('aria-label', 'Previous page');
+              prev.textContent = '‹';
+              pagEl.appendChild(prev);
+            }
+            for (var n = 1; n <= totalPages; n++) {
+              if (n === safePage) {
+                var cur = document.createElement('span');
+                cur.setAttribute('aria-current', 'page');
+                cur.textContent = String(n);
+                pagEl.appendChild(cur);
+              } else {
+                var link = document.createElement('a');
+                link.href = searchPageUrl(q, n);
+                link.textContent = String(n);
+                pagEl.appendChild(link);
+              }
+            }
+            if (safePage < totalPages) {
+              var next = document.createElement('a');
+              next.href = searchPageUrl(q, safePage + 1);
+              next.setAttribute('aria-label', 'Next page');
+              next.textContent = '›';
+              pagEl.appendChild(next);
+            }
+          }
+        }
+      };
+
+      // Live filter while typing: replaceState (no history spam), page resets
+      // to 1 because the result set changed. IMPORTANT: preserve the existing
+      // history.state — passing null would clobber ClientRouter's per-entry
+      // metadata and break its popstate (back/forward) DOM restoration.
+      document.addEventListener('input', function (e) {
+        if (!e.target || e.target.id !== 'search-page-input') return;
+        var url = new URL(window.location.href);
+        if (e.target.value) {
+          url.searchParams.set('q', e.target.value);
+        } else {
+          url.searchParams.delete('q');
+        }
+        url.searchParams.delete('page');
+        window.history.replaceState(window.history.state, '', url);
+        window.__renderGlobalSearch();
+      });
+
+      // Initial load + every ClientRouter swap. Focus the field once per
+      // arrival from another page (NN/g: don't make people click twice) —
+      // never on pagination/query changes within the page.
+      document.addEventListener('astro:page-load', function () {
+        var path = window.location.pathname.replace(/\/+$/, '');
+        var prevPath = window.__searchPrevPath;
+        window.__searchPrevPath = path;
+        if (path !== '/search') return;
+        window.__renderGlobalSearch();
+        var arrivedFromOtherPage = prevPath === undefined || prevPath !== '/search';
+        if (arrivedFromOtherPage) {
+          var input = document.getElementById('search-page-input');
+          if (input && !input.value) input.focus({ preventScroll: true });
+        }
+      });
+    }
+  </script>
+</Layout>

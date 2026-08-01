@@ -4,6 +4,8 @@ import { test, expect } from '@playwright/test';
 // is:inline scripts run only once, so per-element listeners died after a
 // body swap. The fix uses document-level event delegation — these tests
 // exercise UI behavior across client-side navigations on mobile viewport.
+// (Per-page project/article search was removed in favor of Global Search —
+// see tests/search.spec.ts and docs/adr/0002.)
 
 test.describe('Navigation lifecycle (ClientRouter)', () => {
   test.use({ viewport: { width: 390, height: 700 } });
@@ -43,41 +45,5 @@ test.describe('Navigation lifecycle (ClientRouter)', () => {
     const toggle = page.locator('#menu-toggle');
     await toggle.click();
     await expect(toggle).toHaveAttribute('aria-expanded', 'true');
-  });
-
-  test('project search works on direct load and after client-side re-visit', async ({ page }) => {
-    const expectSearchFilters = async () => {
-      await page.fill('#project-search', 'zzzznotfound');
-      await expect(page.locator('#empty-state')).toBeVisible();
-      await expect(page.locator('.project-card').first()).toBeHidden();
-      await page.fill('#project-search', '');
-      await expect(page.locator('.project-card').first()).toBeVisible();
-    };
-
-    // Direct load
-    await page.goto('/projects/');
-    await expectSearchFilters();
-
-    // Client-side nav away and back again (this re-visits projects after the
-    // router already ran its inline script once — the original failure mode)
-    await page.locator('#menu-toggle').click();
-    await page.locator('#site-menu a[href="/articles/"]').click();
-    await expect(page).toHaveURL(/\/articles\//);
-    await page.goBack();
-    await expect(page).toHaveURL(/\/projects\//);
-    await expectSearchFilters();
-  });
-
-  test('article search works after client-side navigation', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('#menu-toggle').click();
-    await page.locator('#site-menu a[href="/articles/"]').click();
-    await expect(page).toHaveURL(/\/articles\//);
-
-    await page.fill('#article-search', 'zzzznotfound');
-    await expect(page.locator('#empty-state')).toBeVisible();
-    await expect(page.locator('.article-card').first()).toBeHidden();
-    await page.fill('#article-search', '');
-    await expect(page.locator('.article-card').first()).toBeVisible();
   });
 });

@@ -16,27 +16,7 @@ const sortedArticles = articles.sort((a, b) => b.data.pubDate.getTime() - a.data
           Practical writeups on concurrency, distributed rate limiting, idempotent reprocessing, and backend testing edge cases.
         </p>
       </div>
-
-      <div class="page-tools">
-        <label class="eyebrow" for="article-search">Search articles</label>
-        <div class="search-container">
-          <input
-            type="text"
-            id="article-search"
-            class="search-input"
-            placeholder="Search title, tags, or summary"
-            aria-label="Search articles"
-          />
-        </div>
-      </div>
     </header>
-
-    <div id="empty-state" class="empty-state span-12">
-      <div>
-        <h3>No articles found</h3>
-        <p>Try a different keyword.</p>
-      </div>
-    </div>
 
     <div class="article-list span-12">
       {sortedArticles.map((art) => {
@@ -56,30 +36,4 @@ const sortedArticles = articles.sort((a, b) => b.data.pubDate.getTime() - a.data
       })}
     </div>
   </div>
-
-  <script is:inline>
-    // Delegated on document (survives ClientRouter swaps) — see Layout.astro note.
-    if (!window.__articleSearchDelegated) {
-      window.__articleSearchDelegated = true;
-      document.addEventListener('input', (e) => {
-        if (e.target.id !== 'article-search') return;
-        const query = e.target.value.toLowerCase().trim();
-        const cards = document.querySelectorAll('.article-card');
-        const emptyState = document.getElementById('empty-state');
-        let visibleCount = 0;
-
-        cards.forEach((card) => {
-          const title = card.querySelector('.art-title')?.textContent.toLowerCase() || '';
-          const desc = card.querySelector('.art-desc')?.textContent.toLowerCase() || '';
-          const badge = card.querySelector('.card-meta')?.textContent.toLowerCase() || '';
-          const isMatch = title.includes(query) || desc.includes(query) || badge.includes(query);
-
-          card.style.display = isMatch ? 'flex' : 'none';
-          if (isMatch) visibleCount++;
-        });
-
-        if (emptyState) emptyState.style.display = visibleCount === 0 ? 'grid' : 'none';
-      });
-    }
-  </script>
 </Layout>

@@ -38,7 +38,7 @@ test.describe('personal-website-v3 E2E Integration Tests', () => {
     await expect(eduHeader).toBeVisible();
   });
 
-  test('3. Projects Page lists items and supports dynamic search', async ({ page }) => {
+  test('3. Projects Page lists items', async ({ page }) => {
     await page.goto('/projects');
     
     // Check header
@@ -46,25 +46,11 @@ test.describe('personal-website-v3 E2E Integration Tests', () => {
     await expect(title).toBeVisible();
 
     // Check project card items are visible
+    // (Per-page search removed — filtering now lives in Global Search,
+    //  see tests/search.spec.ts and docs/adr/0002.)
     const projectCards = page.locator('.project-card');
     await expect(projectCards).toHaveCount(4);
-
-    // Search for "Python" and verify filtering works
-    const searchInput = page.locator('#project-search');
-    await searchInput.fill('Python');
-    
-    // The search matches "Custom OCR Service" and "The Pilot System" (both have Python in description or tech stack)
-    // and hides the others (CEISA, Critical Web Applications)
-    const visibleCards = page.locator('.project-card:visible');
-    await expect(visibleCards).toHaveCount(2);
-
-    // Search for a non-matching word
-    await searchInput.fill('NonExistentStack');
-    await expect(page.locator('.project-card:visible')).toHaveCount(0);
-    
-    // Check empty state
-    const emptyState = page.locator('#empty-state');
-    await expect(emptyState).toBeVisible();
+    await expect(projectCards.first()).toBeVisible();
   });
 
   test('4. Articles Page loads and renders markdown detail pages', async ({ page }) => {

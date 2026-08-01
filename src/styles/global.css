@@ -238,6 +238,87 @@ main {
   background: var(--text-primary);
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Mobile search entry: magnifier icon (NN/g — icon-only is acceptable on
+   mobile; desktop keeps an open text field). Schematic icon, 44px target. */
+.nav-search-link {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+}
+
+.nav-search-link:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-search-link.active {
+  color: var(--accent-teal);
+}
+
+.nav-search-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Desktop search entry: open text field + submit button
+   (NN/g "Search: Visible and Simple" — a type-in field, not just an icon).
+   Field width 27ch per NN/g minimum so queries never scroll. */
+.nav-search {
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-search-input {
+  height: 38px;
+  width: 27ch;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--card-bg-inset);
+  color: var(--text-primary);
+  outline: none;
+  padding: 0 0.8rem;
+  font-size: 0.84rem;
+}
+
+.nav-search-input:focus {
+  border-color: var(--accent-teal);
+  box-shadow: 0 0 0 3px rgba(100, 216, 204, 0.14);
+}
+
+.nav-search-submit {
+  min-width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--card-bg-inset);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.nav-search-submit:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.nav-search-submit svg {
+  width: 17px;
+  height: 17px;
+}
+
 .nav-links {
   position: absolute;
   top: 72px;
@@ -538,19 +619,17 @@ main {
   padding: 0.25rem 0 0.75rem;
 }
 
+/* Hero text stack: eyebrow -> title -> subtitle needs breathing room.
+   The global `* { margin: 0 }` reset would otherwise glue them together. */
+.page-hero > div:first-child,
+.resume-hero > div:first-child {
+  display: grid;
+  gap: 0.75rem;
+}
+
 .page-title {
   max-width: 13ch;
   font-size: 2.45rem;
-}
-
-.page-tools {
-  display: grid;
-  gap: 0.85rem;
-}
-
-.search-container {
-  position: relative;
-  width: 100%;
 }
 
 .search-input {
@@ -651,9 +730,126 @@ main {
   color: var(--accent-gold);
 }
 
+.badge-teal {
+  border-color: rgba(100, 216, 204, 0.2);
+  background: rgba(100, 216, 204, 0.08);
+  color: var(--accent-teal);
+}
+
+.badge-blue {
+  border-color: rgba(142, 197, 255, 0.2);
+  background: rgba(142, 197, 255, 0.08);
+  color: var(--accent-blue);
+}
+
+.badge-purple {
+  border-color: rgba(199, 166, 255, 0.2);
+  background: rgba(199, 166, 255, 0.08);
+  color: var(--accent-purple);
+}
+
 .article-list {
   display: grid;
   gap: 0.85rem;
+}
+
+/* ==========================================================================
+   Global Search page (/search/) — see docs/adr/0002
+   ========================================================================== */
+
+.search-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.search-form {
+  display: grid;
+}
+
+.search-count {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.search-results {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.search-result {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  color: var(--text-primary);
+}
+
+.search-result:hover {
+  border-color: var(--border-hover);
+  background: var(--card-hover-bg);
+}
+
+.search-result-type {
+  flex: 0 0 auto;
+  margin-top: 0.1rem;
+}
+
+.search-result-body {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.search-result-title {
+  color: var(--text-primary);
+  font-weight: 800;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.search-result-desc {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.search-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.search-pagination a,
+.search-pagination span {
+  min-width: 40px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg-inset);
+  color: var(--text-secondary);
+  padding: 0 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.search-pagination a:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.search-pagination [aria-current="page"] {
+  border-color: var(--accent-teal);
+  background: var(--accent-teal);
+  color: #041011;
+  font-weight: 800;
 }
 
 .resume-summary {
@@ -1090,6 +1286,28 @@ footer {
     padding-top: 112px;
   }
 
+  /* Desktop nav: menus left — logo center — search right */
+  .nav-content {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .logo {
+    justify-self: center;
+  }
+
+  .nav-actions {
+    justify-self: end;
+  }
+
+  .nav-search {
+    display: flex;
+  }
+
+  .nav-search-link {
+    display: none;
+  }
+
   .menu-toggle {
     display: none;
   }
@@ -1097,6 +1315,7 @@ footer {
   .nav-links {
     position: static;
     display: flex;
+    justify-self: start;
     align-items: center;
     gap: 0.15rem;
     padding: 0.25rem;
@@ -1150,9 +1369,14 @@ footer {
 
   .page-hero,
   .resume-hero {
+    padding-bottom: 1.25rem;
+  }
+
+  /* Two-column hero only when a second column actually exists
+     (resume contact grid). Single-child heroes stay full width. */
+  .resume-hero {
     grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
     align-items: end;
-    padding-bottom: 1.25rem;
   }
 
   .page-title {
@@ -1370,8 +1594,11 @@ footer {
 /* Apply transition rules to all key redirect buttons and cards */
 .button,
 .nav-links a,
+.nav-search-submit,
+.nav-search-link,
 .project-card,
 .article-card,
+.search-result,
 .tool-shell .grid-cols-1.md\:grid-cols-2 > div,
 .tool-shell .flex-col.gap-1.mt-2 > div,
 .tool-shell button {
@@ -1384,12 +1611,15 @@ footer {
 /* Physical Spring Hover Lift & Scale */
 .button:hover,
 .nav-links a:hover,
+.nav-search-submit:hover,
+.nav-search-link:hover,
 .tool-shell button:hover {
   transform: translateY(-2px) scale(1.03) !important;
 }
 
 .project-card:hover,
 .article-card:hover,
+.search-result:hover,
 .tool-shell .grid-cols-1.md\:grid-cols-2 > div:hover,
 .tool-shell .flex-col.gap-1.mt-2 > div:hover {
   transform: translateY(-3px) scale(1.015) !important;
@@ -1399,6 +1629,7 @@ footer {
 .button:hover,
 .button-primary:hover,
 .button-secondary:hover,
+.nav-search-submit:hover,
 .tool-shell button:hover {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 }
@@ -1406,8 +1637,11 @@ footer {
 /* Physical compression on click/pointer-down */
 .button:active,
 .nav-links a:active,
+.nav-search-submit:active,
+.nav-search-link:active,
 .project-card:active,
 .article-card:active,
+.search-result:active,
 .tool-shell .grid-cols-1.md\:grid-cols-2 > div:active,
 .tool-shell .flex-col.gap-1.mt-2 > div:active,
 .tool-shell button:active {

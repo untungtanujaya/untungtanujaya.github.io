@@ -8,7 +8,7 @@ import { ClientRouter } from 'astro:transitions';
 interface Props {
   title?: string;
   description?: string;
-  activeTab?: 'home' | 'resume' | 'projects' | 'articles' | 'apps';
+  activeTab?: 'home' | 'resume' | 'projects' | 'articles' | 'apps' | 'search';
 }
 
 const {
@@ -78,20 +78,44 @@ const ogImage = new URL('/untung-tanujaya.webp', Astro.site);
 
     <header class="glass-nav">
       <nav class="nav-content">
-        <a href="/" class="logo" aria-label="Untung Tanujaya Home">
-          <img src="/logo-ut.webp" alt="UT Logo" class="logo-icon" width="70" height="32" />
-        </a>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-menu">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </button>
         <div class="nav-links" id="site-menu">
           <a href="/" class={activeTab === 'home' ? 'active' : ''}>Home</a>
           <a href="/resume/" class={activeTab === 'resume' ? 'active' : ''}>Resume</a>
           <a href="/projects/" class={activeTab === 'projects' ? 'active' : ''}>Projects</a>
           <a href="/articles/" class={activeTab === 'articles' ? 'active' : ''}>Articles</a>
           <a href="/apps/" class={activeTab === 'apps' ? 'active' : ''}>Apps</a>
+        </div>
+        <a href="/" class="logo" aria-label="Untung Tanujaya Home">
+          <img src="/logo-ut.webp" alt="UT Logo" class="logo-icon" width="70" height="32" />
+        </a>
+        <div class="nav-actions">
+          <form class="nav-search" action="/search/" method="get" role="search">
+            <input
+              type="search"
+              name="q"
+              class="nav-search-input"
+              placeholder="Search"
+              aria-label="Search the site"
+              autocomplete="off"
+            />
+            <button type="submit" class="nav-search-submit" aria-label="Search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+              </svg>
+            </button>
+          </form>
+          <a href="/search/" class={activeTab === 'search' ? 'nav-search-link active' : 'nav-search-link'} aria-label="Search the site">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+          </a>
+          <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
         </div>
       </nav>
     </header>

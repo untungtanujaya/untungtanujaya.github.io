@@ -31,3 +31,11 @@ _Avoid_: Scroll animation, fade-in
 **Page Transition**:
 The visual continuity when a visitor moves between pages of the Portfolio Site, replacing the browser's default hard cut. Unsupported browsers simply keep the hard cut.
 _Avoid_: SPA navigation, route animation
+
+**Global Search**:
+The single site-wide search experience living at `/search/`, covering Projects, Technical Articles, Clinical Apps, Resume content, and the top-level pages. It replaces per-page search boxes. Its desktop entry point is an open text field in the navigation bar; on mobile it is a magnifier icon leading to the page.
+_Avoid_: Site search, per-page search, filter box
+
+**Search Index**:
+The build-time, metadata-only catalog (~39 items, ~10KB) that Global Search filters. It is embedded in the search page's DOM as HTML-escaped JSON and never contains article body text, so the page stays fast on low-end phones with flaky connections.
+_Avoid_: Search database, inverted index
