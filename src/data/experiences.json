@@ -5,7 +5,7 @@
     "company": "fr8co",
     "location": "West Jakarta, Jakarta",
     "start_date": "May 2025",
-    "end_date": "Present",
+    "end_date": "June 2026",
     "summary": "Led the development of concurrent customs reporting systems and RPA engines, improving data ingestion speed by 10x using Go and Python.",
     "description": [
       "Engineered and maintained Go-based backend services and Python-powered microservices for a logistics and customs-compliance platform, opening 367 Pull Requests and shipping 267 merges to production within a 13-month tenure, contributing over 86,000 lines of production-stable code across three core repositories.",

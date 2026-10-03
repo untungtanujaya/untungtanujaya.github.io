@@ -1,36 +1,61 @@
 @import "tailwindcss";
 
+/* Fraunces Variable (self-subset woff2 in /public/fonts — docs/adr/0003).
+   Italic subset covers A–Za–z.'’ only (hero accent word). */
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/fraunces-opsz-normal-sub.woff2') format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/fraunces-opsz-italic-sub.woff2') format('woff2-variations');
+}
+
 :root {
-  --bg-primary: #07090d;
-  --bg-secondary: #0c1117;
-  --surface: #101722;
-  --surface-2: #141d2a;
+  /* Warm ink palette — dark editorial, single brass accent.
+     Semantic pastel hues kept (muted) for clinical-app & search-result
+     categories only; everything else lives on neutrals + brass. */
+  --bg-primary: #0e1512;
+  --bg-secondary: #141a16;
+  --surface: #1a1f1b;
+  --surface-2: #21271f;
   --card-bg: var(--surface);
-  --card-bg-inset: #0a1018;
-  --card-hover-bg: #151f2d;
-  --border-color: #223041;
-  --border-hover: #3b5369;
-  --text-primary: #f4f7fb;
-  --text-secondary: #b8c5d3;
-  --text-muted: #7f8ea2;
-  --accent-fern: #91d27c;
-  --accent-moss: #a5d6a7;
-  --accent-teal: #64d8cc;
-  --accent-gold: #f2c96d;
-  --accent-blue: #8ec5ff;
-  --accent-purple: #c7a6ff;
-  --pastel-teal: var(--accent-teal);
+  --card-bg-inset: #121713;
+  --card-hover-bg: #232a22;
+  --border-color: #2a2f28;
+  --border-hover: #444c3c;
+  --text-primary: #ede7db;
+  --text-secondary: #b6ac9b;
+  --text-muted: #877e6d;
+  --accent: #d2a75e;
+  --accent-strong: #e4bd78;
+  --accent-ink: #1e1608;
+  --accent-fern: #9db88a;
+  --accent-moss: #9db88a;
+  --accent-teal: var(--accent);
+  --accent-gold: var(--accent);
+  --accent-blue: #8fa9c8;
+  --accent-purple: #b39ac6;
+  --pastel-teal: #7fb8ab;
   --pastel-blue: var(--accent-blue);
   --pastel-purple: var(--accent-purple);
   --pastel-green: var(--accent-moss);
   --bg-color: var(--bg-primary);
+  --font-serif: 'Fraunces Variable', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
   --font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   --max-width: 1160px;
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 8px;
-  --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.26);
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.34);
 }
 
 *,
@@ -60,8 +85,8 @@ body {
   flex-direction: column;
   overflow-x: hidden;
   background:
-    linear-gradient(180deg, rgba(7, 9, 13, 0.96), rgba(9, 16, 24, 0.98) 46%, #07090d 100%),
-    linear-gradient(90deg, rgba(100, 216, 204, 0.04), rgba(242, 201, 109, 0.025));
+    radial-gradient(1200px 600px at 85% -10%, rgba(210, 167, 94, 0.05), transparent 60%),
+    linear-gradient(180deg, #121a15 0%, var(--bg-primary) 38%, var(--bg-primary) 100%);
 }
 
 body::before {
@@ -70,12 +95,10 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.14;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(to bottom, black, transparent 78%);
+  opacity: 0.5;
+  background-image: radial-gradient(rgba(237, 231, 219, 0.045) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: linear-gradient(to bottom, black, transparent 60%);
 }
 
 button,
@@ -96,21 +119,21 @@ svg {
 }
 
 a {
-  color: var(--accent-teal);
+  color: var(--accent);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--text-primary);
+  color: var(--accent-strong);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent-teal);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
 ::selection {
-  background: rgba(100, 216, 204, 0.24);
+  background: rgba(210, 167, 94, 0.28);
   color: var(--text-primary);
 }
 
@@ -121,10 +144,19 @@ h4,
 h5,
 h6 {
   color: var(--text-primary);
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 600;
   letter-spacing: 0;
-  line-height: 1.12;
+  line-height: 1.08;
   overflow-wrap: anywhere;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 640;
 }
 
 h1 {
@@ -177,10 +209,10 @@ main {
   right: 0;
   z-index: 100;
   min-height: 72px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(7, 9, 13, 0.86);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(237, 231, 219, 0.09);
+  background: rgba(14, 21, 18, 0.82);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
 
 @media (prefers-reduced-transparency: reduce) {
@@ -258,11 +290,11 @@ main {
 
 .nav-search-link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(237, 231, 219, 0.06);
 }
 
 .nav-search-link.active {
-  color: var(--accent-teal);
+  color: var(--accent);
 }
 
 .nav-search-link svg {
@@ -292,8 +324,8 @@ main {
 }
 
 .nav-search-input:focus {
-  border-color: var(--accent-teal);
-  box-shadow: 0 0 0 3px rgba(100, 216, 204, 0.14);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(210, 167, 94, 0.14);
 }
 
 .nav-search-submit {
@@ -330,7 +362,7 @@ main {
   padding: 0.5rem;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  background: rgba(12, 17, 23, 0.98);
+  background: rgba(20, 26, 22, 0.98);
   box-shadow: var(--shadow-soft);
 }
 
@@ -346,13 +378,17 @@ main {
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
   font-size: 0.92rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-  background: rgba(255, 255, 255, 0.06);
+.nav-links a:hover {
+  background: rgba(237, 231, 219, 0.06);
   color: var(--text-primary);
+}
+
+.nav-links a.active {
+  background: rgba(210, 167, 94, 0.12);
+  color: var(--accent);
 }
 
 .bento-grid {
@@ -370,8 +406,8 @@ main {
   min-width: 0;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  box-shadow: 0 1px 0 rgba(237, 231, 219, 0.03) inset;
 }
 
 :where(.bento-card) {
@@ -401,18 +437,33 @@ main {
 
 .eyebrow,
 .hero-kicker {
-  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--accent);
   font-family: var(--font-mono);
   font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
+.eyebrow::before,
+.hero-kicker::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.7;
+  flex: 0 0 auto;
+}
+
 .hero-title {
-  max-width: 100%;
+  max-width: 14ch;
   font-size: 3rem;
-  line-height: 0.98;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
 }
 
 .hero-title .word {
@@ -420,12 +471,15 @@ main {
 }
 
 .hero-title .accent {
-  color: var(--accent-teal);
+  color: var(--accent);
+  font-style: italic;
+  font-weight: 560;
 }
 
 .hero-lede {
-  max-width: 680px;
+  max-width: 60ch;
   font-size: 1.05rem;
+  font-weight: 400;
   color: var(--text-secondary);
 }
 
@@ -443,31 +497,31 @@ main {
   justify-content: center;
   gap: 0.45rem;
   border-radius: var(--radius-md);
-  padding: 0.72rem 1rem;
+  padding: 0.72rem 1.15rem;
   font-size: 0.9rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
 }
 
 .button-primary {
-  background: var(--accent-teal);
-  color: #041011;
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
 .button-primary:hover {
-  color: #041011;
-  background: #7de7dc;
+  color: var(--accent-ink);
+  background: var(--accent-strong);
 }
 
 .button-secondary {
   border: 1px solid var(--border-color);
-  background: var(--card-bg-inset);
+  background: transparent;
   color: var(--text-primary);
 }
 
 .button-secondary:hover {
-  border-color: var(--border-hover);
-  color: var(--text-primary);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .hero-portrait {
@@ -511,8 +565,9 @@ main {
 
 .metric-value {
   color: var(--text-primary);
-  font-size: 1.45rem;
-  font-weight: 900;
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 560;
   line-height: 1;
 }
 
@@ -628,8 +683,10 @@ main {
 }
 
 .page-title {
-  max-width: 13ch;
+  max-width: 16ch;
   font-size: 2.45rem;
+  font-weight: 520;
+  letter-spacing: -0.01em;
 }
 
 .search-input {
@@ -646,7 +703,7 @@ main {
 
 .search-input:focus {
   border-color: var(--accent-teal);
-  box-shadow: 0 0 0 3px rgba(100, 216, 204, 0.14);
+  box-shadow: 0 0 0 3px rgba(210, 167, 94, 0.16);
 }
 
 .empty-state {
@@ -708,43 +765,43 @@ main {
   width: fit-content;
   align-items: center;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(242, 201, 109, 0.18);
-  background: rgba(242, 201, 109, 0.08);
+  border: 1px solid rgba(210, 167, 94, 0.22);
+  background: rgba(210, 167, 94, 0.07);
   color: var(--accent-gold);
   padding: 0.24rem 0.5rem;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.2;
 }
 
 .badge-fern {
-  border-color: rgba(145, 210, 124, 0.2);
-  background: rgba(145, 210, 124, 0.08);
+  border-color: rgba(157, 184, 138, 0.22);
+  background: rgba(157, 184, 138, 0.07);
   color: var(--accent-fern);
 }
 
 .badge-gold {
-  border-color: rgba(242, 201, 109, 0.2);
-  background: rgba(242, 201, 109, 0.08);
+  border-color: rgba(210, 167, 94, 0.22);
+  background: rgba(210, 167, 94, 0.07);
   color: var(--accent-gold);
 }
 
 .badge-teal {
-  border-color: rgba(100, 216, 204, 0.2);
-  background: rgba(100, 216, 204, 0.08);
-  color: var(--accent-teal);
+  border-color: rgba(127, 184, 171, 0.22);
+  background: rgba(127, 184, 171, 0.07);
+  color: var(--pastel-teal);
 }
 
 .badge-blue {
-  border-color: rgba(142, 197, 255, 0.2);
-  background: rgba(142, 197, 255, 0.08);
+  border-color: rgba(143, 169, 200, 0.22);
+  background: rgba(143, 169, 200, 0.07);
   color: var(--accent-blue);
 }
 
 .badge-purple {
-  border-color: rgba(199, 166, 255, 0.2);
-  background: rgba(199, 166, 255, 0.08);
+  border-color: rgba(179, 154, 198, 0.22);
+  background: rgba(179, 154, 198, 0.07);
   color: var(--accent-purple);
 }
 
@@ -807,8 +864,9 @@ main {
 
 .search-result-title {
   color: var(--text-primary);
-  font-weight: 800;
-  font-size: 1rem;
+  font-family: var(--font-serif);
+  font-weight: 620;
+  font-size: 1.06rem;
   line-height: 1.3;
 }
 
@@ -846,10 +904,10 @@ main {
 }
 
 .search-pagination [aria-current="page"] {
-  border-color: var(--accent-teal);
-  background: var(--accent-teal);
-  color: #041011;
-  font-weight: 800;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
 }
 
 .resume-summary {
@@ -1012,7 +1070,7 @@ main {
   gap: 0.45rem;
   color: var(--text-secondary);
   font-size: 0.9rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .back-link:hover {
@@ -1081,7 +1139,9 @@ main {
 
 .article-title {
   font-size: 1.65rem;
-  line-height: 1.15;
+  font-weight: 540;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
 }
 
 .article-meta {
@@ -1145,13 +1205,13 @@ main {
   overflow-x: auto;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  background: #05080d;
+  background: #0e1210;
   padding: 1rem;
 }
 
 .article-body code {
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(237, 231, 219, 0.07);
   padding: 0.12em 0.3em;
   color: var(--text-primary);
   font-family: var(--font-mono);
@@ -1198,7 +1258,7 @@ input[type="text"]:focus,
 select:focus,
 textarea:focus {
   border-color: var(--accent-teal);
-  box-shadow: 0 0 0 3px rgba(100, 216, 204, 0.14);
+  box-shadow: 0 0 0 3px rgba(210, 167, 94, 0.16);
 }
 
 input[type="checkbox"] {
@@ -1254,7 +1314,7 @@ input[type="checkbox"]:checked::before {
 
 footer {
   border-top: 1px solid var(--border-color);
-  background: rgba(7, 9, 13, 0.8);
+  background: rgba(14, 21, 18, 0.8);
   padding: 1.5rem 1rem;
 }
 
@@ -1317,18 +1377,32 @@ footer {
     display: flex;
     justify-self: start;
     align-items: center;
-    gap: 0.15rem;
-    padding: 0.25rem;
-    border-radius: var(--radius-lg);
-    border-color: rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.04);
+    gap: 1.35rem;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
     box-shadow: none;
   }
 
+  /* Desktop = underline metaphor (editorial), not buttons: no fills, no pill */
   .nav-links a {
-    min-height: 38px;
-    padding: 0 0.78rem;
-    font-size: 0.84rem;
+    min-height: 44px;
+    padding: 0 0.1rem;
+    font-size: 0.86rem;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    background: transparent;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-links a.active {
+    color: var(--accent);
   }
 
   .bento-grid {
@@ -1479,8 +1553,8 @@ footer {
   font-size: 0.95rem !important;
   line-height: 1.5 !important;
   margin-bottom: 0.5rem !important;
-  background-color: rgba(255, 255, 255, 0.03) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(237, 231, 219, 0.03) !important;
+  border-color: rgba(237, 231, 219, 0.1) !important;
   color: var(--text-primary) !important;
   transition: all 0.2s ease !important;
   font-family: var(--font-sans) !important;
@@ -1491,9 +1565,9 @@ footer {
 .tool-shell select:focus,
 .tool-shell textarea:focus {
   border-color: var(--pastel-teal) !important;
-  background-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(237, 231, 219, 0.05) !important;
   outline: none !important;
-  box-shadow: 0 0 0 2px rgba(128, 203, 196, 0.15) !important;
+  box-shadow: 0 0 0 2px rgba(210, 167, 94, 0.16) !important;
 }
 
 /* Choices/options select buttons (e.g. +0, +1, +2, +3 in PHQ-9 and GAD-7) */
@@ -1510,8 +1584,8 @@ footer {
 .tool-shell .flex.justify-between.items-center.py-2\.5.px-3\.5 {
   padding: 1rem 1.2rem !important; /* Premium padding */
   border-radius: 8px !important;
-  background-color: rgba(255, 255, 255, 0.02) !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
+  background-color: rgba(237, 231, 219, 0.02) !important;
+  border-color: rgba(237, 231, 219, 0.08) !important;
   font-size: 0.95rem !important;
   margin-bottom: 0.25rem !important;
   min-height: 52px !important;
@@ -1533,8 +1607,8 @@ footer {
   line-height: 1.4 !important;
   margin-top: 0.75rem !important;
   margin-bottom: 1.25rem !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.02em !important;
+  font-weight: 640 !important;
+  letter-spacing: -0.01em !important;
 }
 
 /* Question texts in questionnaires */
@@ -1549,12 +1623,12 @@ footer {
 
 /* Spacing and borders */
 .tool-shell .border-b {
-  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  border-bottom-color: rgba(237, 231, 219, 0.08) !important;
   padding-bottom: 0.75rem !important;
 }
 
 .tool-shell .border-t {
-  border-top-color: rgba(255, 255, 255, 0.08) !important;
+  border-top-color: rgba(237, 231, 219, 0.08) !important;
   padding-top: 1rem !important;
 }
 
@@ -1566,16 +1640,16 @@ footer {
 
 .tool-shell:not(.overview) .grid-cols-1.md\:grid-cols-2 > div {
   padding: 1.5rem !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(237, 231, 219, 0.08) !important;
   border-radius: 12px !important;
-  background: rgba(255, 255, 255, 0.02) !important;
+  background: rgba(237, 231, 219, 0.02) !important;
   cursor: pointer !important;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .tool-shell:not(.overview) .grid-cols-1.md\:grid-cols-2 > div:hover {
-  background: rgba(255, 255, 255, 0.04) !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
+  background: rgba(237, 231, 219, 0.04) !important;
+  border-color: rgba(237, 231, 219, 0.2) !important;
 }
 
 /* ==========================================================================
@@ -1591,9 +1665,10 @@ footer {
   --apple-response: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Apply transition rules to all key redirect buttons and cards */
+/* Apply transition rules to all key redirect buttons and cards.
+   NOTE: .nav-links a is deliberately absent — desktop nav links are text
+   links (underline metaphor), not buttons; they must not lift or compress. */
 .button,
-.nav-links a,
 .nav-search-submit,
 .nav-search-link,
 .project-card,
@@ -1602,7 +1677,7 @@ footer {
 .tool-shell .grid-cols-1.md\:grid-cols-2 > div,
 .tool-shell .flex-col.gap-1.mt-2 > div,
 .tool-shell button {
-  transition: transform 0.4s var(--apple-spring), 
+  transition: transform 0.4s var(--apple-spring),
               background-color 0.2s var(--apple-response),
               border-color 0.2s var(--apple-response),
               box-shadow 0.4s var(--apple-spring) !important;
@@ -1610,7 +1685,6 @@ footer {
 
 /* Physical Spring Hover Lift & Scale */
 .button:hover,
-.nav-links a:hover,
 .nav-search-submit:hover,
 .nav-search-link:hover,
 .tool-shell button:hover {
@@ -1631,12 +1705,11 @@ footer {
 .button-secondary:hover,
 .nav-search-submit:hover,
 .tool-shell button:hover {
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 1px 0 rgba(237, 231, 219, 0.15) inset, 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Physical compression on click/pointer-down */
 .button:active,
-.nav-links a:active,
 .nav-search-submit:active,
 .nav-search-link:active,
 .project-card:active,
@@ -1648,6 +1721,60 @@ footer {
   transform: scale(0.95) translateY(0) !important;
   transition: transform 0.08s var(--apple-response) !important;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset !important;
+}
+
+/* Editorial micro-interactions: animated underline on desktop nav links,
+   brass hairline that grows from the left — quiet, text-only, transform-based. */
+@media (min-width: 768px) {
+  .nav-links a {
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0.1rem;
+    right: 0.1rem;
+    bottom: 0.55rem;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.3s var(--apple-response);
+  }
+
+  .nav-links a:hover::after,
+  .nav-links a.active::after {
+    transform: scaleX(1);
+  }
+
+  .nav-links a.active::after {
+    opacity: 0.55;
+  }
+}
+
+/* Arrow nudge on primary-action hover — the "→" slides a touch rightward */
+.button [aria-hidden="true"] {
+  display: inline-block;
+  transition: transform 0.3s var(--apple-spring);
+}
+
+.button:hover [aria-hidden="true"] {
+  transform: translateX(3px);
+}
+
+/* Card titles settle into brass on hover — color-only, no layout cost */
+.project-card:hover .proj-title,
+.article-card:hover .art-title,
+.feature-card:hover h3 {
+  color: var(--accent);
+  transition: color 0.25s var(--apple-response);
+}
+
+.proj-title,
+.art-title,
+.feature-card h3 {
+  transition: color 0.25s var(--apple-response);
 }
 
 /* ==========================================================================

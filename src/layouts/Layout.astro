@@ -3,6 +3,9 @@ import '../styles/global.css';
 import '@fontsource-variable/plus-jakarta-sans';
 import '@fontsource-variable/plus-jakarta-sans/wght-italic.css';
 import normalFont from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url';
+// Subset Fraunces (subset-tooling: .fonttools-venv + pyftsubset; see docs/adr/0003)
+const serifFont = '/fonts/fraunces-opsz-normal-sub.woff2';
+const serifItalicFont = '/fonts/fraunces-opsz-italic-sub.woff2';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -32,7 +35,9 @@ const ogImage = new URL('/untung-tanujaya.webp', Astro.site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preload" href={normalFont} as="font" type="font/woff2" crossorigin />
-    <meta name="theme-color" content="#07090d" />
+    <link rel="preload" href={serifFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifItalicFont} as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#0e1512" />
     <meta name="color-scheme" content="dark" />
     {MOTION.pageTransitions && <ClientRouter />}
 
