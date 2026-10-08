@@ -43,4 +43,7 @@ Pemilik memutuskan 8 Okt 2026: domain produksi tetap `https://untungtanujaya.com
 
 ## 7. Catatan rilis
 
-Diisi setelah deployment: SHA rilis source, SHA commit di repo deployment, Pages run, hasil production smoke, dan rollback point (`80b7acd` = rilis v3 terakhir).
+- Source repo: `untungtanujaya/personal-website-v4` (private), commit rilis `b4678c8`; CI run 37731568281 sukses (build + content check + 27 E2E).
+- Repo deployment: `untungtanujaya/untungtanujaya.github.io` commit `22f9292` di atas riwayat v3 `80b7acd` (tanpa force push); Pages run 37731777334 sukses (Build + Deploy).
+- Rollback point: `80b7acd` (revert commit rilis, bukan reset paksa).
+- Production smoke 8 Okt 2026 di `https://untungtanujaya.com`: 16 route 200 (/, /en/, /zh/, work, cv, research, publications, writing detail, zh/writing, tools indeks, PHQ-9, search, sitemap, feed, robots, 404); hero v4 live di EN dan ZH; canonical & feed absolute memakai `.com`; legacy redirect `/resume/` → `/en/cv/` dan `/apps/psychiatry/phq-9/` → `/en/tools/psychiatry/phq-9/` membawa query/hash; aset CSS, woff2 Plus Jakarta Sans, dan portrait webp 200.
