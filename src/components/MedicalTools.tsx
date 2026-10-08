@@ -6,18 +6,19 @@ import {
 } from 'lucide-react';
 
 export interface MedicalToolsProps {
-  navigate: (path: string) => void;
+  navigate?: (path: string) => void;
+  locale?: 'en' | 'zh';
   specialty: 'radiology' | 'psychiatry';
   slug?: string;
   lang: 'en' | 'id';
 }
 
-export default function MedicalTools({ navigate: propNavigate, specialty, slug, lang: initialLang = 'en' }: MedicalToolsProps) {
+export default function MedicalTools({ navigate: propNavigate, specialty, slug, lang: initialLang = 'en', locale = 'en' }: MedicalToolsProps) {
   const navigate = (path: string) => {
     if (typeof propNavigate === 'function') {
       propNavigate(path);
     } else {
-      window.location.href = path;
+      window.location.href = path.startsWith('/apps') ? `/${locale}/tools${path.slice(5)}` : `/${locale}/`;
     }
   };
   const [lang, setLang] = useState<'en' | 'id'>(initialLang);
@@ -182,7 +183,7 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
               onClick={() => setLang(l => l === 'en' ? 'id' : 'en')}
               className="px-4 py-2 rounded-xl border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--text-primary)] font-semibold text-xs transition-all cursor-pointer bg-[var(--card-bg-inset)] font-mono"
             >
-              {lang === 'en' ? '🇮🇩 Bahasa Indonesia' : '🇬🇧 English'}
+              {lang === 'en' ? 'Bahasa Indonesia' : 'English'}
             </button>
           </div>
         </div>
@@ -202,7 +203,6 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
 
   const isRadiology = specialty === 'radiology';
   const accentColor = isRadiology ? 'var(--pastel-teal)' : 'var(--pastel-purple)';
-  const badgeBgColor = isRadiology ? 'rgba(128,203,196,0.1)' : 'rgba(179,157,219,0.1)';
 
   return (
     <div className="w-full flex flex-col gap-6 text-[var(--text-primary)]">
@@ -220,7 +220,7 @@ export default function MedicalTools({ navigate: propNavigate, specialty, slug, 
             onClick={() => setLang(l => l === 'en' ? 'id' : 'en')}
             className="px-4 py-2 rounded-xl border border-[var(--border-color)] text-[var(--text-primary)] hover:border-[var(--text-primary)] font-semibold text-xs transition-all cursor-pointer bg-[var(--card-bg-inset)] font-mono"
           >
-            {lang === 'en' ? '🇮🇩 Bahasa Indonesia' : '🇬🇧 English'}
+            {lang === 'en' ? 'Bahasa Indonesia' : 'English'}
           </button>
           <button 
             onClick={() => navigate('/apps/')} 

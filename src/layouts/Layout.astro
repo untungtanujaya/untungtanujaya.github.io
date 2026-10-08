@@ -1,173 +1,72 @@
 ---
 import '../styles/global.css';
-import '@fontsource-variable/plus-jakarta-sans';
-import '@fontsource-variable/plus-jakarta-sans/wght-italic.css';
-import normalFont from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url';
-// Subset Fraunces (subset-tooling: .fonttools-venv + pyftsubset; see docs/adr/0003)
-const serifFont = '/fonts/fraunces-opsz-normal-sub.woff2';
-const serifItalicFont = '/fonts/fraunces-opsz-italic-sub.woff2';
-import { ClientRouter } from 'astro:transitions';
-
-interface Props {
-  title?: string;
-  description?: string;
-  activeTab?: 'home' | 'resume' | 'projects' | 'articles' | 'apps' | 'search';
-}
-
-const {
-  title = "Untung Tanujaya | Software Engineer",
-  description = "Software Engineer specializing in high-performance backends and clean architectures.",
-  activeTab = "home"
-} = Astro.props;
-
-// Motion System kill-switch — see docs/adr/0001-motion-system-zero-regression.md
-const MOTION = { pageTransitions: true };
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/untung-tanujaya.webp', Astro.site);
+import '@fontsource-variable/plus-jakarta-sans/index.css';
+import Icon from '../components/Icon.astro';
+import { ui, href, tr, type Locale } from '../i18n/ui';
+interface Props { locale?: Locale; title: string; description?: string; section?: string; path?: string; }
+const { locale = 'en', title, description = 'Untung Tanujaya — backend engineer working with Go and Python, and M.S. Software Engineering student at Harbin Institute of Technology.', section = '', path = '' } = Astro.props;
+const t = ui[locale];
+const canonical = new URL(href(locale, path), Astro.site);
+const other = locale === 'en' ? 'zh' : 'en';
+const nav = ['work', 'research', 'writing', 'cv'] as const;
 ---
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang={locale === 'zh' ? 'zh-Hans' : 'en'}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="preload" href={normalFont} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={serifFont} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={serifItalicFont} as="font" type="font/woff2" crossorigin />
-    <meta name="theme-color" content="#0e1512" />
-    <meta name="color-scheme" content="dark" />
-    {MOTION.pageTransitions && <ClientRouter />}
-
-    <!-- Motion gate: add .motion-ok ONLY when the user has no reduced-motion
-         preference. Without this class, all motion start-states stay inert and
-         content renders fully visible (reduced-motion = off total, no-JS safe).
-         Failsafe: if the motion module fails to load/run, .motion-off is added
-         after 2.5s and every start-state is released (content stays visible). -->
-    <script is:inline>
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.documentElement.classList.add('motion-ok');
-        window.clearTimeout(window.__motionFailsafe);
-        window.__motionFailsafe = window.setTimeout(function () {
-          document.documentElement.classList.add('motion-off');
-        }, 2500);
-      }
-    </script>
-    
-    <!-- SEO Meta Tags -->
-    <title>{title}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · Untung Tanujaya</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Untung Tanujaya" />
-    <meta name="keywords" content="Untung Tanujaya, Software Engineer, Go, React, Astro, Backend Developer, Portfolio" />
-
-    <link rel="canonical" href={canonicalURL} />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Untung Tanujaya" />
-    <meta property="og:title" content={title} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f8fafc" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={new URL(href('en', path), Astro.site)} />
+    <link rel="alternate" hreflang="zh-Hans" href={new URL(href('zh', path), Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(href('en', path), Astro.site)} />
+    <link rel="alternate" type="application/rss+xml" title={t.feed} href={`/${locale}/feed.xml`} />
+    <meta property="og:title" content={`${title} · Untung Tanujaya`} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content={ogImage} />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale === 'zh' ? 'zh_CN' : 'en_US'} />
+    <meta property="og:image" content={new URL('/untung-tanujaya.webp', Astro.site)} />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'Person', name: 'Untung Tanujaya', url: Astro.site, jobTitle: 'Backend Engineer', sameAs: ['https://github.com/untungtanujaya', 'https://linkedin.com/in/tanujaya'] })} />
+    <script is:inline>
+      (() => { let theme = 'system'; try { theme = localStorage.getItem('ut-theme') || 'system'; } catch {} const dark = theme === 'dark' || (theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches); document.documentElement.dataset.theme = dark ? 'dark' : 'light'; document.documentElement.dataset.preference = theme; })();
+    </script>
   </head>
   <body>
-    <a class="skip-link" href="#content">Skip to content</a>
-
-    <header class="glass-nav">
-      <nav class="nav-content">
-        <div class="nav-links" id="site-menu">
-          <a href="/" class={activeTab === 'home' ? 'active' : ''}>Home</a>
-          <a href="/resume/" class={activeTab === 'resume' ? 'active' : ''}>Resume</a>
-          <a href="/projects/" class={activeTab === 'projects' ? 'active' : ''}>Projects</a>
-          <a href="/articles/" class={activeTab === 'articles' ? 'active' : ''}>Articles</a>
-          <a href="/apps/" class={activeTab === 'apps' ? 'active' : ''}>Apps</a>
+    <a class="skip-link" href="#content">{t.skip}</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href={href(locale)} aria-label={`Untung Tanujaya — ${t.home}`}><span class="monogram">ut<span>.</span></span><span class="brand-name">Untung Tanujaya</span></a>
+        <nav class="desktop-nav" aria-label={tr(locale, 'Main navigation', '主导航')}>
+          {nav.map(key => <a href={href(locale, key)} aria-current={section === key ? 'page' : undefined}>{t[key]}</a>)}
+        </nav>
+        <div class="header-controls">
+          <a class="icon-button" href={href(locale, 'search')} aria-label={t.search} title={t.search}><Icon name="search" size={18} /></a>
+          <a class="locale-switch" href={href(other, path)} hreflang={other === 'zh' ? 'zh-Hans' : 'en'} lang={other === 'zh' ? 'zh-Hans' : 'en'} data-locale-switch aria-label={other === 'zh' ? '切换到中文' : 'Switch to English'}>{other === 'zh' ? '中文' : 'EN'}</a>
+          <label class="theme-control"><span class="sr-only">{t.theme}</span><Icon name="sun" size={17}/><select id="theme" aria-label={t.theme}><option value="system">{t.system}</option><option value="light">{t.light}</option><option value="dark">{t.dark}</option></select></label>
         </div>
-        <a href="/" class="logo" aria-label="Untung Tanujaya Home">
-          <img src="/logo-ut.webp" alt="UT Logo" class="logo-icon" width="70" height="32" />
-        </a>
-        <div class="nav-actions">
-          <form class="nav-search" action="/search/" method="get" role="search">
-            <input
-              type="search"
-              name="q"
-              class="nav-search-input"
-              placeholder="Search"
-              aria-label="Search the site"
-              autocomplete="off"
-            />
-            <button type="submit" class="nav-search-submit" aria-label="Search">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="7"></circle>
-                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
-              </svg>
-            </button>
-          </form>
-          <a href="/search/" class={activeTab === 'search' ? 'nav-search-link active' : 'nav-search-link'} aria-label="Search the site">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="7"></circle>
-              <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
-            </svg>
-          </a>
-          <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-menu">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </button>
-        </div>
-      </nav>
-    </header>
-
-    <main id="content">
-      <slot />
-    </main>
-
-    <footer>
-      <div class="footer-content">
-        <p>&copy; {new Date().getFullYear()} Untung Tanujaya. Built with Astro.</p>
-        <div class="footer-links" aria-label="Footer links">
-          <a href="mailto:utanujaya@gmail.com">Email</a>
-          <a href="https://github.com/untungtanujaya" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://linkedin.com/in/tanujaya" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        </div>
+        <details class="mobile-menu"><summary>{t.menu}<span aria-hidden="true">+</span></summary><nav aria-label={tr(locale, 'Mobile navigation', '移动导航')}><a href={href(locale)}>{t.home}</a>{nav.map(key => <a href={href(locale, key)} aria-current={section === key ? 'page' : undefined}>{t[key]}</a>)}<a href={href(locale, 'tools')}>{t.tools}</a></nav></details>
       </div>
+    </header>
+    <main id="content" class="page-shell" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <div class="footer-top"><div><p class="eyebrow">{tr(locale, 'Keep the conversation going', '保持交流')}</p><h2>{tr(locale, 'Let’s build something thoughtful.', '一起把想法做扎实。')}</h2><a class="text-link" href="mailto:utanujaya@gmail.com">utanujaya@gmail.com <Icon name="external" size={18}/></a></div><div class="footer-links"><a href="https://github.com/untungtanujaya">GitHub <Icon name="external" size={14}/></a><a href="https://linkedin.com/in/tanujaya">LinkedIn <Icon name="external" size={14}/></a><a href={href(locale, 'tools')}>{t.tools}</a><a href={`/${locale}/feed.xml`}>{t.feed}</a></div></div>
+      <div class="footer-bottom"><span>© {new Date().getFullYear()} Untung Tanujaya</span><span>{tr(locale, 'Backend engineering · Research · Notes', '后端工程 · 研究 · 技术笔记')}</span><a href="#content">{tr(locale, 'Back to top ↑', '回到顶部 ↑')}</a></div>
     </footer>
-
-    <script is:inline>
-      // Event delegation on `document` — survives ClientRouter body swaps
-      // (document itself is never swapped). Per-element listeners would die
-      // with the old DOM and is:inline scripts are not re-executed by the
-      // router, so delegation + idempotent registration is the robust pattern.
-      if (!window.__menuDelegated) {
-        window.__menuDelegated = true;
-        document.addEventListener('click', (e) => {
-          const toggle = e.target.closest('#menu-toggle');
-          if (toggle) {
-            const navLinks = document.getElementById('site-menu');
-            if (!navLinks) return;
-            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-            toggle.setAttribute('aria-expanded', String(!isExpanded));
-            navLinks.classList.toggle('active', !isExpanded);
-            return;
-          }
-          if (e.target.closest('#site-menu a')) {
-            const toggle = document.getElementById('menu-toggle');
-            const navLinks = document.getElementById('site-menu');
-            if (toggle) toggle.setAttribute('aria-expanded', 'false');
-            if (navLinks) navLinks.classList.remove('active');
-          }
-        });
-      }
-    </script>
     <script>
-      import '../scripts/motion';
+      const select = document.querySelector<HTMLSelectElement>('#theme');
+      const media = matchMedia('(prefers-color-scheme: dark)');
+      let preference = document.documentElement.dataset.preference || 'system';
+      const apply = () => { const theme = preference === 'system' ? (media.matches ? 'dark' : 'light') : preference; document.documentElement.dataset.theme = theme; document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#101820' : '#f8fafc'); };
+      if (select) { select.value = preference; select.addEventListener('change', () => { preference = select.value; try { localStorage.setItem('ut-theme', preference); } catch {} apply(); }); }
+      media.addEventListener('change', apply); apply();
+      document.querySelector<HTMLAnchorElement>('[data-locale-switch]')?.addEventListener('click', e => { const a = e.currentTarget as HTMLAnchorElement; a.href = a.pathname + location.search + location.hash; });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelector<HTMLDetailsElement>('.mobile-menu')?.removeAttribute('open'); });
     </script>
   </body>
 </html>

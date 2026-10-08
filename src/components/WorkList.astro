@@ -1,0 +1,9 @@
+---
+import { getProjects } from '../i18n/content';
+import { href, type Locale } from '../i18n/ui';
+import { getProjSlug } from '../utils/slugify';
+import Icon from './Icon.astro';
+const { locale, limit = 4 } = Astro.props as { locale: Locale; limit?: number };
+const projects = getProjects(locale).slice(0, limit);
+---
+<div class="work-list">{projects.map((p,i) => <a class="work-row" href={href(locale, `work/${getProjSlug({...p,title:p.originalTitle})}`)}><span class="row-number">{String(i+1).padStart(2,'0')}</span><div><div class="category">{p.subtitle}</div><h3>{p.title}</h3><div class="tags">{p.tech_stack.split(',').map(tech => <span class="tag">{tech.trim()}</span>)}</div></div><span class="arrow-box"><Icon name="external" size={17}/></span></a>)}</div>

@@ -1,0 +1,13 @@
+---
+import projects from '../data/projects.json';
+import { getCollection } from 'astro:content';
+import { getProjSlug } from '../utils/slugify';
+import { tools,specialties } from '../data/tools';
+export async function getStaticPaths(){
+ const articles=await getCollection('articles');
+ const paths=[['',''],['resume','cv'],['projects','work'],['articles','writing'],['apps','tools'],['search','search'],...projects.map(p=>[`projects/${getProjSlug(p)}`,`work/${getProjSlug(p)}`]),...articles.map(a=>[`articles/${a.data.slug||a.id}`,`writing/${a.data.slug||a.id}`]),...specialties.map(s=>[`apps/${s}`,`tools/${s}`]),...tools.map(t=>[`apps/${t[0]}/${t[1]}`,`tools/${t[0]}/${t[1]}`])];
+ return paths.map(([from,to])=>({params:{legacy:from||undefined},props:{target:`/en/${to?to+'/':''}`}}));
+}
+const { target }=Astro.props;
+---
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta http-equiv="refresh" content={`0;url=${target}`}/><link rel="canonical" href={new URL(target,Astro.site)}/><meta name="robots" content="noindex"/><title>Untung Tanujaya — Page moved</title><script is:inline define:vars={{target}}>location.replace(target+location.search+location.hash);</script></head><body><main><h1>Untung Tanujaya</h1><p>This page has a new home.</p><a href={target}>Continue in English</a> · <a href={target.replace('/en/','/zh/')} lang="zh-Hans">中文</a></main></body></html>

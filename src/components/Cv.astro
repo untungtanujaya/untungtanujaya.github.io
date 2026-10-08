@@ -1,0 +1,16 @@
+---
+import PageIntro from './PageIntro.astro';
+import { getExperiences, getEducations, getSkills } from '../i18n/content';
+import { ui,tr,type Locale } from '../i18n/ui';
+const { locale } = Astro.props as {locale:Locale};const t=ui[locale];
+---
+<PageIntro eyebrow={tr(locale,'Curriculum vitae','个人简历')} title="Untung Tanujaya" description={tr(locale,'Backend engineer. M.S. Software Engineering student. Building reliable services, concurrent pipelines, and practical automation.','后端工程师，软件工程硕士研究生。专注可靠服务、并发流水线与实用自动化。')}><div class="actions no-print"><button class="button primary" id="print-cv">{t.print}</button></div></PageIntro>
+<div class="content-grid"><aside class="side-note cv-sidebar"><p>{tr(locale,'Harbin, China','中国哈尔滨')}<br/><a href="mailto:utanujaya@gmail.com">utanujaya@gmail.com</a></p><p><a href="https://github.com/untungtanujaya">GitHub / untungtanujaya</a><br/><a href="https://linkedin.com/in/tanujaya">LinkedIn / tanujaya</a></p><nav class="side-nav" aria-label={tr(locale,'CV sections','简历章节')}><a href="#experience">01 / {t.experience}</a><a href="#education">02 / {t.education}</a><a href="#skills">03 / {t.skills}</a></nav></aside><div><section class="content-block" id="experience"><h2>{t.experience}</h2>{getExperiences(locale).map(exp=><article class="cv-entry"><p class="role">{exp.title}</p><h3>{exp.company}</h3><p class="meta">{exp.start_date} — {exp.end_date}<br/>{exp.location}</p><p>{exp.summary}</p><details><summary>{t.fullDetails}</summary><ul>{exp.description.map(line=><li>{line}</li>)}</ul></details></article>)}</section><section class="content-block" id="education"><h2>{t.education}</h2>{getEducations(locale).map(edu=><article class="cv-entry"><h3>{edu.institution}</h3><p class="role">{edu.degree}</p><p class="meta">{edu.completion_date} · {edu.location}</p><p>{edu.description}</p></article>)}</section><section class="content-block" id="skills"><h2>{t.skills}</h2>{getSkills(locale).map(group=><div class="skill-group"><h3>{group.category}</h3><div class="tags">{group.items.map(skill=><span class="tag">{skill}</span>)}</div></div>)}</section></div></div>
+<script>
+ const details = [...document.querySelectorAll<HTMLDetailsElement>('.cv-entry details')];
+ let previous:boolean[]=[];
+ const expand=()=>{previous=details.map(d=>d.open);details.forEach(d=>d.open=true);};
+ const restore=()=>details.forEach((d,i)=>d.open=previous[i]??false);
+ window.addEventListener('beforeprint',expand);window.addEventListener('afterprint',restore);
+ document.querySelector('#print-cv')?.addEventListener('click',()=>window.print());
+</script>

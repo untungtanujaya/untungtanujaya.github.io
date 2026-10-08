@@ -1,0 +1,13 @@
+{
+  "src/data/experiences.json": "367ff07a8d5711bc6fcd001f049aaa0d58332311e72ad774f7c62487c29a9ade",
+  "src/data/projects.json": "654f5569a016ac909b4702553633527a38a3e6ba5524b1120203f6d234ac2ec8",
+  "src/data/educations.json": "1ebf8cfeb42da4d32ba95aae2a71e1fd209301aaf71b9b8846238a04142982d3",
+  "src/data/skills.json": "7d22ff7c1543398cbf8d7f37fce5edfcf3d7141eb320a5211247d6b0a375f647",
+  "src/content/articles/retrying-flaky-apis-go.md": "3cb78eb4e0ba77480a05ca0c666460654977c51fc574c5dceca9644479bdf471",
+  "src/content/articles/testing-silently-dropped-fields.md": "5f0954696152976c500addd5ecf2a7168d97a328675220eae5ee22d45e3baf0d",
+  "src/content/articles/rate-limiting-redis-go.md": "2005fe540145b21509f9768ddcdcf255464332f4e58a23bc97ce1716576b4b2e",
+  "src/content/articles/idempotent-reprocessing-scoped-deletes.md": "e91b1afd5c217b083a1b60d4fe8d0ea5de84496d36ada6c731fe6c1595865e54",
+  "src/content/articles/optimizing-go-backends.md": "b8633864fb4de9037b1bb7feb7c94600c0ac7a0123297c39a9f463b32c160ed8",
+  "src/content/articles/shared-mutable-state-singleton.md": "9dfc623fa01f1b98e0251536826e85f2099b875a8884e6182d085e4e48e96189",
+  "src/content/articles/rate-limit-semaphore-sliding-window.md": "444c150514d8f24f0ba52868121363069bf94922076784695f265961d157ceab"
+}

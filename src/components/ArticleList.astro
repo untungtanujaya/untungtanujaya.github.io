@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import { articleMeta } from '../i18n/content';
+import { href, date, ui, type Locale } from '../i18n/ui';
+import Icon from './Icon.astro';
+const { locale, limit = 99, summaries = false } = Astro.props as { locale: Locale; limit?: number; summaries?: boolean };
+const articles = (await getCollection('articles')).sort((a,b)=> b.data.pubDate.valueOf()-a.data.pubDate.valueOf() || a.id.localeCompare(b.id)).slice(0,limit);
+---
+<div>{articles.map(a => <a class="article-row" href={href(locale,`writing/${a.data.slug || a.id}`)}><span class="meta">{date(a.data.pubDate, locale)}<br/>{a.data.read_time} {ui[locale].min}</span><div><h3>{locale==='zh' ? articleMeta[a.id]?.title || a.data.title : a.data.title}</h3>{summaries && <p>{locale==='zh' ? articleMeta[a.id]?.summary : articleMeta[a.id]?.enSummary}</p>}</div><Icon name="external" size={17}/></a>)}</div>

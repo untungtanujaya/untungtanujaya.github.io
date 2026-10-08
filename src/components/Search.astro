@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import { getProjects, getExperiences, getEducations, getSkills, articleMeta } from '../i18n/content';
+import { href,tr,ui,type Locale } from '../i18n/ui';
+import { getProjSlug } from '../utils/slugify';
+import { tools } from '../data/tools';
+import PageIntro from './PageIntro.astro';
+const {locale}=Astro.props as {locale:Locale}; const t=ui[locale];
+const articles=await getCollection('articles');
+const pubs=await getCollection('publications',({data})=>!data.draft);
+const rows=[
+ ...getProjects(locale).map(p=>({title:p.title,kind:t.work,description:p.description,url:href(locale,`work/${getProjSlug({...p,title:p.originalTitle})}`)})),
+ ...articles.map(a=>({title:locale==='zh'?articleMeta[a.id]?.title||a.data.title:a.data.title,kind:t.writing,description:locale==='zh'?articleMeta[a.id]?.summary||a.data.summary:articleMeta[a.id]?.enSummary||a.data.summary,url:href(locale,`writing/${a.data.slug||a.id}`)})),
+ ...pubs.map(p=>({title:p.data.title[locale],kind:t.publications,description:p.data.abstract[locale],url:href(locale,`research/publications/${p.id}`)})),
+ ...getExperiences(locale).map(e=>({title:`${e.title} · ${e.company}`,kind:t.cv,description:e.summary,url:href(locale,'cv')+'#experience'})),
+ ...getEducations(locale).map(e=>({title:e.institution,kind:t.cv,description:e.degree,url:href(locale,'cv')+'#education'})),
+ ...getSkills(locale).map(g=>({title:g.category,kind:t.cv,description:g.items.join(', '),url:href(locale,'cv')+'#skills'})),
+ {title:t.research,kind:t.research,description:tr(locale,'M.S. Software Engineering, Harbin Institute of Technology. Distributed systems, software architecture, artificial intelligence.','哈尔滨工业大学软件工程硕士，分布式系统、软件架构、人工智能。'),url:href(locale,'research')},
+ ...tools.map(x=>({title:x[2],kind:t.tools,description:locale==='zh'?x[4]:x[3],url:href(locale,`tools/${x[0]}/${x[1]}`)})),
+];
+---
+<PageIntro eyebrow={tr(locale,'Find your way','内容导航')} title={tr(locale,'Search the site.','搜索全站内容。')} description={tr(locale,'Projects, writing, experience, research, and tools in one place.','在这里查找项目、文章、工作经历、研究与工具。')}/>
+<form class="search-form" role="search"><label class="sr-only" for="query">{t.search}</label><input id="query" name="q" type="search" placeholder={tr(locale,'Try Go, Redis, or distributed systems…','试试 Go、Redis 或分布式系统…')} autocomplete="off"/><button class="button primary" type="submit">{t.search}</button><button class="button" type="reset">{tr(locale,'Clear','清除')}</button></form>
+<p id="result-count" class="result-count" aria-live="polite" data-unit={tr(locale,'results','条结果')}>{rows.length} {tr(locale,'results','条结果')}</p>
+<div id="no-results" class="empty-state" hidden><h2>{tr(locale,'No matching results.','没有找到匹配内容。')}</h2><p>{tr(locale,'Try a shorter phrase, or clear your search to browse everything.','试试更短的关键词，或清除搜索以浏览全部内容。')}</p></div>
+<div id="search-results">{rows.map(r=><a class="search-item" href={r.url} data-search={`${r.title} ${r.kind} ${r.description}`.toLocaleLowerCase()}><span class="eyebrow">{r.kind}</span><h2>{r.title}</h2><p>{r.description}</p></a>)}</div>
+<script>
+ const form=document.querySelector<HTMLFormElement>('.search-form')!;const input=document.querySelector<HTMLInputElement>('#query')!;
+ const items=[...document.querySelectorAll<HTMLElement>('[data-search]')];const count=document.querySelector<HTMLElement>('#result-count')!;
+ const filter=()=>{const q=input.value.trim().toLocaleLowerCase();let n=0;items.forEach(item=>{item.hidden=!item.dataset.search!.includes(q);if(!item.hidden)n++;});count.textContent=`${n} ${count.dataset.unit}`;document.querySelector<HTMLElement>('#no-results')!.hidden=n!==0;};
+ const save=()=>{const url=new URL(location.href);input.value.trim()?url.searchParams.set('q',input.value.trim()):url.searchParams.delete('q');history.replaceState(null,'',url);};
+ input.value=new URLSearchParams(location.search).get('q')||'';filter();
+ input.addEventListener('input',()=>{filter();save();});form.addEventListener('submit',e=>{e.preventDefault();filter();save();});form.addEventListener('reset',()=>{input.value='';filter();save();input.focus();});
+</script>

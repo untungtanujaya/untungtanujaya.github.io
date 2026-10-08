@@ -1,0 +1,49 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Overview from '../../components/Overview.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import WorkList from '../../components/WorkList.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import Cv from '../../components/Cv.astro';
+import Research from '../../components/Research.astro';
+import Search from '../../components/Search.astro';
+import MedicalTools from '../../components/MedicalTools';
+import Icon from '../../components/Icon.astro';
+import { getProjects, articleMeta } from '../../i18n/content';
+import { getProjSlug } from '../../utils/slugify';
+import { locales, href, tr, ui, date, type Locale } from '../../i18n/ui';
+import { tools, specialties } from '../../data/tools';
+interface Props { kind: string; locale: Locale; project?: ReturnType<typeof getProjects>[number]; article?: CollectionEntry<'articles'>; tool?: typeof tools[number]; publication?: CollectionEntry<'publications'>; }
+export async function getStaticPaths(){
+ const articles=await getCollection('articles');const pubs=await getCollection('publications',({data})=>!data.draft);
+ return locales.flatMap(locale=>[
+ ...['','work','writing','cv','research','research/publications','tools','search',...specialties.map(s=>`tools/${s}`)].map(path=>({params:{locale,path:path||undefined},props:{kind:path||'home',locale}})),
+ ...getProjects(locale).map(project=>({params:{locale,path:`work/${getProjSlug({...project,title:project.originalTitle})}`},props:{kind:'project',locale,project}})),
+ ...articles.map(article=>({params:{locale,path:`writing/${article.data.slug||article.id}`},props:{kind:'article',locale,article}})),
+ ...tools.map(tool=>({params:{locale,path:`tools/${tool[0]}/${tool[1]}`},props:{kind:'tool',locale,tool}})),
+ ...pubs.map(publication=>({params:{locale,path:`research/publications/${publication.id}`},props:{kind:'publication',locale,publication}})),
+ ]);
+}
+const {kind,locale,project,article,tool,publication}=Astro.props;
+const l=locale as Locale;const t=ui[l];const path=Astro.params.path||'';
+const rendered = article ? await render(article) : publication ? await render(publication) : null;
+const Content=rendered?.Content;
+const title=kind==='home'?tr(l,'Backend engineer & graduate student','后端工程师与硕士研究生'):project?.title||(article?(l==='zh'?articleMeta[article.id]?.title||article.data.title:article.data.title):null)||publication?.data.title[l]||tool?.[2]||(kind==='research/publications'?t.publications:kind.startsWith('tools/')?tr(l,kind.includes('radiology')?'Radiology tools':'Psychiatry scales',kind.includes('radiology')?'放射科工具':'精神科量表'):t[kind as keyof typeof t])||t.home;
+const description=project?.description||(article?(l==='zh'?articleMeta[article.id]?.summary:articleMeta[article.id]?.enSummary):null)||tr(l,`${title}. Untung Tanujaya — backend engineering, Go, Python, and graduate research at Harbin Institute of Technology.`,`${title}。Untung Tanujaya — 后端工程、Go、Python 与哈尔滨工业大学研究生学习。`);
+const section=kind==='project'?'work':kind==='article'?'writing':kind.startsWith('research')||kind==='publication'?'research':kind;
+---
+<Layout locale={l} title={title} description={description} section={section} path={path}>
+ {kind==='home'&&<Overview locale={l}/>}
+ {kind==='work'&&<><PageIntro eyebrow={tr(l,'Selected work / 2021–2026','工程实践 / 2021–2026')} title={tr(l,'Systems built for the real world.','让系统经得起真实场景。')} description={tr(l,'A selection of backend services, automation, and infrastructure from my engineering work.','精选后端服务、自动化与基础设施工程实践。')}/><WorkList locale={l}/><div class="notice">{tr(l,'These projects come from professional engineering work. Descriptions and technologies are shared here; internal source code is not publicly available.','这些项目来自职业工程实践。这里分享项目描述与技术栈，内部源代码不公开。')}</div></>}
+ {kind==='project'&&project&&<><PageIntro eyebrow={project.subtitle} title={project.title}><a class="back-link" href={href(l,'work')}>← {t.allWork}</a></PageIntro><div class="content-grid"><aside class="side-note"><dl><dt>{tr(l,'Practice','实践领域')}</dt><dd>{project.subtitle}</dd><dt>{tr(l,'Technologies','技术栈')}</dt><dd><div class="tags">{project.tech_stack.split(',').map(tech=><span class="tag">{tech.trim()}</span>)}</div></dd></dl><a class="text-link" href={href(l,'cv')+'#experience'}>{tr(l,'Related experience','相关工作经历')}<Icon size={16}/></a></aside><div class="body-copy"><section class="content-block"><h2>{tr(l,'Project overview','项目概述')}</h2><p>{project.description}</p></section><section><h2>{tr(l,'Notes from engineering practice','工程实践笔记')}</h2><p>{tr(l,'For more on concurrency, reliability, and working with external services, explore my technical writing.','关于并发、可靠性及外部服务集成的更多思考，请阅读我的技术文章。')}</p><a class="button" href={href(l,'writing')}>{t.writing}<Icon size={16}/></a></section></div></div></>}
+ {kind==='cv'&&<Cv locale={l}/>}
+ {(kind==='research'||kind==='research/publications')&&<Research locale={l} publicationsOnly={kind==='research/publications'}/>}
+ {kind==='writing'&&<><PageIntro eyebrow={tr(l,'Engineering notes','工程笔记')} title={tr(l,'Things learned by building.','在构建中积累的思考。')} description={tr(l,'Practical notes on Go, Python, concurrency, and the less obvious parts of keeping systems reliable.','关于 Go、Python、并发，以及保障系统可靠性时容易被忽略的细节。')}/>{l==='zh'&&<p class="notice">文章标题与摘要提供中文，正文保留英文原文。</p>}<ArticleList locale={l} summaries/></>}
+ {kind==='article'&&article&&Content&&<><PageIntro eyebrow={tr(l,'Engineering notes','工程笔记')} title={title}><div class="status-line" style="margin-top:24px">Untung Tanujaya · {date(article.data.pubDate,l)} · {article.data.read_time} {t.min}</div><a class="back-link" href={href(l,'writing')}>← {t.allWriting}</a></PageIntro>{l==='zh'&&<div class="notice"><strong>英文原文</strong><p>{articleMeta[article.id]?.summary}</p></div>}<div class="reader-grid"><article class="prose" lang="en"><Content/></article><aside class="toc"><p>{tr(l,'On this page','本页内容')}</p><nav aria-label={tr(l,'Table of contents','文章目录')}>{rendered?.headings.filter(h=>h.depth===2).map(h=><a href={`#${h.slug}`} lang="en">{h.text}</a>)}</nav></aside></div></>}
+ {kind==='publication'&&publication&&Content&&<><PageIntro eyebrow={`${publication.data.venue} / ${publication.data.status}`} title={publication.data.title[l]} description={publication.data.authors.join(', ')}><p class="status-line" style="margin-top:20px">{date(publication.data.date,l)}</p><a class="back-link" href={href(l,'research/publications')}>← {t.publications}</a></PageIntro><div class="body-copy"><h2>{tr(l,'Abstract','摘要')}</h2><p>{publication.data.abstract[l]}</p><div class="actions">{publication.data.doi&&<a class="button" href={`https://doi.org/${publication.data.doi}`}>DOI<Icon name="external" size={16}/></a>}{publication.data.paperUrl&&<a class="button" href={publication.data.paperUrl}>{tr(l,'Read paper','阅读论文')}<Icon name="external" size={16}/></a>}{publication.data.codeUrl&&<a class="button" href={publication.data.codeUrl}>{tr(l,'Code','代码')}<Icon name="external" size={16}/></a>}</div></div><article class="prose" style="margin-top:40px"><Content/>{publication.data.bibtex&&<><h2>{tr(l,'Citation','引用')}</h2><pre><code>{publication.data.bibtex}</code></pre></>}</article><script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@type':'ScholarlyArticle',headline:publication.data.title[l],author:publication.data.authors.map(name=>({'@type':'Person',name})),datePublished:publication.data.date.toISOString(),abstract:publication.data.abstract[l]})}/></>}
+ {kind==='tools'&&<><PageIntro eyebrow={tr(l,'Small tools / Side projects','实用工具 / 个人项目')} title={tr(l,'Tools that do one thing well.','专注于具体问题的工具。')} description={tr(l,'A collection of browser-based clinical calculators and assessment helpers, preserved from earlier versions of this site.','这里保留了网站早期版本中的浏览器端临床计算器与评估辅助工具。')}/><div class="tool-grid">{specialties.map(s=><a class="tool-card" href={href(l,`tools/${s}`)}><p class="eyebrow">07 {tr(l,'tools','个工具')}</p><h2>{s==='radiology'?tr(l,'Radiology','放射科'):tr(l,'Psychiatry','精神科')}</h2><p>{s==='radiology'?tr(l,'Imaging scores, risk estimates, and dose calculators.','影像评分、风险估算与剂量计算。'):tr(l,'Screening scales, assessment tools, and note builders.','筛查量表、评估工具与记录生成器。')}</p><span class="text-link" style="margin-top:20px">{tr(l,'Browse tools','浏览工具')}<Icon size={16}/></span></a>)}</div></>}
+ {kind.startsWith('tools/')&&<><PageIntro eyebrow={t.tools} title={title} description={tr(l,'Choose a tool below. Calculators retain their original English and Indonesian content.','选择下方工具。计算器保留原有英语与印尼语内容。')}/><div class="tool-grid">{tools.filter(x=>kind.endsWith(x[0])).map(x=><a class="tool-card" href={href(l,`tools/${x[0]}/${x[1]}`)}><h2>{x[2]}</h2><p>{l==='zh'?x[4]:x[3]}</p><span class="text-link">{tr(l,'Open tool','打开工具')}<Icon size={16}/></span></a>)}</div></>}
+ {kind==='tool'&&tool&&<><PageIntro eyebrow={t.tools} title={tool[2]} description={l==='zh'?tool[4]:tool[3]}/><p class="notice">{tr(l,'Original calculator · English / Bahasa Indonesia. This tool supports education and reference; clinical decisions require professional judgment.','原版计算器 · 英语 / 印尼语。仅供学习与参考，临床决策需要专业判断。')}</p><div class="tool-shell" lang="en"><noscript><p>{tr(l,'Enable JavaScript to use this calculator.','请启用 JavaScript 以使用计算器。')}</p></noscript><MedicalTools client:load specialty={tool[0]} slug={tool[1]} lang="en" locale={l}/></div></>}
+ {kind==='search'&&<Search locale={l}/>}
+</Layout>
